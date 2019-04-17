@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
+            android:paddingBottom="20dp"
             android:text="◎"
             android:textSize="100dp"/>
     </FrameLayout>

@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
                 LoadActivity(v);
             }
         });
+        card_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadActivity(v);
+            }
+        });
     }
 
     private void Loading(){
@@ -37,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
         if(view.getId()==card_camera.getId())
             startActivity(new Intent(this,CameraActivity.class));
         else if(view.getId()==card_log.getId())
-            startActivity(new Intent(this,CameraActivity.class));
+            startActivity(new Intent(this,LogActivity.class));
         else
             Toast.makeText(getApplicationContext(),"no Activity!",Toast.LENGTH_LONG);
-
     }
 }
