@@ -48,29 +48,17 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
 
     public CameraPreview(Context context, AppCompatActivity activity, int cameraID, SurfaceView surfaceView) {
         super(context);
-
-
-        Log.d("@@@", "Preview");
-
-
-
         mActivity = activity;
         mCameraID = cameraID;
         mSurfaceView = surfaceView;
 
-
         mSurfaceView.setVisibility(View.VISIBLE);
-
 
         // SurfaceHolder.Callback를 등록하여 surface의 생성 및 해제 시점을 감지
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
 
     }
-
-
-
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
