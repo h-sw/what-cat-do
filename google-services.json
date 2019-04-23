@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "832270296429",
+    "firebase_url": "https://whatcatdo-992f0.firebaseio.com",
+    "project_id": "whatcatdo-992f0",
+    "storage_bucket": "whatcatdo-992f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832270296429:android:8fca32f12d5d5b6d",
+        "android_client_info": {
+          "package_name": "com.team_project2.hans.whatcatdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832270296429-avls35fko4q3vb0g3j6euf87h9h7j5lf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team_project2.hans.whatcatdo",
+            "certificate_hash": "fab373d7228d9d1a86c1fd5d6a48f0021a7b456a"
+          }
+        },
+        {
+          "client_id": "832270296429-rvgbaj74pki0qmk1594adu9rob6n7r7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRwB9_Iea7HlLRU2f4ryTuGuGq9FsodQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832270296429-rvgbaj74pki0qmk1594adu9rob6n7r7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
