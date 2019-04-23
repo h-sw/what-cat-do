@@ -344,7 +344,7 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
 
             try {
 
-                File path = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + "/camtest");
+                File path = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + "/whatCatDo");
                 if (!path.exists()) {
                     path.mkdirs();
                 }
