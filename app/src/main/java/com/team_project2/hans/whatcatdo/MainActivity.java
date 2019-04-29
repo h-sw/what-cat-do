@@ -4,20 +4,28 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     CardView card_camera;
     CardView card_log;
+    CardView card_picture;
+
+
+    private int MAX_ITEM_COUNT = 50;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         Loading();
+        card_picture = findViewById(R.id.card_picture);
         card_camera = findViewById(R.id.card_camera);
         card_log = findViewById(R.id.card_log);
 
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 LoadActivity(v);
             }
         });
+
     }
 
     private void Loading(){
