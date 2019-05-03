@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         card_camera = findViewById(R.id.card_camera);
         card_log = findViewById(R.id.card_log);
 
+        card_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ImageSelectActivity.class));
+            }
+        });
         card_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

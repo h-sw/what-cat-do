@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team_project2.hans.whatcatdo">
-    <!--Permission Agree-->
+    <!-- Permission Agree -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ImageSelectActivity"
+            android:label="@string/title_activity_image_select"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +27,7 @@
         </activity>
         <activity android:name=".LodingActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".LogActivity"></activity>
+        <activity android:name=".LogActivity" />
     </application>
 
 </manifest>
