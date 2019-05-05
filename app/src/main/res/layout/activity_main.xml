@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,57 +49,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="2"
+        android:orientation="vertical"
+        android:layout_weight="3"
         android:weightSum="9"
         android:layout_marginTop="10dp">
         <android.support.v7.widget.CardView
             android:id="@+id/card_picture"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_weight="3"
             android:clickable="true">
-            <TextView
-                android:layout_margin="10dp"
+            <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="사진 가져오기"
-                android:textSize="36dp"
-                android:textColor="@color/Pink"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="사진으로 분석하기"
+                    android:textSize="36dp"
+                    android:textColor="@color/MajorBlue"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+
+                    android:text="찍어둔 사진으로 고양이를 분석합니다."/>
+            </LinearLayout>
+
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/card_camera"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_margin="16dp"
             android:layout_weight="3"
             android:clickable="true">
-            <TextView
-                android:layout_margin="10dp"
+            <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="사진 촬영하기"
-                android:textSize="36dp"
-                android:textColor="@color/MajorBlue"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="영상으로 분석하기"
+                    android:textSize="36dp"
+                    android:textColor="@color/MajorBlue"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+
+                    android:text="카메라를 통해 고양이의 감정을 읽습니다."/>
+            </LinearLayout>
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:id="@+id/card_log"
-            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="3"
             android:clickable="true">
-            <TextView
-                android:layout_margin="10dp"
+            <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="분석 기록보기"
-                android:textSize="36dp"
-                android:textColor="@color/MajorBlue"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="분석 기록보기"
+                    android:textSize="36dp"
+                    android:textColor="@color/MajorBlue"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+
+                    android:text="찾아본 고양이의 감정을 다시 볼 수 있습니다."/>
+            </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 

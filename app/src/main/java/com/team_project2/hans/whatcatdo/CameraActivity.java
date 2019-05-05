@@ -1,5 +1,7 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,11 @@ import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class CameraActivity extends AppCompatActivity {
     private final String TAG = "CAMERA";
@@ -24,54 +31,18 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView btn_record;
     private boolean isRecording = false;
 
-    File video;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         getSupportActionBar().hide();
+
         cameraView = findViewById(R.id.camera);
         btn_record = findViewById(R.id.btn_record);
 
-        setCamera();
+        Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
 
-        btn_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (isRecording) {
-                    //cameraView.stopVideo();
-                    cameraView.captureVideo();
-                    Log.d(TAG,cameraView.getPreviewSize().toString());
-                    Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
-                    isRecording = false;
-                    return;
-                }
-                Toast.makeText(CameraActivity.this, "분석 시작", Toast.LENGTH_SHORT).show();
-                cameraView.captureVideo();
-                isRecording = true;
-            }
-        });
-
-    }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        cameraView.start();
-    }
-
-    @Override
-    protected void onPause() {
-        cameraView.stop();
-        super.onPause();
-    }
-
-    void setCamera(){
-        cameraView.setVideoQuality(CameraKit.Constants.VIDEO_QUALITY_720P);
 
         cameraView.addCameraKitListener(new CameraKitEventListener() {
             @Override
@@ -91,11 +62,56 @@ public class CameraActivity extends AppCompatActivity {
 
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
-                video = cameraKitVideo.getVideoFile();
-                Log.d(TAG+"2", String.valueOf(cameraKitVideo.getVideoFile()));
+                try {
+                    Log.d("OutputVideo","onVideo called");
+                    if(cameraKitVideo.getVideoFile().exists()){
+                        File file = cameraKitVideo.getVideoFile();
+
+                        Log.d("OutputVideo",file.toString());
+                        Log.d("OutputVideo",Long.toString(file.length()));
+
+                        Toast.makeText(CameraActivity.this, "분석종료!"+file.toString(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(CameraActivity.this,NewCameraActivity.class);
+                        intent.putExtra("videoPath",file.getAbsolutePath());
+                        startActivity(intent);
+
+
+                    }
+                }catch (Throwable e){
+                    e.printStackTrace();
+                }
             }
         });
 
+        btn_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRecording) {
+                    //Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
+                    cameraView.stopVideo();
+                    isRecording = false;
+                }else{
+                    Toast.makeText(CameraActivity.this, "분석 시작", Toast.LENGTH_SHORT).show();
+                    cameraView.captureVideo();
+                    isRecording = true;
+                }
+            }
+        });
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cameraView.start();
+    }
+
+    @Override
+    protected void onPause() {
+        cameraView.stop();
+        super.onPause();
     }
 
 }
