@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -22,20 +23,25 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class ImageSelectActivity extends AppCompatActivity {
+    /*layout component*/
     private ImageView img_select;
     private Button btn_select;
     private Button btn_analyze_picture;
+    private TextView text_score;
 
+
+    /*tensorflow*/
     private static final String MODEL_PATH = "inceptionv3_slim_2016.tflite";
-    private static final boolean QUANT = false;
     private static final String LABEL_PATH = "mlabels.txt";
     private static final int INPUT_SIZE = 299;
-
-    private boolean isSelect = false;
-
-    private Bitmap img;
+    private static final boolean QUANT = false;
     private Classifier classifier;
-    private Executor executor = Executors.newSingleThreadExecutor();;
+
+
+    /*image buffer*/
+    private boolean isSelect = false;
+    private Bitmap img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +51,7 @@ public class ImageSelectActivity extends AppCompatActivity {
         img_select = findViewById(R.id.img_select);
         btn_select = findViewById(R.id.btn_select);
         btn_analyze_picture = findViewById(R.id.btn_analyze_picture);
-
-
+        text_score = findViewById(R.id.text_score);
 
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +62,6 @@ public class ImageSelectActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
-        //initTensorFlowAndLoadModel();
 
         btn_analyze_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,19 +72,14 @@ public class ImageSelectActivity extends AppCompatActivity {
                    bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
 
                    try {
-                       classifier = new TensorFlowImageClassifier(
-                               getAssets(),
-                               MODEL_PATH,
-                               LABEL_PATH,
-                               INPUT_SIZE,
-                               QUANT);
+                       classifier = new TensorFlowImageClassifier(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE, QUANT);
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
 
-                   Log.d("ddd",classifier.toString());
                    final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-                   Toast.makeText(ImageSelectActivity.this, results.toString(), Toast.LENGTH_SHORT).show();
+                   text_score.setText(results.toString());
+
                }else{
                    Toast.makeText(ImageSelectActivity.this, "이미지를 먼저 선택해 주세요!", Toast.LENGTH_SHORT).show();
                }
@@ -106,24 +105,4 @@ public class ImageSelectActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void initTensorFlowAndLoadModel(){
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    classifier = new TensorFlowImageClassifier(
-                            getAssets(),
-                            MODEL_PATH,
-                            LABEL_PATH,
-                            INPUT_SIZE,
-                            QUANT);
-                }catch (final Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-
 }
