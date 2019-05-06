@@ -31,7 +31,6 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         getSupportActionBar().hide();
 
-
         cameraView = findViewById(R.id.camera);
         btn_record = findViewById(R.id.btn_record);
 
@@ -54,10 +53,9 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void run() {
                 cameraView.stopVideo();
-
-                Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
             }
         },RECORD_TIME);
+        Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
     }
 
 
