@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         card_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,ImageSelectActivity.class));
+                LoadActivity(v);
             }
         });
         card_camera.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,CameraActivity.class));
         else if(view.getId()==card_log.getId())
             startActivity(new Intent(this,LogActivity.class));
+        else if(view.getId()==card_picture.getId())
+            startActivity(new Intent(this,ImageSelectActivity.class));
         else
             Toast.makeText(getApplicationContext(),"no Activity!",Toast.LENGTH_LONG);
     }

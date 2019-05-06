@@ -36,6 +36,7 @@ public class CameraActivity extends AppCompatActivity {
 
 
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
@@ -44,8 +45,6 @@ public class CameraActivity extends AppCompatActivity {
 
         cameraView = findViewById(R.id.camera);
         btn_record = findViewById(R.id.btn_record);
-
-        cameraView.setVideoBitRate(CameraKit.Constants.VIDEO_QUALITY_480P);
 
         Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
 
@@ -80,8 +79,6 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent = new Intent(CameraActivity.this,NewCameraActivity.class);
                     intent.putExtra("videoPath",file.getAbsolutePath());
                     startActivity(intent);
-
-
                 }
 
             }
@@ -120,7 +117,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void checkPermission() {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // 마시멜로우 버전과 같거나 이상이라면
             if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                     || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

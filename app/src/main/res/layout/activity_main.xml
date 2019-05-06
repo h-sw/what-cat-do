@@ -17,10 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_margin="10dp"
-            android:text="뭐하냥?"
+            android:layout_margin="6dp"
+            android:text="뭐하냥? - 고양이의 감정을 알아보자"
             android:textColor="#FFF"
-            android:textSize="32sp" />
+            android:textSize="18sp" />
     </FrameLayout>
 
 
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="사진으로 분석하기"
-                    android:textSize="36dp"
+                    android:textSize="32sp"
                     android:textColor="@color/MajorBlue"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="영상으로 분석하기"
-                    android:textSize="36dp"
+                    android:textSize="32sp"
                     android:textColor="@color/MajorBlue"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="분석 기록보기"
-                    android:textSize="36dp"
+                    android:textSize="32sp"
                     android:textColor="@color/MajorBlue"/>
                 <TextView
                     android:layout_width="wrap_content"
