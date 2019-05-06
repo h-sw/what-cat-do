@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewCameraActivity">
+    tools:context=".NewCameraActivity"
+    android:orientation="vertical">
 
     <VideoView
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
         android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 
 
 </LinearLayout>

@@ -1,7 +1,10 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,9 +40,12 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         getSupportActionBar().hide();
+        checkPermission();
 
         cameraView = findViewById(R.id.camera);
         btn_record = findViewById(R.id.btn_record);
+
+        cameraView.setVideoBitRate(CameraKit.Constants.VIDEO_QUALITY_480P);
 
         Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
 
@@ -62,43 +68,42 @@ public class CameraActivity extends AppCompatActivity {
 
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
-                try {
-                    Log.d("OutputVideo","onVideo called");
-                    if(cameraKitVideo.getVideoFile().exists()){
-                        File file = cameraKitVideo.getVideoFile();
+                Log.d("OutputVideo","onVideo called");
+                if(cameraKitVideo.getVideoFile().exists()){
+                    File file = cameraKitVideo.getVideoFile();
 
-                        Log.d("OutputVideo",file.toString());
-                        Log.d("OutputVideo",Long.toString(file.length()));
+                    Log.d("OutputVideo",file.toString());
+                    Log.d("OutputVideo",Long.toString(file.length()));
 
-                        Toast.makeText(CameraActivity.this, "분석종료!"+file.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "분석종료!"+file.toString(), Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(CameraActivity.this,NewCameraActivity.class);
-                        intent.putExtra("videoPath",file.getAbsolutePath());
-                        startActivity(intent);
+                    Intent intent = new Intent(CameraActivity.this,NewCameraActivity.class);
+                    intent.putExtra("videoPath",file.getAbsolutePath());
+                    startActivity(intent);
 
 
-                    }
-                }catch (Throwable e){
-                    e.printStackTrace();
                 }
+
             }
         });
 
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isRecording) {
-                    //Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
-                    cameraView.stopVideo();
-                    isRecording = false;
-                }else{
-                    Toast.makeText(CameraActivity.this, "분석 시작", Toast.LENGTH_SHORT).show();
-                    cameraView.captureVideo();
-                    isRecording = true;
-                }
+                Toast.makeText(CameraActivity.this, "분석 시작!", Toast.LENGTH_SHORT).show();
+                cameraView.captureVideo();
+                cameraView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        cameraView.stopVideo();
+
+                        Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
+                    }
+                },3000);
             }
         });
     }
+
 
 
 
@@ -113,5 +118,25 @@ public class CameraActivity extends AppCompatActivity {
         cameraView.stop();
         super.onPause();
     }
+
+    private void checkPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // 마시멜로우 버전과 같거나 이상이라면
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "외부 저장소 사용을 위해 읽기/쓰기 필요", Toast.LENGTH_SHORT).show();
+                }
+
+                requestPermissions(new String[]
+                                {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                        2);  //마지막 인자는 체크해야될 권한 갯수
+
+            } else {
+                //Toast.makeText(this, "권한 승인되었음", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
 }
