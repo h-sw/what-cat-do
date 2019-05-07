@@ -58,7 +58,7 @@ public interface Classifier {
             }
 
             if (confidence != null) {
-                resultString += String.format("(%.1f%%) ", confidence * 100.0f);
+                resultString += String.format("(%.2f%%) ", confidence * 10.0f);
             }
 
             return resultString.trim();

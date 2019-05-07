@@ -18,9 +18,11 @@ import com.wonderkiln.camerakit.CameraView;
 import java.io.File;
 
 public class CameraActivity extends AppCompatActivity {
-    private static final String TAG = "CAMERA ACTIVITY";
-    private static final int RECORD_TIME = 3000;
+    private static final String TAG         = "CAMERA ACTIVITY";
 
+    private static final int    RECORD_TIME = 3000;
+
+    /*layout Component*/
     private CameraView cameraView;
     private ImageView btn_record;
 
@@ -92,7 +94,6 @@ public class CameraActivity extends AppCompatActivity {
             public void onVideo(CameraKitVideo cameraKitVideo) {
                 if(cameraKitVideo.getVideoFile().exists()){
                     File file = cameraKitVideo.getVideoFile();
-
                     Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
                     intent.putExtra("videoPath",file.getAbsolutePath());
                     startActivity(intent);
@@ -101,7 +102,4 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

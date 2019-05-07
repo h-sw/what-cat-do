@@ -16,9 +16,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
+import static java.lang.System.currentTimeMillis;
+
 public class CameraResultActivity extends AppCompatActivity {
     private static final String  TAG             = "CAMERA RESULT ACTIVITY";
 
+    /*constant value*/
     private static final String  MODEL_PATH      = "google_inception_v3_cats_feel.tflite";
     private static final boolean QUANT           = true;
     private static final String  LABEL_PATH      = "labels.txt";
@@ -32,7 +35,6 @@ public class CameraResultActivity extends AppCompatActivity {
 
     /*텐서플로우 관련*/
     private TensorFlowImageClassifier classifier;
-
 
     /*동영상 프레임 단위로 자르기*/
     private File videoFile;
@@ -93,6 +95,7 @@ public class CameraResultActivity extends AppCompatActivity {
 
     public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
         String folder = Environment.getExternalStorageDirectory().toString();
+        Long id = System.currentTimeMillis();
         File saveFolder = new File(folder + IMAGE_PATH);
         if(!saveFolder.exists()){
             saveFolder.mkdirs();
@@ -101,7 +104,7 @@ public class CameraResultActivity extends AppCompatActivity {
         for (Bitmap b : saveBitmap){
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             b.compress(Bitmap.CompressFormat.JPEG, IMAGE_QUALITY, bytes);
-            File file = new File(saveFolder,("img"+i+".jpg"));
+            File file = new File(saveFolder,("wcd_image_"+id+"_"+i+".jpg"));
 
             file.createNewFile();
             FileOutputStream fo = new FileOutputStream(file);

@@ -17,18 +17,19 @@ import java.io.InputStream;
 import java.util.List;
 
 public class ImageSelectActivity extends AppCompatActivity {
+    private static final String TAG = "IMAGE SELECT ACTIVITY";
+
     /*layout component*/
     private ImageView img_select;
     private Button btn_select;
     private Button btn_analyze_picture;
     private TextView text_score;
 
-
     /*tensorflow*/
     private static final String MODEL_PATH = "inceptionv3_slim_2016.tflite";
     private static final String LABEL_PATH = "mlabels.txt";
-    private static final int INPUT_SIZE = 299;
-    private static final boolean QUANT = false;
+    private static final int    INPUT_SIZE = 299;
+
     private Classifier classifier;
 
 
@@ -66,7 +67,7 @@ public class ImageSelectActivity extends AppCompatActivity {
                    bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
 
                    try {
-                       classifier = new TensorFlowImageClassifier(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE, QUANT);
+                       classifier = new TensorFlowImageClassifier(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE);
                    } catch (IOException e) {
                        e.printStackTrace();
                    }

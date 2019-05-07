@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class LoadingActivity extends AppCompatActivity {
+    private static final String TAG = "LOADING ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

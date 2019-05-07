@@ -28,40 +28,37 @@ import java.util.PriorityQueue;
  */
 
 public class TensorFlowImageClassifier implements Classifier {
+    private static final String TAG                = "TENSORFLOW IMAGE CLASSIFIER";
+    private static final int    MAX_RESULTS        = 3;      // Max cont of result
+    private static final int    BATCH_SIZE         = 1;      // batch size : Google Inception V3 is 1
+    private static final int    PIXEL_SIZE         = 3;      // pixel size : Google Inception V3 is 3
+    private static final float  THRESHOLD          = 0.1f;   //
+    private static final int    NumBytesPerChannel = 4;      // a 32bit float value requires 4 bytes
 
-    private static final int MAX_RESULTS = 3;
-    private static final int BATCH_SIZE = 1;
-    private static final int PIXEL_SIZE = 3;
-    private static final float THRESHOLD = 0.1f;
+    private static final int    IMAGE_MEAN         = 128;    //
+    private static final float  IMAGE_STD          = 128.0f; //
 
-    private static final int NumBytesPerChannel = 4; // a 32bit float value requires 4 bytes
 
-    private static final int IMAGE_MEAN = 128;
-    private static final float IMAGE_STD = 128.0f;
-
+    /*tensorflow*/
     private Interpreter interpreter;
     private int inputSize;
     private List<String> labelList;
-    private boolean quant;
 
     public TensorFlowImageClassifier(AssetManager assetManager,
                                      String modelPath,
                                      String labelPath,
-                                     int inputSize,
-                                     boolean quant) throws IOException {
-        create(assetManager,modelPath,labelPath,inputSize,quant);
+                                     int inputSize) throws IOException {
+        create(assetManager,modelPath,labelPath,inputSize);
     }
 
     public void create(AssetManager assetManager,
                              String modelPath,
                              String labelPath,
-                             int inputSize,
-                             boolean quant) throws IOException {
+                             int inputSize) throws IOException {
 
         this.interpreter = new Interpreter(this.loadModelFile(assetManager, modelPath), new Interpreter.Options());
         this.labelList = this.loadLabelList(assetManager, labelPath);
         this.inputSize = inputSize;
-        this.quant = quant;
     }
     @Override
     public List<Recognition> recognizeImage(Bitmap bitmap) {

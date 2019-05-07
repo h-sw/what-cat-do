@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MAIN ACTIVITY";
+
+    /*layout Component*/
     CardView card_camera;
     CardView card_log;
     CardView card_picture;
@@ -77,6 +80,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
