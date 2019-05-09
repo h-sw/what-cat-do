@@ -105,9 +105,6 @@ public class ImageSelectActivity extends AppCompatActivity {
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
 
                     path = data.getData().getPath();
-                    Uri aa2 = data.getData();
-                    String path = getRealPathFromURI(aa2);
-                    Log.d(TAG,path);
                     img = BitmapFactory.decodeStream(inputStream);
                     inputStream.close();
                     img_select.setImageBitmap(img);
