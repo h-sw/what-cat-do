@@ -16,6 +16,8 @@ import java.io.InputStream;
 public class ImageSelectActivity extends AppCompatActivity {
     private static final String TAG = "IMAGE SELECT ACTIVITY";
 
+    private static final int REQUEST_CODE = 1;
+
     /*layout component*/
     private ImageView img_select;
     private Button btn_select;
@@ -82,7 +84,7 @@ public class ImageSelectActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,REQUEST_CODE);
     }
 
     /**
@@ -90,7 +92,7 @@ public class ImageSelectActivity extends AppCompatActivity {
      * */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == 1){
+        if(requestCode == REQUEST_CODE){
             if(resultCode == RESULT_OK){
                 try{
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
