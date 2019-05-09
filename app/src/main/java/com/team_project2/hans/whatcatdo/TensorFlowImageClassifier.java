@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.util.Log;
-
-import com.team_project2.hans.whatcatdo.Classifier;
 
 import org.tensorflow.lite.Interpreter;
 
@@ -24,20 +21,18 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Created by amitshekhar on 17/03/18.
+ *
+ * tflite파일을 읽고, 이미지를 추론하는 클래스 입니다.
  */
 
 public class TensorFlowImageClassifier implements Classifier {
     private static final String TAG                = "TENSORFLOW IMAGE CLASSIFIER";
+
     private static final int    MAX_RESULTS        = 3;      // Max cont of result
     private static final int    BATCH_SIZE         = 1;      // batch size : Google Inception V3 is 1
     private static final int    PIXEL_SIZE         = 3;      // pixel size : Google Inception V3 is 3
     private static final float  THRESHOLD          = 0.1f;   //
     private static final int    NumBytesPerChannel = 4;      // a 32bit float value requires 4 bytes
-
-    private static final int    IMAGE_MEAN         = 128;    //
-    private static final float  IMAGE_STD          = 128.0f; //
-
 
     /*tensorflow*/
     private Interpreter interpreter;
@@ -96,7 +91,6 @@ public class TensorFlowImageClassifier implements Classifier {
     }
 
     private ByteBuffer convertBitmapToByteBuffer(Bitmap bitmap) {
-//        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(BATCH_SIZE * inputSize * inputSize * PIXEL_SIZE);
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(BATCH_SIZE * inputSize * inputSize * PIXEL_SIZE * NumBytesPerChannel);
         byteBuffer.order(ByteOrder.nativeOrder());
         int[] intValues = new int[inputSize * inputSize];
@@ -105,10 +99,6 @@ public class TensorFlowImageClassifier implements Classifier {
         for (int i = 0; i < inputSize; ++i) {
             for (int j = 0; j < inputSize; ++j) {
                 final int val = intValues[pixel++];
-
-//                byteBuffer.put((byte) ((val >> 16) & 0xFF));
-//                byteBuffer.put((byte) ((val >> 8) & 0xFF));
-//                byteBuffer.put((byte) (val & 0xFF));
 
                 byteBuffer.putFloat( (((val >> 16) & 0xFF) - 128) / 128.0f);
                 byteBuffer.putFloat( (((val >> 8) & 0xFF) - 128) / 128.0f);
@@ -119,7 +109,6 @@ public class TensorFlowImageClassifier implements Classifier {
     }
 
     @SuppressLint("DefaultLocale")
-//    private List<Recognition> getSortedResult(byte[][] labelProbArray) {
     private List<Recognition> getSortedResult(float[][] labelProbArray) {
 
         PriorityQueue<Recognition> pq =
@@ -132,7 +121,6 @@ public class TensorFlowImageClassifier implements Classifier {
                             }
                         });
         for (int i = 0; i < labelList.size(); ++i) {
-//            float confidence = (labelProbArray[0][i] & 0xff) / 255.0f;
             float confidence = labelProbArray[0][i];
 
             if (confidence > THRESHOLD) {

@@ -10,11 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class ImageSelectActivity extends AppCompatActivity {
     private static final String TAG = "IMAGE SELECT ACTIVITY";
@@ -25,12 +22,6 @@ public class ImageSelectActivity extends AppCompatActivity {
     private Button btn_analyze_picture;
     private TextView text_score;
 
-    /*tensorflow*/
-    private static final String MODEL_PATH = "inceptionv3_slim_2016.tflite";
-    private static final String LABEL_PATH = "mlabels.txt";
-    private static final int    INPUT_SIZE = 299;
-
-    private Classifier classifier;
 
 
     /*image buffer*/
@@ -51,39 +42,52 @@ public class ImageSelectActivity extends AppCompatActivity {
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,1);
+                openGallary();
             }
         });
 
         btn_analyze_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(isSelect && img!=null){
-                   BitmapDrawable bitmapDrawable = (BitmapDrawable)img_select.getDrawable();
-                   Bitmap bitmap = bitmapDrawable.getBitmap();
-                   bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
-
-                   try {
-                       classifier = new TensorFlowImageClassifier(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE);
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-
-                   final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-                   text_score.setText(results.toString());
-
-               }else{
-                   Toast.makeText(ImageSelectActivity.this, "이미지를 먼저 선택해 주세요!", Toast.LENGTH_SHORT).show();
-               }
+                if(isSelect)
+                    startActivity(IntentBitmap(img_select));
             }
         });
+    }
 
+    /**
+     * 비트맵을 인자로 가지는 Intent를 생성하는 메소드.
+     * */
+    Intent IntentBitmap(ImageView imageView){
+        Intent intent = new Intent(ImageSelectActivity.this,ImageResultActivity.class);
+        Bitmap bitmap = ImageViewToBitmap(imageView,Common.INPUT_SIZE);
+        intent.putExtra("bitmap",bitmap);
+        return intent;
+    }
+
+    /**
+     * 이미지뷰의 이미지를 비트맵으로 변환하는 메소드 입니다
+     * */
+    Bitmap ImageViewToBitmap(ImageView imageView,int INPUT_SIZE){
+        BitmapDrawable bitmapDrawable = (BitmapDrawable)imageView.getDrawable();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        return Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
     }
 
 
+    /**
+     *갤러리를 여는 메소드 입니다
+     * */
+    void openGallary(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+    }
+
+    /**
+     * 갤러리에서 불러온 이미지를 screen에 저장, 출력하는 메소드.
+     * */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == 1){

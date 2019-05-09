@@ -3,7 +3,6 @@ package com.team_project2.hans.whatcatdo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,7 +24,6 @@ public class CameraActivity extends AppCompatActivity {
     /*layout Component*/
     private CameraView cameraView;
     private ImageView btn_record;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,6 @@ public class CameraActivity extends AppCompatActivity {
                 cameraView.stopVideo();
             }
         },RECORD_TIME);
-        Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -93,6 +90,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
                 if(cameraKitVideo.getVideoFile().exists()){
+                    Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
                     File file = cameraKitVideo.getVideoFile();
                     Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
                     intent.putExtra("videoPath",file.getAbsolutePath());

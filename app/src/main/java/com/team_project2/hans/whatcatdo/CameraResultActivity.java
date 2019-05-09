@@ -14,20 +14,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
-
-import static java.lang.System.currentTimeMillis;
 
 public class CameraResultActivity extends AppCompatActivity {
     private static final String  TAG             = "CAMERA RESULT ACTIVITY";
-
-    /*constant value*/
-    private static final String  MODEL_PATH      = "google_inception_v3_cats_feel.tflite";
-    private static final boolean QUANT           = true;
-    private static final String  LABEL_PATH      = "labels.txt";
-    private static final int     INPUT_SIZE      = 224;
-    private static final String  IMAGE_PATH      = "/whatcatdo/";
-    private static final int     IMAGE_QUALITY   = 100;
 
     /*layout component*/
     private VideoView videoView;
@@ -96,14 +85,14 @@ public class CameraResultActivity extends AppCompatActivity {
     public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
         String folder = Environment.getExternalStorageDirectory().toString();
         Long id = System.currentTimeMillis();
-        File saveFolder = new File(folder + IMAGE_PATH);
+        File saveFolder = new File(folder + Common.IMAGE_PATH);
         if(!saveFolder.exists()){
             saveFolder.mkdirs();
         }
-        int i = 1;
+        int i = 0;
         for (Bitmap b : saveBitmap){
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            b.compress(Bitmap.CompressFormat.JPEG, IMAGE_QUALITY, bytes);
+            b.compress(Bitmap.CompressFormat.JPEG, Common.IMAGE_QUALITY, bytes);
             File file = new File(saveFolder,("wcd_image_"+id+"_"+i+".jpg"));
 
             file.createNewFile();
