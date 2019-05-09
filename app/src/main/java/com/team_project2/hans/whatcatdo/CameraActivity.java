@@ -16,8 +16,8 @@ import com.wonderkiln.camerakit.CameraView;
 
 import java.io.File;
 
-public class CameraActivity extends AppCompatActivity {
-    private static final String TAG         = "CAMERA ACTIVITY";
+public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기본 제공 클래스
+    private static final String TAG         = "CAMERA ACTIVITY";//보기 편리하게 태그
 
     private static final int    RECORD_TIME = 3000;
 
