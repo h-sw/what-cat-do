@@ -16,13 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CameraResultActivity extends AppCompatActivity {
-    private static final String  TAG             = "CAMERA RESULT ACTIVITY";
+    private static final String  TAG = "CAMERA RESULT ACTIVITY";
 
     /*layout component*/
     private VideoView videoView;
 
 
-    /*텐서플로우 관련*/
+    /*&#xd150;&#xc11c;&#xd50c;&#xb85c;&#xc6b0; &#xad00;&#xb828;*/
     private TensorFlowImageClassifier classifier;
 
     /*동영상 프레임 단위로 자르기*/
