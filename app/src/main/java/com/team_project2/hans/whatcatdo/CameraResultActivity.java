@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CameraResultActivity extends AppCompatActivity {
-    private static final String  TAG             = "CAMERA RESULT ACTIVITY";
+    private static final String  TAG = "CAMERA RESULT ACTIVITY";
 
     /*layout component*/
     private VideoView videoView;
