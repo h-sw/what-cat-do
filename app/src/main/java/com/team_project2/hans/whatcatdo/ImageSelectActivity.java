@@ -1,11 +1,16 @@
 package com.team_project2.hans.whatcatdo;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,6 +34,7 @@ public class ImageSelectActivity extends AppCompatActivity {
     /*image buffer*/
     private boolean isSelect = false;
     private Bitmap img;
+    private String path;
 
 
     @Override
@@ -64,6 +70,7 @@ public class ImageSelectActivity extends AppCompatActivity {
         Intent intent = new Intent(ImageSelectActivity.this,ImageResultActivity.class);
         Bitmap bitmap = ImageViewToBitmap(imageView,Common.INPUT_SIZE);
         intent.putExtra("bitmap",bitmap);
+        intent.putExtra("path",path);
         return intent;
     }
 
@@ -96,6 +103,11 @@ public class ImageSelectActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 try{
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
+
+                    path = data.getData().getPath();
+                    Uri aa2 = data.getData();
+                    String path = getRealPathFromURI(aa2);
+                    Log.d(TAG,path);
                     img = BitmapFactory.decodeStream(inputStream);
                     inputStream.close();
                     img_select.setImageBitmap(img);
@@ -106,4 +118,29 @@ public class ImageSelectActivity extends AppCompatActivity {
             }
         }
     }
+
+    public String getPath(Uri uri){
+        String [] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this,uri,proj,null,null,null);
+
+        Cursor cursor = cursorLoader.loadInBackground();
+        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(index);
+    }
+
+    public String getRealPathFromURI(Uri uri){
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor c = getContentResolver().query(uri, proj, null, null, null);
+        int index = c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        c.moveToFirst();
+        String path = c.getString(index);
+
+        return path;
+
+    }
+
 }

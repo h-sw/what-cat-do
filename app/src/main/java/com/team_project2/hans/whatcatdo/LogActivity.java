@@ -5,16 +5,28 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
 public class LogActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private DBLogHelper db;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+        getSupportActionBar().hide();
+
+        db = new DBLogHelper(this);
+        ArrayList<ResultLog> myDataset = db.getAll();
+
         recyclerView = findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -26,10 +38,7 @@ public class LogActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        String[] myDataset = new String[10];
-        for(String s : myDataset){
-            s = "123";
-        }
+
         mAdapter = new MyAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
     }

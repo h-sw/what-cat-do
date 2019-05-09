@@ -11,4 +11,29 @@ public class Common {
     public static final int     INPUT_SIZE        = 299;
     public static final String  IMAGE_PATH        = "/whatcatdo/";
     public static final int     IMAGE_QUALITY     = 100;
+
+    /*database*/
+    public static final int     DATABASE_VERSION  = 1;
+    public static final String  DATABASE_NAME     = "logManager";
+
+    //Log Table name
+    public static final String  TABLE_LOGS        = "logs";
+
+    //Log Table Columns names
+    public static final String  LOG_ID            = "_id";
+    public static final String  LOG_TIMESTAMP     = "timestamp";
+    public static final String  LOG_PATH          = "path";
+
+    //Emotion Table name
+    public static final String  TABLE_EMOTIONS    = "emotions";
+
+    //Emotion Table Columns names
+    public static final String  EMOTION_ID        = "_id";
+    public static final String  EMOTION_TIMESTAMP = "timestamp";
+    public static final String  EMOTION_TITLE     = "title";
+    public static final String  EMOTION_PERCENT   = "percent";
+
+
+
+
 }

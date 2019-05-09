@@ -99,7 +99,6 @@ public class TensorFlowImageClassifier implements Classifier {
         for (int i = 0; i < inputSize; ++i) {
             for (int j = 0; j < inputSize; ++j) {
                 final int val = intValues[pixel++];
-
                 byteBuffer.putFloat( (((val >> 16) & 0xFF) - 128) / 128.0f);
                 byteBuffer.putFloat( (((val >> 8) & 0xFF) - 128) / 128.0f);
                 byteBuffer.putFloat( ((val & 0xFF)-128)/128.0f);

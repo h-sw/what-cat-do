@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImageResultActivity extends AppCompatActivity {
@@ -23,11 +24,14 @@ public class ImageResultActivity extends AppCompatActivity {
     private TextView text_result;
     private Button btn_main;
 
+    private DBLogHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_result);
+        db = new DBLogHelper(this);
         getSupportActionBar().hide();
 
         img_result = findViewById(R.id.img_result);
@@ -46,6 +50,8 @@ public class ImageResultActivity extends AppCompatActivity {
                 startActivity(new Intent(ImageResultActivity.this,MainActivity.class));
             }
         });
+
+        db.getAll();
     }
 
     /**
@@ -57,7 +63,17 @@ public class ImageResultActivity extends AppCompatActivity {
         try {
             classifier = new TensorFlowImageClassifier(getAssets(), Common.MODEL_PATH, Common.LABEL_PATH, Common.INPUT_SIZE);
             final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
+            long timestamp = System.currentTimeMillis();
             setScreen(results);
+            Log log = new Log(timestamp, getIntent().getStringExtra("path"));
+            ArrayList<Emotion> emotions = new ArrayList<>();
+
+            for(Classifier.Recognition r : results){
+                Emotion emotion = new Emotion(timestamp, r.getTitle(), r.getConfidence());
+                emotions.add(emotion);
+            }
+            db.addLog(log,emotions);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
