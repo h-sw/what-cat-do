@@ -85,9 +85,17 @@ public class DBLogHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
         while(cursor.moveToNext()){
-            logs.add(new LogEmotion(cursor.getLong(0),
-                                    cursor.getString(1),
-                                    cursor.getString(4)));
+            boolean exist = false;
+            for(LogEmotion logEmotion : logs){
+                if(logEmotion.getTimestamp()==cursor.getLong(0)){
+                    exist = true;
+                }
+            }
+            if(!exist){
+                logs.add(new LogEmotion(cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getString(4)));
+            }
         }
 
         cursor = db.rawQuery(SELECT_LOGS_TABLE,null);

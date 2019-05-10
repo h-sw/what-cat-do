@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 public class LogEmotion {
 
+    public ArrayList<Emotion> getEmotions() {
+        return emotions;
+    }
+
     private ArrayList<Emotion> emotions;
     private long timestamp;
     private String path;
     private String comment;
+
+    public String getComment() {
+        return comment;
+    }
 
     public LogEmotion(long timestamp, String path, String comment){
         this.emotions = new ArrayList<>();
