@@ -38,7 +38,7 @@ public class LogActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
 
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new LogAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
     }
 }
