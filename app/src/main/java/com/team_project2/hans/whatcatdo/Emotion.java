@@ -15,23 +15,12 @@ public class Emotion {
         return percent;
     }
 
-    public void setPercent(long percent) {
-        this.percent = percent;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
 }

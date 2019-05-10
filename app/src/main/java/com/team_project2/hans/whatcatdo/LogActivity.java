@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class LogActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class LogActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         db = new DBLogHelper(this);
-        ArrayList<ResultLog> myDataset = db.getAll();
+        ArrayList<LogEmotion> myDataset = db.getLogEmotion();
 
         recyclerView = findViewById(R.id.my_recycler_view);
 

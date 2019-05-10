@@ -1,8 +1,5 @@
 package com.team_project2.hans.whatcatdo;
 
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private ArrayList<ResultLog> mDataset;
+    private ArrayList<LogEmotion> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<ResultLog> myDataset) {
+    public MyAdapter(ArrayList<LogEmotion> myDataset) {
         mDataset = myDataset;
     }
 
@@ -58,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.textView.setText(mDataset[position]);
-        ResultLog log = mDataset.get(position);
+        LogEmotion log = mDataset.get(position);
         String time =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
         holder.text_time.setText(time);
         holder.text_emotion.setText(log.getPrimaryEmotion());

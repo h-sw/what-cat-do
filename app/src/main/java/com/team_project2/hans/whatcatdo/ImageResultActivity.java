@@ -51,7 +51,7 @@ public class ImageResultActivity extends AppCompatActivity {
             }
         });
 
-        db.getAll();
+        db.getLogEmotion();
     }
 
     /**

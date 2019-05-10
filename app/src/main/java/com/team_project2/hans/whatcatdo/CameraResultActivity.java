@@ -22,7 +22,7 @@ public class CameraResultActivity extends AppCompatActivity {
     private VideoView videoView;
 
 
-    /*&#xd150;&#xc11c;&#xd50c;&#xb85c;&#xc6b0; &#xad00;&#xb828;*/
+    /*tensorflow*/
     private TensorFlowImageClassifier classifier;
 
     /*동영상 프레임 단위로 자르기*/

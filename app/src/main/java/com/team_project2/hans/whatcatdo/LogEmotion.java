@@ -2,13 +2,13 @@ package com.team_project2.hans.whatcatdo;
 
 import java.util.ArrayList;
 
-public class ResultLog {
+public class LogEmotion {
 
     private ArrayList<Emotion> emotions;
     private long timestamp;
     private String path;
 
-    public ResultLog(long timestamp, String path){
+    public LogEmotion(long timestamp, String path){
         this.emotions = new ArrayList<>();
         this.timestamp =  timestamp;
         this.path = path;

@@ -12,6 +12,9 @@ public class Common {
     public static final String  IMAGE_PATH        = "/whatcatdo/";
     public static final int     IMAGE_QUALITY     = 100;
 
+
+
+
     /*database*/
     public static final int     DATABASE_VERSION  = 1;
     public static final String  DATABASE_NAME     = "logManager";

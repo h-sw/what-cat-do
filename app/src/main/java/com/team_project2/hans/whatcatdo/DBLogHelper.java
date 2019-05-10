@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DBLogHelper extends SQLiteOpenHelper {
     private final static String TAG = "DB LOG HELPER";
@@ -66,8 +65,11 @@ public class DBLogHelper extends SQLiteOpenHelper {
         android.util.Log.d(TAG,"db add success");
     }
 
-    public ArrayList<ResultLog> getAll(){
+    public ArrayList<LogEmotion> getLogEmotion(){
         SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<LogEmotion> logs = new ArrayList<>();
+
+        //SELECT logs.timestamp, path, title, percent FROM logs LEFT JOIN emotions ON logs.timestamp == emotions.timestamp
         String SELECT_LOGS_TABLE = "SELECT " + Common.TABLE_LOGS + "." + Common.LOG_TIMESTAMP
                                                 + ", " + Common.LOG_PATH
                                                 + ", " + Common.EMOTION_TITLE
@@ -75,25 +77,19 @@ public class DBLogHelper extends SQLiteOpenHelper {
                                                 + " FROM " + Common.TABLE_LOGS
                                                 + " LEFT JOIN " + Common.TABLE_EMOTIONS
                                                 + " ON "+ Common.TABLE_LOGS + "." + Common.LOG_TIMESTAMP + " == " + Common.TABLE_EMOTIONS + "." + Common.EMOTION_TIMESTAMP;
-        //SELECT time FROM logs LEFT JOIN emotions ON logs.timestamp == emotions.timestamp
+
 
         Cursor cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
-
-        ArrayList<ResultLog> logs = new ArrayList<>();
-
         while(cursor.moveToNext()){
-            logs.add(new ResultLog(cursor.getLong(0), cursor.getString(1)));
+            logs.add(new LogEmotion(cursor.getLong(0), cursor.getString(1)));
         }
 
         cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
         while(cursor.moveToNext()){
-            for(ResultLog log : logs){
-                android.util.Log.d(TAG,Long.toString(log.getTimestamp()));
-                android.util.Log.d(TAG,Long.toString(cursor.getLong(0)));
+            for(LogEmotion log : logs){
                 if(log.getTimestamp()==cursor.getLong(0)){
-                    android.util.Log.d(TAG,"12312312");
                     log.addEmotion(new Emotion(log.getTimestamp(),cursor.getString(2),cursor.getFloat(3)));
                 }
             }
