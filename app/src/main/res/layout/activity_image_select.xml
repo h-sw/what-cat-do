@@ -27,14 +27,22 @@
             android:layout_height="wrap_content"
 
             android:layout_marginBottom="24dp"
-            android:text="갤러리에서 가져오기" />
+            android:text="갤러리에서 가져오기"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@color/Pink"
+            android:textColor="#fff"/>
         <Button
             android:id="@+id/btn_analyze_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:layout_marginBottom="24dp"
-            android:text="사진 분석"/>
+            android:text="사진 분석"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@color/Pink"
+            android:textColor="#fff"/>
         <TextView
             android:id="@+id/text_score"
             android:layout_width="wrap_content"

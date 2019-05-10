@@ -20,8 +20,8 @@ public class DBLogHelper extends SQLiteOpenHelper {
         String CREATE_LOGS_TABLE = "CREATE TABLE " + Common.TABLE_LOGS + "("
                                     + Common.LOG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                                     + Common.LOG_TIMESTAMP + " INTEGER,"
-                                    + Common.LOG_PATH +" TEXT"
-                                    + Common.LOG_COMMENT+ ")";
+                                    + Common.LOG_PATH +" TEXT,"
+                                    + Common.LOG_COMMENT+ " TEXT"+")";
         db.execSQL(CREATE_LOGS_TABLE);
 
         String CREATE_EMOTIONS_TABLE = "CREATE TABLE " + Common.TABLE_EMOTIONS + "("

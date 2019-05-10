@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,8 +26,12 @@ public class ImageResultActivity extends AppCompatActivity {
     private TextView text_result;
     private Button btn_main;
     private EditText edit_comment;
+    private Button btn_save;
 
     private DBLogHelper db;
+
+    private Log log;
+    private ArrayList<Emotion> emotions;
 
 
     @Override
@@ -40,6 +45,7 @@ public class ImageResultActivity extends AppCompatActivity {
         text_result = findViewById(R.id.text_result);
         btn_main = findViewById(R.id.btn_main);
         edit_comment = findViewById(R.id.edit_comment);
+        btn_save = findViewById(R.id.btn_save);
 
         bitmap = getIntent().getParcelableExtra("bitmap");
         img_result.setImageBitmap(bitmap);
@@ -51,6 +57,15 @@ public class ImageResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ImageResultActivity.this,MainActivity.class));
+            }
+        });
+
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.addLog(log,emotions);
+                Toast.makeText(ImageResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -67,16 +82,16 @@ public class ImageResultActivity extends AppCompatActivity {
             classifier = new TensorFlowImageClassifier(getAssets(), Common.MODEL_PATH, Common.LABEL_PATH, Common.INPUT_SIZE);
             final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
             long timestamp = System.currentTimeMillis();
+
             setScreen(results);
-            Log log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
-            ArrayList<Emotion> emotions = new ArrayList<>();
+
+            log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
+            emotions = new ArrayList<>();
 
             for(Classifier.Recognition r : results){
                 Emotion emotion = new Emotion(timestamp, r.getTitle(), r.getConfidence());
                 emotions.add(emotion);
             }
-            db.addLog(log,emotions);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

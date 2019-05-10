@@ -36,8 +36,4 @@ public class Common {
     public static final String  EMOTION_TIMESTAMP = "timestamp";
     public static final String  EMOTION_TITLE     = "title";
     public static final String  EMOTION_PERCENT   = "percent";
-
-
-
-
 }
