@@ -135,5 +135,4 @@ public class TensorFlowImageClassifier implements Classifier {
 
         return recognitions;
     }
-
 }
