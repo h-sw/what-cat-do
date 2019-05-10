@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class ImageResultActivity extends AppCompatActivity {
     private ImageView img_result;
     private TextView text_result;
     private Button btn_main;
+    private EditText edit_comment;
 
     private DBLogHelper db;
 
@@ -37,6 +39,7 @@ public class ImageResultActivity extends AppCompatActivity {
         img_result = findViewById(R.id.img_result);
         text_result = findViewById(R.id.text_result);
         btn_main = findViewById(R.id.btn_main);
+        edit_comment = findViewById(R.id.edit_comment);
 
         bitmap = getIntent().getParcelableExtra("bitmap");
         img_result.setImageBitmap(bitmap);
@@ -65,7 +68,7 @@ public class ImageResultActivity extends AppCompatActivity {
             final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
             long timestamp = System.currentTimeMillis();
             setScreen(results);
-            Log log = new Log(timestamp, getIntent().getStringExtra("path"));
+            Log log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
             ArrayList<Emotion> emotions = new ArrayList<>();
 
             for(Classifier.Recognition r : results){

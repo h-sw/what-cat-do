@@ -7,11 +7,13 @@ public class LogEmotion {
     private ArrayList<Emotion> emotions;
     private long timestamp;
     private String path;
+    private String comment;
 
-    public LogEmotion(long timestamp, String path){
+    public LogEmotion(long timestamp, String path, String comment){
         this.emotions = new ArrayList<>();
         this.timestamp =  timestamp;
         this.path = path;
+        this.comment = comment;
     }
 
     public String getPath() {

@@ -26,6 +26,7 @@ public class Common {
     public static final String  LOG_ID            = "_id";
     public static final String  LOG_TIMESTAMP     = "timestamp";
     public static final String  LOG_PATH          = "path";
+    public static final String  LOG_COMMENT       = "comment";
 
     //Emotion Table name
     public static final String  TABLE_EMOTIONS    = "emotions";

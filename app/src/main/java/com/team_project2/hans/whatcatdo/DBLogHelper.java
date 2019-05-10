@@ -20,7 +20,8 @@ public class DBLogHelper extends SQLiteOpenHelper {
         String CREATE_LOGS_TABLE = "CREATE TABLE " + Common.TABLE_LOGS + "("
                                     + Common.LOG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                                     + Common.LOG_TIMESTAMP + " INTEGER,"
-                                    + Common.LOG_PATH +" TEXT" + ")";
+                                    + Common.LOG_PATH +" TEXT"
+                                    + Common.LOG_COMMENT+ ")";
         db.execSQL(CREATE_LOGS_TABLE);
 
         String CREATE_EMOTIONS_TABLE = "CREATE TABLE " + Common.TABLE_EMOTIONS + "("
@@ -48,6 +49,7 @@ public class DBLogHelper extends SQLiteOpenHelper {
 
         valueLog.put(Common.LOG_TIMESTAMP, log.getTimestamp());
         valueLog.put(Common.LOG_PATH, log.getPath());
+        valueLog.put(Common.LOG_COMMENT, log.getComment());
 
         db.insert(Common.TABLE_LOGS, null, valueLog);
 
@@ -57,7 +59,6 @@ public class DBLogHelper extends SQLiteOpenHelper {
             valueEmotion.put(Common.EMOTION_TIMESTAMP, emotion.getTimestamp());
             valueEmotion.put(Common.EMOTION_TITLE, emotion.getTitle());
             valueEmotion.put(Common.EMOTION_PERCENT, emotion.getPercent());
-
             db.insert(Common.TABLE_EMOTIONS, null, valueEmotion);
         }
 
@@ -74,6 +75,7 @@ public class DBLogHelper extends SQLiteOpenHelper {
                                                 + ", " + Common.LOG_PATH
                                                 + ", " + Common.EMOTION_TITLE
                                                 + ", " + Common.EMOTION_PERCENT
+                                                + ", " + Common.LOG_COMMENT
                                                 + " FROM " + Common.TABLE_LOGS
                                                 + " LEFT JOIN " + Common.TABLE_EMOTIONS
                                                 + " ON "+ Common.TABLE_LOGS + "." + Common.LOG_TIMESTAMP + " == " + Common.TABLE_EMOTIONS + "." + Common.EMOTION_TIMESTAMP;
@@ -82,7 +84,9 @@ public class DBLogHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
         while(cursor.moveToNext()){
-            logs.add(new LogEmotion(cursor.getLong(0), cursor.getString(1)));
+            logs.add(new LogEmotion(cursor.getLong(0),
+                                    cursor.getString(1),
+                                    cursor.getString(4)));
         }
 
         cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
@@ -90,7 +94,9 @@ public class DBLogHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext()){
             for(LogEmotion log : logs){
                 if(log.getTimestamp()==cursor.getLong(0)){
-                    log.addEmotion(new Emotion(log.getTimestamp(),cursor.getString(2),cursor.getFloat(3)));
+                    log.addEmotion(new Emotion(log.getTimestamp(),
+                            cursor.getString(2),
+                            cursor.getFloat(3)));
                 }
             }
         }
