@@ -40,6 +40,7 @@ public class DBLogHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + Common.TABLE_EMOTIONS);
             onCreate(db);
     }
+    //comment  추가
 
     public void addLog(Log log, ArrayList<Emotion> emotions){
         SQLiteDatabase db = this.getWritableDatabase();
