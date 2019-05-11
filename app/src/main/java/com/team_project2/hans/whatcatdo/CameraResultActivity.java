@@ -1,5 +1,6 @@
 package com.team_project2.hans.whatcatdo;
 
+
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -10,12 +11,14 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.Toast;
 
-import com.team_project2.hans.whatcatdo.Classifier.Recognition;
 
-import org.tensorflow.lite.Tensor;
+import com.smarteist.autoimageslider.SliderLayout;
+import com.smarteist.autoimageslider.SliderView;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -28,7 +31,7 @@ public class CameraResultActivity extends AppCompatActivity {
     private static final String  TAG = "CAMERA RESULT ACTIVITY";
 
     /*layout component*/
-    private VideoView videoView;
+    private SliderLayout sliderLayout;
     private TextView text_result_camera;
 
     /*tensorflow*/
@@ -39,6 +42,7 @@ public class CameraResultActivity extends AppCompatActivity {
     private Uri videoFileUri;
     private MediaMetadataRetriever mediaMetadataRetriever;
     private ArrayList<Bitmap> bitmapArrayList;
+    private ArrayList<String> bitmapPath;
     private MediaPlayer mediaPlayer;
     private Bitmap bitmap;
     private Thread thread;
@@ -46,13 +50,20 @@ public class CameraResultActivity extends AppCompatActivity {
     Long id;
     String string;
 
+    SliderView sliderView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_result);
         getSupportActionBar().hide();
 
-        videoView = findViewById(R.id.videoView);
+        sliderLayout = findViewById(R.id.imageSlider);
+        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
+        sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
+
+
+
         text_result_camera = findViewById(R.id.text_result_camera);
 
         new CheckTypesTask().execute();
@@ -61,8 +72,6 @@ public class CameraResultActivity extends AppCompatActivity {
     void convertVideoToImage(){
         if(!getIntent().getStringExtra("videoPath").isEmpty()){
             String path = getIntent().getStringExtra("videoPath");
-            videoView.setVideoURI(Uri.parse(path));
-            videoView.start();
 
             videoFile = new File(path);
             videoFileUri = Uri.parse(videoFile.toString());
@@ -120,6 +129,7 @@ public class CameraResultActivity extends AppCompatActivity {
 
     public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
         String folder = Environment.getExternalStorageDirectory().toString();
+        bitmapPath = new ArrayList<>();
         id = System.currentTimeMillis();
         File saveFolder = new File(folder + Common.IMAGE_PATH);
         if(!saveFolder.exists()){
@@ -130,7 +140,7 @@ public class CameraResultActivity extends AppCompatActivity {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             b.compress(Bitmap.CompressFormat.JPEG, Common.IMAGE_QUALITY, bytes);
             File file = new File(saveFolder,("wcd_image_"+id+"_"+i+".jpg"));
-
+            bitmapPath.add(file.getAbsolutePath());
             file.createNewFile();
             FileOutputStream fo = new FileOutputStream(file);
             fo.write(bytes.toByteArray());
@@ -163,6 +173,10 @@ public class CameraResultActivity extends AppCompatActivity {
                 convertVideoToImage();
                 classifyImages(bitmapArrayList);
 
+                setSliderViews();
+
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -173,6 +187,58 @@ public class CameraResultActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             asyncDialog.dismiss();
             super.onPostExecute(result);
+        }
+    }
+
+
+
+    private void setSliderViews() {
+
+        for (int i = 0; i < bitmapArrayList.size(); i++) {
+            sliderView = new SliderView(this);
+
+            Bitmap bitmap = bitmapArrayList.get(i);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            byte[] byteArray = stream.toByteArray();
+
+            Log.d(TAG,byteArray.toString());
+
+            sliderView.setImageByte(byteArray);
+/*
+            switch (i) {
+                case 0:
+                    sliderView.setImageUrl("https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    break;
+                case 1:
+                    sliderView.setImageUrl("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    break;
+                case 2:
+                    sliderView.setImageUrl("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+                    break;
+                case 3:
+                    sliderView.setImageUrl("https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+                    break;
+            }*/
+
+            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+            sliderView.setDescription("setDescription " + (i + 1));
+            final int finalI = i;
+            sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(SliderView sliderView) {
+                    Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //at last add this view in your layout :
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    sliderLayout.addSliderView(sliderView);
+                }
+            });
+
         }
     }
 

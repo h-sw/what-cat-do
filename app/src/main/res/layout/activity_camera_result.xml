@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CameraResultActivity"
+    android:background="@color/Pink"
     android:orientation="vertical">
 
-    <VideoView
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:id="@+id/videoView"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+    <com.smarteist.autoimageslider.SliderLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/imageSlider"/>
     <TextView
         android:id="@+id/text_result_camera"
         android:layout_width="match_parent"
