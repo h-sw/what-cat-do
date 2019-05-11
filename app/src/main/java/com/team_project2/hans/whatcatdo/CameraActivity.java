@@ -40,6 +40,7 @@ public class CameraActivity extends AppCompatActivity {//Appcompatactivity ê¸°ë³
             @Override
             public void onClick(View v) {
                 recordVideo();
+                btn_record.setClickable(false);
             }
         });
 

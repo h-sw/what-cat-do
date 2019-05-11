@@ -4,5 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="MajorBlue">#4286F4</color>
-    <color name="Pink">#FFA6C9</color>
+    <color name="Pink">#80FFA6C9</color>
+    <color name="Menu1">#80E8BA6D</color>
+    <color name="Menu2">#80BCFF85</color>
+    <color name="Menu3">#806DDAE8</color>
+    <color name="Menu4">#80BD78FF</color>
+    <color name ="MainBack">#F2DCE8</color>
+
+
 </resources>
