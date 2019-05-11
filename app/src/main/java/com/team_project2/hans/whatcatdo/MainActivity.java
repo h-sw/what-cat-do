@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     CardView card_camera;
     CardView card_log;
     CardView card_picture;
+    CardView card_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         card_picture = findViewById(R.id.card_picture);
         card_camera = findViewById(R.id.card_camera);
         card_log = findViewById(R.id.card_log);
+        card_info = findViewById(R.id.card_info);
 
         card_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
                 LoadActivity(v);
             }
         });
+        card_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadActivity(v);
+            }
+        });
 
     }
 
@@ -63,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,LogActivity.class));
         else if(view.getId()==card_picture.getId())
             startActivity(new Intent(this,ImageSelectActivity.class));
+        else if(view.getId()==card_info.getId())
+            startActivity(new Intent(this,InfoActivity.class));
         else
             Toast.makeText(getApplicationContext(),"no Activity!",Toast.LENGTH_LONG);
     }

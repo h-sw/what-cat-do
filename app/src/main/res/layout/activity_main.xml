@@ -210,8 +210,9 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 고양이가 무슨 생각을 하는지 알아볼까요? "
-                android:textSize="20sp"
+                android:maxLines="1"
+                android:text=" 고양이가 무슨 생각을 할까요? "
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/MainBack"/>
 

@@ -20,7 +20,6 @@ class Classify {
         }
     }
 
-
     void classify(){
         for(int i=0;i<18;i++){
             result[image[i]]++;

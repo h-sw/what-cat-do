@@ -1,7 +1,9 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,8 +52,9 @@ public class ImageResultActivity extends AppCompatActivity {
         bitmap = getIntent().getParcelableExtra("bitmap");
         img_result.setImageBitmap(bitmap);
 
-        ClassifyImage(bitmap);
 
+        CheckTypesTask task = new CheckTypesTask();
+        task.execute();
 
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,28 +75,81 @@ public class ImageResultActivity extends AppCompatActivity {
         db.getLogEmotion();
     }
 
+    private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
+
+        ProgressDialog asyncDialog = new ProgressDialog(
+                ImageResultActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("감정분석 중이에요~");
+
+            // show dialog
+            asyncDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            try {
+
+                classifyImage();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            asyncDialog.dismiss();
+            super.onPostExecute(result);
+        }
+    }
+
+
+    public void classifyImage(){
+        try {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    classifyImage(bitmap);
+                }
+            });
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     /**
      * bitmap이미지를 인자로 받아 결과를 추론하는 클래스 입니다.
      * 이 메소드는 추론된 결과를 반환하지 않고 바로 screen에 값을 수정하도록 합니다.
      *
      * */
-    public void ClassifyImage(Bitmap bitmap){
-        try {
-            classifier = new TensorFlowImageClassifier(getAssets(), Common.MODEL_PATH, Common.LABEL_PATH, Common.INPUT_SIZE);
-            final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-            long timestamp = System.currentTimeMillis();
+    public void classifyImage(Bitmap bitmap){
+        classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+        final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
+        long timestamp = System.currentTimeMillis();
 
-            setScreen(results);
-
-            log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
-            emotions = new ArrayList<>();
-
-            for(Classifier.Recognition r : results){
-                Emotion emotion = new Emotion(timestamp, r.getTitle(), r.getConfidence());
-                emotions.add(emotion);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setScreen(results);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        });
+
+
+        log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
+        emotions = new ArrayList<>();
+
+        for(Classifier.Recognition r : results){
+            Emotion emotion = new Emotion(timestamp, r.getTitle(), r.getConfidence());
+            emotions.add(emotion);
         }
     }
 
@@ -101,11 +157,8 @@ public class ImageResultActivity extends AppCompatActivity {
      * 이 메소드는 bitmap이미지를 인자로 받아 추론결과를 List형태로 반환합니다.
      * */
     public List<Classifier.Recognition> getClassifiedResult(Bitmap bitmap){
-        try {
-            classifier = new TensorFlowImageClassifier(getAssets(), Common.MODEL_PATH, Common.LABEL_PATH, Common.INPUT_SIZE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+
         return classifier.recognizeImage(bitmap);
     }
 

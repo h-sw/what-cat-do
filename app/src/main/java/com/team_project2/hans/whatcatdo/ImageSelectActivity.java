@@ -1,14 +1,9 @@
 package com.team_project2.hans.whatcatdo;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,8 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.InputStream;
+
+import static com.team_project2.hans.whatcatdo.BitmapConverter.ImageViewToBitmap;
 
 public class ImageSelectActivity extends AppCompatActivity {
     private static final String TAG = "IMAGE SELECT ACTIVITY";
@@ -76,16 +72,6 @@ public class ImageSelectActivity extends AppCompatActivity {
     }
 
     /**
-     * 이미지뷰의 이미지를 비트맵으로 변환하는 메소드 입니다
-     * */
-    Bitmap ImageViewToBitmap(ImageView imageView,int INPUT_SIZE){
-        BitmapDrawable bitmapDrawable = (BitmapDrawable)imageView.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-        return Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
-    }
-
-
-    /**
      *갤러리를 여는 메소드 입니다
      * */
     void openGallary(){
@@ -107,7 +93,7 @@ public class ImageSelectActivity extends AppCompatActivity {
                     Uri uri = data.getData();
 
 
-                    path = RealPathUtil.getRealPathFromURI_API19(this,uri);
+                    path = RealPathManager.getRealPathFromURI_API19(this,uri);
                     //path = data.getData().getPath();
                     img = BitmapFactory.decodeStream(inputStream);
 

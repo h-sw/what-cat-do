@@ -39,22 +39,30 @@ public class TensorFlowImageClassifier implements Classifier {
     private int inputSize;
     private List<String> labelList;
 
-    public TensorFlowImageClassifier(AssetManager assetManager,
+    private static TensorFlowImageClassifier tensorFlowImageClassifier = null;
+
+    private TensorFlowImageClassifier(AssetManager assetManager,
                                      String modelPath,
                                      String labelPath,
                                      int inputSize) throws IOException {
-        create(assetManager,modelPath,labelPath,inputSize);
-    }
-
-    public void create(AssetManager assetManager,
-                             String modelPath,
-                             String labelPath,
-                             int inputSize) throws IOException {
-
         this.interpreter = new Interpreter(this.loadModelFile(assetManager, modelPath), new Interpreter.Options());
         this.labelList = this.loadLabelList(assetManager, labelPath);
         this.inputSize = inputSize;
     }
+
+    public static TensorFlowImageClassifier create(AssetManager assetManager,
+                             String modelPath,
+                             String labelPath,
+                             int inputSize) throws IOException {
+        tensorFlowImageClassifier = new TensorFlowImageClassifier(assetManager,modelPath,labelPath,inputSize);
+
+        return tensorFlowImageClassifier;
+    }
+
+    public static TensorFlowImageClassifier getTensorFlowClassifier(){
+        return tensorFlowImageClassifier;
+    }
+
     @Override
     public List<Recognition> recognizeImage(Bitmap bitmap) {
         ByteBuffer byteBuffer = convertBitmapToByteBuffer(bitmap);
