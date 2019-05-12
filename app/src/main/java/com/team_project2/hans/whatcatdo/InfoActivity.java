@@ -20,6 +20,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main); // 메인 엑티비티가 아니라 인포액피비티 자나요!!!!!!!!!!!!!!!!
         setContentView(R.layout.activity_info);
+        getSupportActionBar().hide();
         bt1 = findViewById(R.id.bt1);
         bt2 = findViewById(R.id.bt2);
         bt3 = findViewById(R.id.bt3);
