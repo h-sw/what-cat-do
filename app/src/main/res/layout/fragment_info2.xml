@@ -2,10 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AAD">
+    android:background="@color/Menu2">
     <TextView
-        android:text="프래그먼트 2"
+        android:text="촬영분석"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#FFF"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="고양이 촬영으로 알아보기 Tap!!"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="카메라 촬영 버튼을 누른 후 3초동안 고양이를 찍어주세요 !!"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="left"
+        android:text="\n- 3초 동안 촬영 된 고양이의 속마음을 알려드릴게요 !!"
+        />
 
 </LinearLayout>

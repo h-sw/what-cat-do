@@ -14,18 +14,31 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전환1"
+            android:backgroundTint="@color/Menu1"
+            android:textColor="#FFF"
+            android:text="사진분석"
             android:id="@+id/bt1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전환2"
+            android:backgroundTint="@color/Menu2"
+            android:textColor="#FFF"
+            android:text="촬영분석"
             android:id="@+id/bt2"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전환3"
+            android:backgroundTint="@color/Menu3"
+            android:textColor="#FFF"
+            android:text="기록확인"
             android:id="@+id/bt3"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/MainBack"
+            android:textColor="#FFF"
+            android:text="닫기"
+            android:id="@+id/bt4"/>
     </LinearLayout>
 
     <FrameLayout
