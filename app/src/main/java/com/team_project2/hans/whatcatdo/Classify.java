@@ -7,9 +7,9 @@ import java.util.List;
 
 class Classify {
     //happy=1, angry=2, sad=3, curious=4, ignore=5, scared=6, sleepy=7, sad=8
-    int image[] = {1,1,3,2,3,3,3,2,1,4,7,5,2,3,1,4,5,2};
-    int accuracy ;
-    int result[] = new int[8];
+    ArrayList image = new ArrayList();//이미지의 감정을 저장해주는 리스트
+    int accuracy ;//정확도 값
+    ArrayList result = new ArrayList();//결과 값을 저장해주는 리스트
 
     List<Classifier.Recognition> results;
     public Classify(List<Classifier.Recognition> results) {
@@ -23,24 +23,15 @@ class Classify {
 
     void classify(){
         for(int i=0;i<18;i++){
-            result[image[i]]++;
+            result.add(image.get(i));
         }
 
-        for(int i=0; i<8; i++){
-            for(int j=0; j<7; j++){
-                if(result[j]>result[j+1]){
-                    int temp;
-                    temp=result[j+1];
-                    result[j+1]=result[j];
-                    result[j]=temp;
-                }
-            }
-        }
+        Collections.sort(result);//result값을 소트 해준다
 
         for(int i=0; i<8; i++){
                     int cnt=0;
                     if(accuracy>70){
-                        Log.d("T",Integer.toString(image[i]));
+                        Log.d("T",Integer.toString(result);
                         cnt++;
                     }
                     if(cnt==3){
