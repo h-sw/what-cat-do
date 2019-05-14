@@ -1,16 +1,17 @@
 package com.team_project2.hans.whatcatdo.controller;
 
 import android.util.Log;
-
+import java.util.ArrayList;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 
+import java.util.Collections;
 import java.util.List;
 
 class Classify {
     //happy=1, angry=2, sad=3, curious=4, ignore=5, scared=6, sleepy=7, sad=8
-    int image[] = {1,1,3,2,3,3,3,2,1,4,7,5,2,3,1,4,5,2};
-    int accuracy;
-    int result[] = new int[8];
+    ArrayList<Integer> image = new ArrayList<>();//이미지의 결과
+    ArrayList<Integer> result = new ArrayList<>();//결과 리스트
+    int accuracy;//정확도
 
     List<Classifier.Recognition> results;
     public Classify(List<Classifier.Recognition> results) {
@@ -23,27 +24,19 @@ class Classify {
 
     void classify(){
         for(int i=0;i<18;i++){
-            result[image[i]]++;
+            result.add(image.get(i),+1);//result리스트에 값을 저장해준다
         }
 
-        for(int i=0; i<8; i++){
-            for(int j=0; j<7; j++){
-                if(result[j]>result[j+1]){
-                    int temp;
-                    temp=result[j+1];
-                    result[j+1]=result[j];
-                    result[j]=temp;
-                }
-            }
-        }
+        Collections.sort(result);//result값을 소트해준다
 
         for(int i=0; i<8; i++){
                     int cnt=0;
-                    if(accuracy>70){
-                        Log.d("T",Integer.toString(image[i]));
+                    if(accuracy>70){//정확도가 70이 넘어 갈때
+                        //image의 값을 출력한다
+                        //Log.d("T",Integer.toString(image[i]));
                         cnt++;
                     }
-                    if(cnt==3){
+                    if(cnt==3){//cnt가 3이 되면 탈출
                         break;
             }
         }
