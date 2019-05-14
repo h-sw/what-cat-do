@@ -2,14 +2,13 @@ package com.team_project2.hans.whatcatdo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
 import java.io.File;
@@ -63,9 +62,10 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.textView.setText(mDataset[position]);
+
         LogEmotion log = mDataset.get(position);
 
-        String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
+        //String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
         String date =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
 
         holder.text_date.setText(date);
@@ -83,13 +83,16 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         }
 
 
-
     }
 
-
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
+
+
+
+
+
+
 }
