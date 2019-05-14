@@ -1,5 +1,7 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,8 +28,7 @@ public class LogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log);
         getSupportActionBar().hide();
 
-        db = new DBLogHelper(this);
-        ArrayList<LogEmotion> myDataset = db.getLogEmotion();
+
 
         recyclerView = findViewById(R.id.my_recycler_view);
 
@@ -36,13 +37,17 @@ public class LogActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(LogActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
+        db = new DBLogHelper(LogActivity.this);
+        ArrayList<LogEmotion> myDataset = db.getLogEmotion();
 
         mAdapter = new LogAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
+
+
     }
 }
 

@@ -25,7 +25,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public View view;
-        public TextView text_time;
+        public TextView text_comment;
         public TextView text_emotion;
         public ImageView img_log;
         public TextView text_date;
@@ -34,7 +34,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
             super(v);
             view = v;
             text_date = v.findViewById(R.id.text_date);
-            text_time = v.findViewById(R.id.text_time);
+            text_comment = v.findViewById(R.id.text_comment);
             text_emotion = v.findViewById(R.id.text_emotion);
             img_log = v.findViewById(R.id.img_log);
         }
@@ -65,19 +65,15 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         //holder.textView.setText(mDataset[position]);
         LogEmotion log = mDataset.get(position);
 
-        for(LogEmotion l : mDataset){
-            System.out.println(l.getTimestamp());
-            System.out.println(l.getPath());
-            for(Emotion e : l.getEmotions()){
-                System.out.println(e.getTitle());
-            }
-            System.out.println("===========================");
-        }
-
         String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
         String date =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
+
         holder.text_date.setText(date);
-        holder.text_time.setText(time);
+        holder.text_comment.setText(log.getComment());
+        if(log.getComment().isEmpty()){
+            holder.text_comment.setText("코멘트가 없습니다");
+        }
+
         holder.text_emotion.setText(log.getPrimaryEmotion());
 
         File imgFile = new File(log.getPath());

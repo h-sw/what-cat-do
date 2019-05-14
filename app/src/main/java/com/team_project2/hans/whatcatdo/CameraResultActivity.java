@@ -37,6 +37,7 @@ public class CameraResultActivity extends AppCompatActivity {
     /*layout component*/
     private SliderLayout sliderLayout;
     private TextView text_result_camera;
+    private SliderView sliderView;
 
     /*tensorflow*/
     private TensorFlowImageClassifier classifier;
@@ -47,14 +48,17 @@ public class CameraResultActivity extends AppCompatActivity {
     private MediaMetadataRetriever mediaMetadataRetriever;
     private ArrayList<Bitmap> bitmapArrayList;
     private ArrayList<String> bitmapPath;
+    private ArrayList<List<Classifier.Recognition>> classifyResults;
     private MediaPlayer mediaPlayer;
     private Bitmap bitmap;
     private Thread thread;
 
-    Long id;
-    String string;
+    private int selectImage;
 
-    SliderView sliderView;
+    private Long timestamp;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,101 +66,18 @@ public class CameraResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera_result);
         getSupportActionBar().hide();
 
+        text_result_camera = findViewById(R.id.text_result_camera);
         sliderLayout = findViewById(R.id.imageSlider);
+
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
         sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
 
 
 
-        text_result_camera = findViewById(R.id.text_result_camera);
-
-        new CheckTypesTask().execute();
+        new TaskClassifier().execute();
     }
 
-    void convertVideoToImage(){
-        if(!getIntent().getStringExtra("videoPath").isEmpty()){
-            String path = getIntent().getStringExtra("videoPath");
-
-            videoFile = new File(path);
-            videoFileUri = Uri.parse(videoFile.toString());
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            bitmapArrayList = new ArrayList<>();
-            mediaMetadataRetriever.setDataSource(videoFile.toString());
-            mediaPlayer = MediaPlayer.create(getBaseContext(),videoFileUri);
-
-            for(int i=0;i<mediaPlayer.getDuration(); i += 500){
-                bitmap = mediaMetadataRetriever.getFrameAtTime(i*1000,MediaMetadataRetriever.OPTION_CLOSEST);
-                bitmapArrayList.add(bitmap);
-            }
-            mediaMetadataRetriever.release();
-            saveFrames();
-        }
-    }
-
-    public void classifyImages(ArrayList<Bitmap> bitmaps){
-        ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
-        TensorFlowImageClassifier tensorFlowImageClassifier = TensorFlowImageClassifier.getTensorFlowClassifier();
-        for(Bitmap bitmap : bitmaps){
-            bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
-            List<Classifier.Recognition> results = tensorFlowImageClassifier.recognizeImage(bitmap);
-            recognitions.add(results);
-        }
-        string = "";
-        for(List<Classifier.Recognition> r : recognitions){
-            Log.d(TAG,r.toString());
-            string += (r.toString()+'\n');
-        }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                text_result_camera.setText(string);
-            }
-        });
-    }
-
-
-
-
-    public void saveFrames(){
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    saveFrames(bitmapArrayList);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }
-
-    public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
-        String folder = Environment.getExternalStorageDirectory().toString();
-        bitmapPath = new ArrayList<>();
-        id = System.currentTimeMillis();
-        File saveFolder = new File(folder + Common.IMAGE_PATH);
-        if(!saveFolder.exists()){
-            saveFolder.mkdirs();
-        }
-        int i = 0;
-        for (Bitmap b : saveBitmap){
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            b.compress(Bitmap.CompressFormat.JPEG, Common.IMAGE_QUALITY, bytes);
-            File file = new File(saveFolder,("wcd_image_"+id+"_"+i+".jpg"));
-            bitmapPath.add(file.getAbsolutePath());
-            file.createNewFile();
-            FileOutputStream fo = new FileOutputStream(file);
-            fo.write(bytes.toByteArray());
-
-            fo.flush();
-            fo.close();
-            i++;
-        }
-        thread.interrupt();
-    }
-
-    private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
+    private class TaskClassifier extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog asyncDialog = new ProgressDialog(
                 CameraResultActivity.this);
@@ -175,8 +96,7 @@ public class CameraResultActivity extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             try {
                 convertVideoToImage();
-                classifyImages(bitmapArrayList);
-
+                classifyResults = classifyImages(bitmapArrayList);
                 setSliderViews();
 
 
@@ -194,7 +114,75 @@ public class CameraResultActivity extends AppCompatActivity {
         }
     }
 
+    void convertVideoToImage(){
+        if(!getIntent().getStringExtra("videoPath").isEmpty()){
+            String path = getIntent().getStringExtra("videoPath");
 
+            videoFile = new File(path);
+            videoFileUri = Uri.parse(videoFile.toString());
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            bitmapArrayList = new ArrayList<>();
+            mediaMetadataRetriever.setDataSource(videoFile.toString());
+            mediaPlayer = MediaPlayer.create(getBaseContext(),videoFileUri);
+
+            for(int i=0;i<mediaPlayer.getDuration(); i += 500){
+                bitmap = mediaMetadataRetriever.getFrameAtTime(i*1000,MediaMetadataRetriever.OPTION_CLOSEST);
+                bitmapArrayList.add(bitmap);
+            }
+            mediaMetadataRetriever.release();
+            //saveFrames();
+        }
+    }
+
+    public void saveFrames(){
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    saveFrames(bitmapArrayList);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
+        String folder = Environment.getExternalStorageDirectory().toString();
+        bitmapPath = new ArrayList<>();
+        timestamp = System.currentTimeMillis();
+        File saveFolder = new File(folder + Common.IMAGE_PATH);
+        if(!saveFolder.exists()){
+            saveFolder.mkdirs();
+        }
+        int i = 0;
+        for (Bitmap b : saveBitmap){
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.JPEG, Common.IMAGE_QUALITY, bytes);
+            File file = new File(saveFolder,("wcd_image_"+ timestamp +"_"+i+".jpg"));
+            bitmapPath.add(file.getAbsolutePath());
+            file.createNewFile();
+            FileOutputStream fo = new FileOutputStream(file);
+            fo.write(bytes.toByteArray());
+
+            fo.flush();
+            fo.close();
+            i++;
+        }
+        thread.interrupt();
+    }
+
+    public ArrayList<List<Classifier.Recognition>> classifyImages(ArrayList<Bitmap> bitmaps){
+        ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
+        TensorFlowImageClassifier tensorFlowImageClassifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+        for(Bitmap bitmap : bitmaps){
+            bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
+            List<Classifier.Recognition> results = tensorFlowImageClassifier.recognizeImage(bitmap);
+            recognitions.add(results);
+        }
+        return recognitions;
+    }
 
     private void setSliderViews() {
 
@@ -211,12 +199,14 @@ public class CameraResultActivity extends AppCompatActivity {
             sliderView.setImageByte(byteArray);
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-            sliderView.setDescription("setDescription " + (i + 1));
+            sliderView.setDescription("setDescription " + i);
             final int finalI = i;
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(SliderView sliderView) {
-                    Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                    selectImage = finalI;
+
+                    Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -227,8 +217,13 @@ public class CameraResultActivity extends AppCompatActivity {
                     sliderLayout.addSliderView(sliderView);
                 }
             });
-
         }
+    }
+
+    public void evaluateClassifiedResult(ArrayList<List<Classifier.Recognition>> classifyResults){
+        //ArrayList<>
+
+
     }
 
 
