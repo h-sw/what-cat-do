@@ -32,7 +32,8 @@ class Classify {
         for(int i=0; i<8; i++){
                     int cnt=0;
                     if(accuracy>70){
-                        Log.d("T",Integer.toString(result);
+                        //result값을 출력해준다
+                        //Log.d("T",Integer.toString(result);
                         cnt++;
                     }
                     if(cnt==3){
