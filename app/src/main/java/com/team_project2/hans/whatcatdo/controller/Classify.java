@@ -26,9 +26,9 @@ class Classify {
         //사진 한장의 감정들 : List<Classifier.Recognition>
         //사진 여러장의 감정들 : List<Classifier.Recognition>가 여러개니까 저걸 ArrayList로 둘러 쌈
 
-        for(Classifier.Recognition result : results){
-            Log.d("SSS",Float.toString(result.getConfidence()));
-        }
+      //  for(Classifier.Recognition result : results){
+        //    Log.d("SSS",Float.toString(result.getConfidence()));
+        //}
     }
 
     //일단 모든 감정들을 다 불러와서 평균을 구해서 정리하자

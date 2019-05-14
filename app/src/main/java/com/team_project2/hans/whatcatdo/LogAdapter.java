@@ -2,7 +2,7 @@ package com.team_project2.hans.whatcatdo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.media.ThumbnailUtils;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -76,10 +75,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
 
         holder.text_emotion.setText(log.getPrimaryEmotion());
 
-        File imgFile = new File(log.getPath());
-        if(imgFile.exists()){
-            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.img_log.setImageBitmap(bitmap);
+        if(!log.getPath().isEmpty()){
+            final int THUMBSIZE = 64;
+            //용량이 큰 bitmap image를 thumbnail로 변경하여 보여줌
+            //recyclerview에서 원본을 사용하면 메모리 부족 오류 발생
+            Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(log.getPath()), THUMBSIZE, THUMBSIZE);
+
+            holder.img_log.setImageBitmap(ThumbImage);
         }
 
 
@@ -89,10 +91,4 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
     public int getItemCount() {
         return mDataset.size();
     }
-
-
-
-
-
-
 }
