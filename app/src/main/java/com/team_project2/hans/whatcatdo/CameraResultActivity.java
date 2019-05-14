@@ -18,6 +18,10 @@ import android.widget.Toast;
 
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
+import com.team_project2.hans.whatcatdo.common.Common;
+import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
+import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
+import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
 
 
 import java.io.ByteArrayOutputStream;
@@ -93,7 +97,7 @@ public class CameraResultActivity extends AppCompatActivity {
         ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
         TensorFlowImageClassifier tensorFlowImageClassifier = TensorFlowImageClassifier.getTensorFlowClassifier();
         for(Bitmap bitmap : bitmaps){
-            bitmap = BitmapConverter.ConvertBitmap(bitmap,Common.INPUT_SIZE);
+            bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
             List<Classifier.Recognition> results = tensorFlowImageClassifier.recognizeImage(bitmap);
             recognitions.add(results);
         }
@@ -205,21 +209,6 @@ public class CameraResultActivity extends AppCompatActivity {
             Log.d(TAG,byteArray.toString());
 
             sliderView.setImageByte(byteArray);
-/*
-            switch (i) {
-                case 0:
-                    sliderView.setImageUrl("https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-                    break;
-                case 1:
-                    sliderView.setImageUrl("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-                    break;
-                case 2:
-                    sliderView.setImageUrl("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
-                    break;
-                case 3:
-                    sliderView.setImageUrl("https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-                    break;
-            }*/
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
             sliderView.setDescription("setDescription " + (i + 1));

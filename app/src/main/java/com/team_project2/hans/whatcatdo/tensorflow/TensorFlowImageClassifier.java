@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.tensorflow;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetFileDescriptor;

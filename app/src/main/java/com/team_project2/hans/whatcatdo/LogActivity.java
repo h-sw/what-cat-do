@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.LogEmotion;
+
 import java.util.ArrayList;
 
 public class LogActivity extends AppCompatActivity {

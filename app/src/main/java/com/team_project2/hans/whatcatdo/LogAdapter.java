@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.team_project2.hans.whatcatdo.database.Emotion;
+import com.team_project2.hans.whatcatdo.database.LogEmotion;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

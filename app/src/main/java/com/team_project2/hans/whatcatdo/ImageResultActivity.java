@@ -13,7 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
+import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.Emotion;
+import com.team_project2.hans.whatcatdo.database.Log;
+import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
+import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
+
 import java.util.ArrayList;
 import java.util.List;
 

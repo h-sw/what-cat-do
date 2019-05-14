@@ -1,8 +1,9 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.controller;
 
 import android.util.Log;
 
-import java.util.ArrayList;
+import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
+
 import java.util.List;
 
 class Classify {

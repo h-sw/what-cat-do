@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.team_project2.hans.whatcatdo.common.Common;
+import com.team_project2.hans.whatcatdo.controller.RealPathManager;
+
 import java.io.InputStream;
 
-import static com.team_project2.hans.whatcatdo.BitmapConverter.ImageViewToBitmap;
+import static com.team_project2.hans.whatcatdo.controller.BitmapConverter.ImageViewToBitmap;
 
 public class ImageSelectActivity extends AppCompatActivity {
     private static final String TAG = "IMAGE SELECT ACTIVITY";
@@ -65,7 +68,7 @@ public class ImageSelectActivity extends AppCompatActivity {
      * */
     Intent IntentBitmap(ImageView imageView){
         Intent intent = new Intent(ImageSelectActivity.this,ImageResultActivity.class);
-        Bitmap bitmap = ImageViewToBitmap(imageView,Common.INPUT_SIZE);
+        Bitmap bitmap = ImageViewToBitmap(imageView, Common.INPUT_SIZE);
         intent.putExtra("bitmap",bitmap);
         intent.putExtra("path",path);
         return intent;

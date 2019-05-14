@@ -1,10 +1,12 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.team_project2.hans.whatcatdo.common.Common;
 
 import java.util.ArrayList;
 

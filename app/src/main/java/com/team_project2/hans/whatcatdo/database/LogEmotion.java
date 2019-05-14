@@ -1,4 +1,6 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.database;
+
+import com.team_project2.hans.whatcatdo.database.Emotion;
 
 import java.util.ArrayList;
 
