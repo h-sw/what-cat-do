@@ -71,6 +71,7 @@ public class ImageResultActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                log.setComment(edit_comment.getText().toString());
                 db.addLog(log,emotions);
                 Toast.makeText(ImageResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
                 finish();
@@ -149,7 +150,7 @@ public class ImageResultActivity extends AppCompatActivity {
         });
 
 
-        log = new Log(timestamp, getIntent().getStringExtra("path"), edit_comment.getText().toString());
+        log = new Log(timestamp, getIntent().getStringExtra("path"));
         emotions = new ArrayList<>();
 
         for(Classifier.Recognition r : results){

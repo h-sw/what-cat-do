@@ -5,10 +5,10 @@ public class Log {
     private String path;
     private String comment;
 
-    public Log(long timestamp, String path, String comment){
+    public Log(long timestamp, String path){
         this.timestamp = timestamp;
         this.path = path;
-        this.comment = comment;
+        this.comment = null;
     }
 
 
@@ -20,13 +20,14 @@ public class Log {
         this.path = path;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public String getComment() {
         return comment;

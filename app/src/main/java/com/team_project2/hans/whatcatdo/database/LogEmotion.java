@@ -38,10 +38,6 @@ public class LogEmotion {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public void addEmotion(Emotion e){
         this.emotions.add(e);
     }
