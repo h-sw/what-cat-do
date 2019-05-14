@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ImageResultActivity"
+    android:background="@color/Pink"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -16,6 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="분석 결과"
+                />
             <ImageView
                 android:id="@+id/img_result"
 
@@ -64,7 +75,7 @@
                 android:text="홈화면으로 가기"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="@color/Pink"
+                android:background="@color/Menu4"
                 android:textColor="#fff"
                 android:gravity="center"/>
 

@@ -1,5 +1,7 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.team_project2.hans.whatcatdo.database.Emotion;
+import com.team_project2.hans.whatcatdo.database.LogEmotion;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
     private ArrayList<LogEmotion> mDataset;
 
     // Provide a reference to the views for each data item
@@ -19,28 +25,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public View view;
-        public TextView text_time;
+        public TextView text_comment;
         public TextView text_emotion;
         public ImageView img_log;
+        public TextView text_date;
 
         public MyViewHolder(View v) {
             super(v);
             view = v;
-            text_time = v.findViewById(R.id.text_time);
+            text_date = v.findViewById(R.id.text_date);
+            text_comment = v.findViewById(R.id.text_comment);
             text_emotion = v.findViewById(R.id.text_emotion);
             img_log = v.findViewById(R.id.img_log);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<LogEmotion> myDataset) {
+    public LogAdapter(ArrayList<LogEmotion> myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
+    public LogAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_log, parent, false);
@@ -56,10 +64,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // - replace the contents of the view with that element
         //holder.textView.setText(mDataset[position]);
         LogEmotion log = mDataset.get(position);
-        String time =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
-        holder.text_time.setText(time);
+
+        String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
+        String date =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
+
+        holder.text_date.setText(date);
+        holder.text_comment.setText(log.getComment());
+        if(log.getComment().isEmpty()){
+            holder.text_comment.setText("코멘트가 없습니다");
+        }
+
         holder.text_emotion.setText(log.getPrimaryEmotion());
-        //holder.img_log.setImageBitmap(log.getPath().get);
+
+        File imgFile = new File(log.getPath());
+        if(imgFile.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.img_log.setImageBitmap(bitmap);
+        }
+
+
 
     }
 

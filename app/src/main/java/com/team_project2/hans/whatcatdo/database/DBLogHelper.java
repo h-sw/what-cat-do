@@ -1,10 +1,12 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.team_project2.hans.whatcatdo.common.Common;
 
 import java.util.ArrayList;
 
@@ -85,9 +87,17 @@ public class DBLogHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
         while(cursor.moveToNext()){
-            logs.add(new LogEmotion(cursor.getLong(0),
-                                    cursor.getString(1),
-                                    cursor.getString(4)));
+            boolean exist = false;
+            for(LogEmotion logEmotion : logs){
+                if(logEmotion.getTimestamp()==cursor.getLong(0)){
+                    exist = true;
+                }
+            }
+            if(!exist){
+                logs.add(new LogEmotion(cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getString(4)));
+            }
         }
 
         cursor = db.rawQuery(SELECT_LOGS_TABLE,null);

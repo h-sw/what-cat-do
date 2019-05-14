@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Menu1">
+    <TextView
+        android:text="사진분석"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#FFF"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="사진으로 알아보기 Tap!!"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="갤러리에서 사진 가져오기 혹은 사진 분석을 눌러주세요 !!"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="left"
+        android:text="\n- 갤러리에서 가져올 사진을 선택하면 저희가 고양이의 속마음을 알려드릴게요 !!"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="left"
+        android:text="- 사진 분석을 누른 후 고양이를 촬영해 주시면 저희가 고양이의 속마음을 알려드릴게요 !!"
+        />
+</LinearLayout>

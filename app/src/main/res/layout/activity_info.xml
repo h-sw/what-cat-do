@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/Menu4"
+    tools:context="com.team_project2.hans.whatcatdo.InfoActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/HotPink">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="6dp"
+            android:text="뭐하냥? - 고양이의 감정을 알아보자"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/Menu1"
+            android:textColor="#FFF"
+            android:text="사진분석"
+            android:id="@+id/bt1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/Menu2"
+            android:textColor="#FFF"
+            android:text="촬영분석"
+            android:id="@+id/bt2"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/Menu3"
+            android:textColor="#FFF"
+            android:text="기록확인"
+            android:id="@+id/bt3"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/MainBack"
+            android:textColor="#FFF"
+            android:text="닫기"
+            android:id="@+id/bt4"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:layout_margin="16dp">
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

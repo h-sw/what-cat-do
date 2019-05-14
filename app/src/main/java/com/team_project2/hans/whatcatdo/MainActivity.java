@@ -14,9 +14,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAIN ACTIVITY";
 
     /*layout Component*/
-    CardView card_camera;
-    CardView card_log;
-    CardView card_picture;
+    CardView card_menu_camera;
+    CardView card_menu_log;
+    CardView card_menu_picture;
+    CardView card_menu_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +28,30 @@ public class MainActivity extends AppCompatActivity {
         Loading();
         checkPermission();
 
-        card_picture = findViewById(R.id.card_picture);
-        card_camera = findViewById(R.id.card_camera);
-        card_log = findViewById(R.id.card_log);
+        card_menu_picture = findViewById(R.id.card_menu_picture);
+        card_menu_camera = findViewById(R.id.card_menu_camera);
+        card_menu_log = findViewById(R.id.card_menu_log);
+        card_menu_info = findViewById(R.id.card_menu_info);
 
-        card_picture.setOnClickListener(new View.OnClickListener() {
+        card_menu_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadActivity(v);
             }
         });
-        card_camera.setOnClickListener(new View.OnClickListener() {
+        card_menu_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadActivity(v);
             }
         });
-        card_log.setOnClickListener(new View.OnClickListener() {
+        card_menu_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadActivity(v);
+            }
+        });
+        card_menu_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadActivity(v);
@@ -57,12 +65,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoadActivity(View view){
-        if(view.getId()==card_camera.getId())
+        if(view.getId()==card_menu_camera.getId())
             startActivity(new Intent(this,CameraActivity.class));
-        else if(view.getId()==card_log.getId())
+        else if(view.getId()==card_menu_log.getId())
             startActivity(new Intent(this,LogActivity.class));
-        else if(view.getId()==card_picture.getId())
+        else if(view.getId()==card_menu_picture.getId())
             startActivity(new Intent(this,ImageSelectActivity.class));
+        else if(view.getId()== card_menu_info.getId())
+            startActivity(new Intent(this,InfoActivity.class));
         else
             Toast.makeText(getApplicationContext(),"no Activity!",Toast.LENGTH_LONG);
     }

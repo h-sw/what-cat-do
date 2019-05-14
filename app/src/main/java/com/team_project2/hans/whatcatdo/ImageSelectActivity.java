@@ -1,30 +1,22 @@
 package com.team_project2.hans.whatcatdo;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
+import com.team_project2.hans.whatcatdo.common.Common;
+import com.team_project2.hans.whatcatdo.controller.RealPathManager;
+
 import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.team_project2.hans.whatcatdo.controller.BitmapConverter.ImageViewToBitmap;
 
 public class ImageSelectActivity extends AppCompatActivity {
     private static final String TAG = "IMAGE SELECT ACTIVITY";
@@ -76,21 +68,11 @@ public class ImageSelectActivity extends AppCompatActivity {
      * */
     Intent IntentBitmap(ImageView imageView){
         Intent intent = new Intent(ImageSelectActivity.this,ImageResultActivity.class);
-        Bitmap bitmap = ImageViewToBitmap(imageView,Common.INPUT_SIZE);
+        Bitmap bitmap = ImageViewToBitmap(imageView, Common.INPUT_SIZE);
         intent.putExtra("bitmap",bitmap);
         intent.putExtra("path",path);
         return intent;
     }
-
-    /**
-     * 이미지뷰의 이미지를 비트맵으로 변환하는 메소드 입니다
-     * */
-    Bitmap ImageViewToBitmap(ImageView imageView,int INPUT_SIZE){
-        BitmapDrawable bitmapDrawable = (BitmapDrawable)imageView.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-        return Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
-    }
-
 
     /**
      *갤러리를 여는 메소드 입니다
@@ -114,8 +96,7 @@ public class ImageSelectActivity extends AppCompatActivity {
                     Uri uri = data.getData();
 
 
-                    path = RealPathUtil.getRealPathFromURI_API19(this,uri);
-                    Log.d(TAG,path);
+                    path = RealPathManager.getRealPathFromURI_API19(this,uri);
                     //path = data.getData().getPath();
                     img = BitmapFactory.decodeStream(inputStream);
 

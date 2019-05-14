@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.controller;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
@@ -11,22 +11,22 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 
-public class RealPathUtil {
+public class RealPathManager {
     public String getRealPathFromURI(Context context, Uri uri){
         String realPath;
         // SDK < API11
         if (Build.VERSION.SDK_INT < 11) {
-            realPath = RealPathUtil.getRealPathFromURI_BelowAPI11(context, uri);
+            realPath = RealPathManager.getRealPathFromURI_BelowAPI11(context, uri);
         }
 
         // SDK >= 11 && SDK < 19
         else if (Build.VERSION.SDK_INT < 19) {
-            realPath = RealPathUtil.getRealPathFromURI_API11to18(context, uri);
+            realPath = RealPathManager.getRealPathFromURI_API11to18(context, uri);
         }
 
         // SDK > 19 (Android 4.4)
         else {
-            realPath = RealPathUtil.getRealPathFromURI_API19(context, uri);
+            realPath = RealPathManager.getRealPathFromURI_API19(context, uri);
         }
 
         return realPath;
