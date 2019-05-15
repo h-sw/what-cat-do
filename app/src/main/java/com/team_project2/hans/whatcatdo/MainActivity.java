@@ -1,6 +1,7 @@
 package com.team_project2.hans.whatcatdo;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -10,6 +11,8 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.wonderkiln.camerakit.CameraView;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAIN ACTIVITY";
 
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     CardView card_menu_log;
     CardView card_menu_picture;
     CardView card_menu_info;
+
+    private CameraView cameraView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         card_menu_camera = findViewById(R.id.card_menu_camera);
         card_menu_log = findViewById(R.id.card_menu_log);
         card_menu_info = findViewById(R.id.card_menu_info);
+
+       // cameraView = findViewById(R.id.camera_main);
 
         card_menu_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
 
     private void Loading(){
         startActivity(new Intent(this, LoadingActivity.class));

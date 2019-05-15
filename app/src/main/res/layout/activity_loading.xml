@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoadingActivity"
     android:orientation="vertical"
-    android:background="@color/HotPink">
+    android:background="@color/DeepBrown">
     <TextView
         android:layout_weight="1"
         android:layout_width="wrap_content"

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="MajorBlue">#4286F4</color>
+    <color name="MajorBlue2">#804286F4</color>
     <color name="Pink">#80FFA6C9</color>
     <color name="Menu1">#80E8BA6D</color>
     <color name="Menu2">#80BCFF85</color>
@@ -11,7 +12,10 @@
     <color name="Menu4">#80BD78FF</color>
     <color name ="MainBack">#F2DCE8</color>
     <color name="HotPink">#FFA6C9</color>
-    <color name="Beige">#F8E4CC</color>
+    <color name="Beige">#F8E4CC</color>-
     <color name="Brown">#80785E3E</color>
+    <color name="DeepBrown">#785E3E</color>
+    <color name="DarkBlue">#447294</color>
+    <color name="Puple1">#3146DE</color>
 
 </resources>
