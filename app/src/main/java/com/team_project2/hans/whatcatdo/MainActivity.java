@@ -1,14 +1,15 @@
 package com.team_project2.hans.whatcatdo;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.wonderkiln.camerakit.CameraView;
@@ -17,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAIN ACTIVITY";
 
     /*layout Component*/
-    CardView card_menu_camera;
-    CardView card_menu_log;
-    CardView card_menu_picture;
-    CardView card_menu_info;
-
+    ImageView img_menu_home;
+    ImageView img_menu_camera;
+    ImageView img_menu_log;
     private CameraView cameraView;
+
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,61 +31,70 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        img_menu_camera = findViewById(R.id.img_menu_camera);
+        img_menu_home = findViewById(R.id.img_menu_home);
+        img_menu_log = findViewById(R.id.img_menu_log);
+
         Loading();
         checkPermission();
 
-        card_menu_picture = findViewById(R.id.card_menu_picture);
-        card_menu_camera = findViewById(R.id.card_menu_camera);
-        card_menu_log = findViewById(R.id.card_menu_log);
-        card_menu_info = findViewById(R.id.card_menu_info);
+        viewPager = findViewById(R.id.pager_main);
 
-       // cameraView = findViewById(R.id.camera_main);
 
-        card_menu_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoadActivity(v);
+        img_menu_home.setOnClickListener(movePageListener);
+        img_menu_home.setTag(0);
+
+        img_menu_camera.setOnClickListener(movePageListener);
+        img_menu_camera.setTag(1);
+
+        img_menu_log.setOnClickListener(movePageListener);
+        img_menu_log.setTag(2);
+
+        viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
+        viewPager.setCurrentItem(0);
+    }
+
+    View.OnClickListener movePageListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            int tag = (int) v.getTag();
+            viewPager.setCurrentItem(tag);
+        }
+    };
+
+    private class pagerAdapter extends FragmentStatePagerAdapter
+    {
+        public pagerAdapter(android.support.v4.app.FragmentManager fm)
+        {
+            super(fm);
+        }
+        @Override
+        public android.support.v4.app.Fragment getItem(int position)
+        {
+            switch(position)
+            {
+                case 0:
+                    return new HomeFragment();
+                case 1:
+                    return new PictureFragment();
+                case 2:
+                    return new LogMenuFragment();
+                default:
+                    return null;
             }
-        });
-        card_menu_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoadActivity(v);
-            }
-        });
-        card_menu_log.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoadActivity(v);
-            }
-        });
-        card_menu_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoadActivity(v);
-            }
-        });
-
-
-
+        }
+        @Override
+        public int getCount()
+        {
+            return 3;
+        }
     }
 
 
     private void Loading(){
         startActivity(new Intent(this, LoadingActivity.class));
-    }
-
-    public void LoadActivity(View view){
-        if(view.getId()==card_menu_camera.getId())
-            startActivity(new Intent(this,CameraActivity.class));
-        else if(view.getId()==card_menu_log.getId())
-            startActivity(new Intent(this,LogActivity.class));
-        else if(view.getId()==card_menu_picture.getId())
-            startActivity(new Intent(this,ImageSelectActivity.class));
-        else if(view.getId()== card_menu_info.getId())
-            startActivity(new Intent(this,InfoActivity.class));
-        else
-            Toast.makeText(getApplicationContext(),"no Activity!",Toast.LENGTH_LONG);
     }
 
     private void checkPermission() {
