@@ -23,7 +23,6 @@ public class LogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log);
         getSupportActionBar().hide();
 
-
         recyclerView = findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -47,5 +46,6 @@ public class LogActivity extends AppCompatActivity {
         });
 
     }
+    
 }
 

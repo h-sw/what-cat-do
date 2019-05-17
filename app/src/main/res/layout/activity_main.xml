@@ -9,6 +9,8 @@
     android:orientation="vertical"
     android:id="@+id/main">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,29 +23,19 @@
         android:fontFamily="@font/misaeng"
         android:textStyle="bold"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
     <LinearLayout
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#fff"
-        android:elevation="@dimen/fab_margin">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/MajorBlue2" />
+        android:background="#fff">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="3">
+            <!--
             <ImageView
                 android:id="@+id/img_menu_home"
                 android:layout_width="wrap_content"
@@ -72,7 +64,31 @@
                 android:clickable="true"
                 android:layout_weight="1"
                 android:src="@drawable/ic_lens"/>
+                -->
+            <TextView
+                android:id="@+id/menu1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/MajorBlue"/>
+            <TextView
+                android:id="@+id/menu2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#fff"/>
+            <TextView
+                android:id="@+id/menu3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#fff"/>
         </LinearLayout>
     </LinearLayout>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.team_project2.hans.whatcatdo;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,10 @@ import java.util.ArrayList;
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
     private ArrayList<LogEmotion> mDataset;
 
+    public void setDataSet(ArrayList<LogEmotion> myDataset) {
+        mDataset = myDataset;
+    }
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -27,7 +33,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         public TextView text_emotion;
         public ImageView img_log;
         public TextView text_date;
-
+        public CardView card_log;
         public MyViewHolder(View v) {
             super(v);
             view = v;
@@ -35,6 +41,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
             text_comment = v.findViewById(R.id.text_comment);
             text_emotion = v.findViewById(R.id.text_emotion);
             img_log = v.findViewById(R.id.img_log);
+            card_log = v.findViewById(R.id.card_log);
+
         }
     }
 
@@ -49,7 +57,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
                                                       int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_log, parent, false);
+                .inflate(R.layout.fragment_item_log, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
@@ -57,7 +65,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.textView.setText(mDataset[position]);
@@ -83,12 +91,24 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
 
             holder.img_log.setImageBitmap(ThumbImage);
         }
+        holder.card_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.view.getContext(),LogContentsActivity.class);
+
+
+                holder.view.getContext().startActivity(intent);
+            }
+        });
 
 
     }
 
     @Override
     public int getItemCount() {
+        if(mDataset == null){
+            return 0;
+        }
         return mDataset.size();
     }
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".LogFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LogItemFragment">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_log"
@@ -11,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:background="#FFFFFFFF"
-        android:elevation="20dp"
+        app:cardElevation="6dp"
         android:clickable="true"
-        android:layout_marginTop="12dp">
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"

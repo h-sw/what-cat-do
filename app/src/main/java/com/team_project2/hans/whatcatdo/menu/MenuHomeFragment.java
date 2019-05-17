@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
+import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.DBLogHelper;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 import java.util.ArrayList;

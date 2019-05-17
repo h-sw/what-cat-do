@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/Menu4"
-    tools:context="com.team_project2.hans.whatcatdo.InfoActivity">
+    tools:context="com.team_project2.hans.whatcatdo.info.InfoActivity">
 
 
     <FrameLayout

@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.team_project2.hans.whatcatdo.CameraActivity;
+import com.team_project2.hans.whatcatdo.ImageSelectActivity;
+import com.team_project2.hans.whatcatdo.R;
 
 public class MenuAnalyzeFragment extends Fragment {
 
@@ -25,14 +29,14 @@ public class MenuAnalyzeFragment extends Fragment {
         card_menu_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),CameraActivity.class));
+                startActivity(new Intent(getContext(), CameraActivity.class));
             }
         });
 
         card_menu_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),ImageSelectActivity.class));
+                startActivity(new Intent(getContext(), ImageSelectActivity.class));
             }
         });
 

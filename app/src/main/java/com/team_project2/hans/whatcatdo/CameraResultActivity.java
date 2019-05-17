@@ -97,8 +97,6 @@ public class CameraResultActivity extends AppCompatActivity {
                 classifyResults = classifyImages(bitmapArrayList);
                 setSliderViews();
 
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.menu;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.team_project2.hans.whatcatdo.R;
 
 public class MenuInfoFragment extends Fragment {
 

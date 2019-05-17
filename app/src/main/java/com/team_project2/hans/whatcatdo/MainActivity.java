@@ -3,6 +3,7 @@ package com.team_project2.hans.whatcatdo;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,7 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.team_project2.hans.whatcatdo.menu.MenuAnalyzeFragment;
+import com.team_project2.hans.whatcatdo.menu.MenuHomeFragment;
+import com.team_project2.hans.whatcatdo.menu.MenuLogFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAIN ACTIVITY";
@@ -20,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView img_menu_camera;
     ImageView img_menu_log;
 
-
+    TextView menu[];
 
     private ViewPager viewPager;
 
@@ -34,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        img_menu_camera = findViewById(R.id.img_menu_camera);
-        img_menu_home = findViewById(R.id.img_menu_home);
-        img_menu_log = findViewById(R.id.img_menu_log);
+       // img_menu_camera = findViewById(R.id.img_menu_camera);
+        //img_menu_home = findViewById(R.id.img_menu_home);
+        //img_menu_log = findViewById(R.id.img_menu_log);
 
+        menu = new TextView[3];
+
+        menu[0] = findViewById(R.id.menu1);
+        menu[1] = findViewById(R.id.menu2);
+        menu[2] = findViewById(R.id.menu3);
 
         Loading();
         checkPermission();
@@ -46,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.pager_main);
 
-
+/*
         img_menu_home.setOnClickListener(movePageListener);
         img_menu_home.setTag(0);
 
@@ -55,20 +66,43 @@ public class MainActivity extends AppCompatActivity {
 
         img_menu_log.setOnClickListener(movePageListener);
         img_menu_log.setTag(2);
-
+*/
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (TextView m : menu) {
+                    m.setBackgroundColor(Color.WHITE);
+                }
+                menu[position].setBackgroundColor(getResources().getColor(R.color.MajorBlue));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         viewPager.setCurrentItem(0);
 
 
     }
+
 
     View.OnClickListener movePageListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
         {
+            /*
             int tag = (int) v.getTag();
-            viewPager.setCurrentItem(tag);
+            viewPager.setCurrentItem(tag);*/
+            int n = viewPager.getCurrentItem();
+
         }
     };
 
@@ -88,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return new MenuAnalyzeFragment();
                 case 2:
+                    MenuLogFragment logFragment = new MenuLogFragment();
                     return new MenuLogFragment();
                 default:
                     return null;
