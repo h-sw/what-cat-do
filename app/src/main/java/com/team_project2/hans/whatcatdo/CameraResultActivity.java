@@ -72,8 +72,6 @@ public class CameraResultActivity extends AppCompatActivity {
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
         sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
 
-
-
         new TaskClassifier().execute();
     }
 
@@ -209,14 +207,7 @@ public class CameraResultActivity extends AppCompatActivity {
                     Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI), Toast.LENGTH_SHORT).show();
                 }
             });
-
-            //at last add this view in your layout :
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    sliderLayout.addSliderView(sliderView);
-                }
-            });
+            sliderLayout.addSliderView(sliderView);
         }
     }
 

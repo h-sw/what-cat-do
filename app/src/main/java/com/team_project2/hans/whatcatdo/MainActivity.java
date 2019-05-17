@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.wonderkiln.camerakit.CameraView;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAIN ACTIVITY";
 
@@ -21,9 +19,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView img_menu_home;
     ImageView img_menu_camera;
     ImageView img_menu_log;
-    private CameraView cameraView;
+
+
 
     private ViewPager viewPager;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
         img_menu_home = findViewById(R.id.img_menu_home);
         img_menu_log = findViewById(R.id.img_menu_log);
 
+
         Loading();
         checkPermission();
+
+
 
         viewPager = findViewById(R.id.pager_main);
 
@@ -52,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(0);
+
+
     }
 
     View.OnClickListener movePageListener = new View.OnClickListener()
@@ -76,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
             switch(position)
             {
                 case 0:
-                    return new HomeFragment();
+                    return new MenuHomeFragment();
                 case 1:
-                    return new PictureFragment();
+                    return new MenuAnalyzeFragment();
                 case 2:
-                    return new LogMenuFragment();
+                    return new MenuLogFragment();
                 default:
                     return null;
             }
@@ -110,4 +118,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

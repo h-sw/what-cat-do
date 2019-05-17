@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoadingActivity"
     android:orientation="vertical"
-    android:background="@color/DeepBrown">
+    android:background="#FFF">
     <TextView
         android:layout_weight="1"
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="뭐하냥?"
-        android:textColor="#FFF"
+        android:textColor="@color/MajorBlue"
         android:textSize="28sp"/>
 
 </LinearLayout>

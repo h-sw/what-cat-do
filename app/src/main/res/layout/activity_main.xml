@@ -8,29 +8,18 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:id="@+id/main">
-     <LinearLayout
-         android:id="@+id/top_title"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="vertical"
-         android:background="#fff"
-         android:elevation="@dimen/fab_margin">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_margin="6dp"
-             android:text="뭐하냥?"
-             android:textStyle="bold"
-             android:fontFamily="@font/misaeng"
-             android:textColor="@color/MajorBlue"
-             android:gravity="center"
-             android:textSize="30sp" />
-         <View
-             android:layout_width="match_parent"
-             android:layout_height="2dp"
-             android:background="@color/MajorBlue2"
-             android:elevation="10dp"/>
-     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뭐하냥?"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="6dp"
+        android:textSize="32dp"
+        android:textColor="@color/MajorBlue"
+        android:fontFamily="@font/misaeng"
+        android:textStyle="bold"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_main"
@@ -48,8 +37,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/MajorBlue2"
-            android:elevation="10dp"/>
+            android:background="@color/MajorBlue2" />
 
         <LinearLayout
             android:layout_width="match_parent"
