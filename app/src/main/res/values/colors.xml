@@ -3,7 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="MajorBlue">#4286F4</color>
+    <!--
+    <color name="MajorBlue">#4286F4</color>-->
+    <color name="MajorBlue">#808080</color>
     <color name="MajorBlue2">#804286F4</color>
     <color name="Pink">#80FFA6C9</color>
     <color name="Menu1">#80E8BA6D</color>

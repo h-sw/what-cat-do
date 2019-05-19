@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:id="@+id/main"
     >
-
-
 
     <TextView
         android:background="@color/Menu1"
@@ -21,12 +18,6 @@
         android:textColor="#fff"
         android:fontFamily="@font/misaeng"
         android:textStyle="bold"/>
-        <!--
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="6dp"
-        -->
-
 
     <LinearLayout
         android:id="@+id/bottom_navigator"
@@ -40,36 +31,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="3">
-            <!--
-            <ImageView
-                android:id="@+id/img_menu_home"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="40dp"
-                android:clickable="true"
-                android:layout_weight="1"
-                android:src="@drawable/ic_home"/>
-            <ImageView
-                android:id="@+id/img_menu_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="40dp"
-                android:clickable="true"
-                android:layout_weight="1"
-                android:src="@drawable/ic_cat"/>
-            <ImageView
-                android:id="@+id/img_menu_log"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="40dp"
-                android:clickable="true"
-                android:layout_weight="1"
-                android:src="@drawable/ic_lens"/>
-                -->
             <TextView
                 android:id="@+id/menu1"
                 android:layout_width="match_parent"

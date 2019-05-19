@@ -53,16 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.pager_main);
 
-/*
-        img_menu_home.setOnClickListener(movePageListener);
-        img_menu_home.setTag(0);
-
-        img_menu_camera.setOnClickListener(movePageListener);
-        img_menu_camera.setTag(1);
-
-        img_menu_log.setOnClickListener(movePageListener);
-        img_menu_log.setTag(2);
-*/
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -75,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 for (TextView m : menu) {
                     m.setBackgroundColor(Color.WHITE);
                 }
-                menu[position].setBackgroundColor(getResources().getColor(R.color.MajorBlue));
+                menu[position].setBackgroundColor(getResources().getColor(R.color.Brown));
             }
 
             @Override
