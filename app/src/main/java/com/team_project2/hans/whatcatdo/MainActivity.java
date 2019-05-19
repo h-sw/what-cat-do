@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.team_project2.hans.whatcatdo.menu.MenuAnalyzeFragment;
 import com.team_project2.hans.whatcatdo.menu.MenuHomeFragment;
+import com.team_project2.hans.whatcatdo.menu.MenuInfoFragment;
 import com.team_project2.hans.whatcatdo.menu.MenuLogFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,16 +32,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-       // img_menu_camera = findViewById(R.id.img_menu_camera);
+        // img_menu_camera = findViewById(R.id.img_menu_camera);
         //img_menu_home = findViewById(R.id.img_menu_home);
         //img_menu_log = findViewById(R.id.img_menu_log);
 
@@ -49,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
         menu[0] = findViewById(R.id.menu1);
         menu[1] = findViewById(R.id.menu2);
         menu[2] = findViewById(R.id.menu3);
-
         Loading();
         checkPermission();
-
 
 
         viewPager = findViewById(R.id.pager_main);
@@ -93,11 +89,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    View.OnClickListener movePageListener = new View.OnClickListener()
-    {
+    View.OnClickListener movePageListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             /*
             int tag = (int) v.getTag();
             viewPager.setCurrentItem(tag);*/
@@ -106,17 +100,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private class pagerAdapter extends FragmentStatePagerAdapter
-    {
-        public pagerAdapter(android.support.v4.app.FragmentManager fm)
-        {
+    private class pagerAdapter extends FragmentStatePagerAdapter {
+        public pagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);
         }
+
         @Override
-        public android.support.v4.app.Fragment getItem(int position)
-        {
-            switch(position)
-            {
+        public android.support.v4.app.Fragment getItem(int position) {
+            switch (position) {
                 case 0:
                     return new MenuHomeFragment();
                 case 1:
@@ -128,27 +119,27 @@ public class MainActivity extends AppCompatActivity {
                     return null;
             }
         }
+
         @Override
-        public int getCount()
-        {
+        public int getCount() {
             return 3;
         }
     }
 
 
-    private void Loading(){
+    private void Loading() {
         startActivity(new Intent(this, LoadingActivity.class));
     }
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // 마시멜로우 버전과 같거나 이상이라면
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                     || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     Toast.makeText(this, "외부 저장소 사용을 위해 읽기/쓰기 필요", Toast.LENGTH_SHORT).show();
                 }
                 requestPermissions(new String[]
-                                {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                                {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                         2);  //마지막 인자는 체크해야될 권한 갯수
             }
         }

@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="뭐하냥?"
-        android:textColor="@color/MajorBlue"
+        android:textColor="@color/Menu1"
         android:textSize="28sp"/>
 
 </LinearLayout>

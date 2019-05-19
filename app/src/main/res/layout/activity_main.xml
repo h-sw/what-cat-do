@@ -7,21 +7,26 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:id="@+id/main">
+    android:id="@+id/main"
+    >
 
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:background="@color/Menu1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="뭐하냥?"
+        android:textSize="32dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/misaeng"
+        android:textStyle="bold"/>
+        <!--
         android:layout_marginTop="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="6dp"
-        android:textSize="32dp"
-        android:textColor="@color/MajorBlue"
-        android:fontFamily="@font/misaeng"
-        android:textStyle="bold"/>
+        -->
+
 
     <LinearLayout
         android:id="@+id/bottom_navigator"
@@ -83,6 +88,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"
                 android:background="#fff"/>
+
         </LinearLayout>
     </LinearLayout>
 
