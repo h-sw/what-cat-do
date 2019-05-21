@@ -209,12 +209,4 @@ public class CameraResultActivity extends AppCompatActivity {
         }
     }
 
-    public void evaluateClassifiedResult(ArrayList<List<Classifier.Recognition>> classifyResults){
-        //ArrayList<>
-
-
-    }
-
-
-
 }

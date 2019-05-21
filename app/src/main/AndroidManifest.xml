@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogContentsActivity"></activity>
+        <activity android:name=".log.LogContentsActivity"></activity>
         <activity android:name=".info.InfoActivity" />
         <activity android:name=".ImageResultActivity" />
         <activity android:name=".CameraResultActivity" />
@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".LoadingActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".LogActivity" />
+        <activity android:name=".log.LogActivity" />
     </application>
 
 </manifest>

@@ -10,13 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.team_project2.hans.whatcatdo.CameraActivity;
 import com.team_project2.hans.whatcatdo.ImageSelectActivity;
-import com.team_project2.hans.whatcatdo.LogAdapter;
+import com.team_project2.hans.whatcatdo.log.LogAdapter;
 import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.DBLogHelper;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;

@@ -1,4 +1,4 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.log;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
 import java.text.SimpleDateFormat;
@@ -23,11 +25,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         mDataset = myDataset;
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public View view;
         public TextView text_comment;
         public TextView text_emotion;
@@ -70,7 +68,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         // - replace the contents of the view with that element
         //holder.textView.setText(mDataset[position]);
 
-        LogEmotion log = mDataset.get(position);
+        final LogEmotion log = mDataset.get(position);
 
         //String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
         String date =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
@@ -95,8 +93,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.view.getContext(),LogContentsActivity.class);
-
-
+                intent.putExtra("logEmotion",log);
                 holder.view.getContext().startActivity(intent);
             }
         });

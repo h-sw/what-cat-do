@@ -1,10 +1,11 @@
-package com.team_project2.hans.whatcatdo;
+package com.team_project2.hans.whatcatdo.log;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.DBLogHelper;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
@@ -24,27 +25,16 @@ public class LogActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         recyclerView = findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(LogActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                db = new DBLogHelper(LogActivity.this);
-                ArrayList<LogEmotion> myDataset = db.getLogEmotion();
-                mAdapter = new LogAdapter(myDataset);
-                recyclerView.setAdapter(mAdapter);
-            }
-        });
-
+        db = new DBLogHelper(LogActivity.this);
+        ArrayList<LogEmotion> myDataset = db.getLogEmotion();
+        mAdapter = new LogAdapter(myDataset);
+        recyclerView.setAdapter(mAdapter);
     }
     
 }

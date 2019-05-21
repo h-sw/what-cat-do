@@ -46,7 +46,6 @@ public class MenuHomeFragment extends Fragment {
         }
         for(LogEmotion log : logs){
             SliderView sliderView = new SliderView(view.getContext());
-            Log.d("ss",log.getPath());
             sliderView.setImageUrl(log.getPath());
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
             sliderView.setDescription(log.getComment());

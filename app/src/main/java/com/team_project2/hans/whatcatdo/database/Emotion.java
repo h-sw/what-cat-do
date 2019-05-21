@@ -1,6 +1,8 @@
 package com.team_project2.hans.whatcatdo.database;
 
-public class Emotion {
+import java.io.Serializable;
+
+public class Emotion implements Serializable {
     private long timestamp;
     private String title;
     private float percent;
