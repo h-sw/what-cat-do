@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,18 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-
         menu = new TextView[3];
-
         menu[0] = findViewById(R.id.menu1);
         menu[1] = findViewById(R.id.menu2);
         menu[2] = findViewById(R.id.menu3);
         Loading();
         checkPermission();
 
-
         viewPager = findViewById(R.id.pager_main);
-
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -61,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
+
         });
         viewPager.setCurrentItem(0);
 
@@ -80,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return new MenuAnalyzeFragment();
                 case 2:
-                    MenuLogFragment logFragment = new MenuLogFragment();
                     return new MenuLogFragment();
                 default:
                     return null;

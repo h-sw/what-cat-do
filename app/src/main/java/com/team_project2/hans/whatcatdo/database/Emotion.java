@@ -6,11 +6,22 @@ public class Emotion implements Serializable {
     private long timestamp;
     private String title;
     private float percent;
+    private int count;
 
     public Emotion(long timestamp, String title, float percent){
         this.timestamp = timestamp;
         this.title = title;
         this.percent = percent;
+    }
+
+    public Emotion(String title, float percent){
+        this.title = title;
+        this.percent = percent;
+        this.count = 1;
+    }
+
+    public void setPercent(float percent) {
+        this.percent = (this.percent*(this.count) + percent) / (++count);
     }
 
     public float getPercent() {

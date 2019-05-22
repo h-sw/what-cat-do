@@ -17,7 +17,10 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         getSupportActionBar().hide();
-        startLoading();
+        if(TensorFlowImageClassifier.getTensorFlowClassifier()==null)
+            startLoading();
+        else
+            finish();
     }
 
     private void startLoading(){

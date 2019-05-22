@@ -41,12 +41,10 @@ public class LogContentsActivity extends AppCompatActivity {
         img_cont = findViewById(R.id.img_cont);
 
 
-
         String date =  new SimpleDateFormat("yyyy년 MM월 dd일").format(logEmotion.getTimestamp());
         text_cont_date.setText(date);
 
-
-        String time =  new SimpleDateFormat("HH시 mm분 ss초").format(logEmotion.getTimestamp());
+        String time =  new SimpleDateFormat("HH시 mm분 SS초").format(logEmotion.getTimestamp());
         text_cont_time.setText(time);
 
         text_cont_comment.setText(logEmotion.getComment());
@@ -58,7 +56,6 @@ public class LogContentsActivity extends AppCompatActivity {
         for(Emotion e : logEmotion.getEmotions()){
             text_cont_emotion[i++].setText(e.getTitle() +" -  "+e.getPercent());
         }
-
 
     }
 }

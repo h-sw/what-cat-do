@@ -13,7 +13,8 @@ public class Common {
     public static final int     IMAGE_QUALITY     = 100;
 
 
-
+    //bitmap
+    public static final int     THUMBSIZE         = 64;
 
     /*database*/
     public static final int     DATABASE_VERSION  = 1;

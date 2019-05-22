@@ -22,7 +22,6 @@ public class MenuAnalyzeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_analyze, container, false);
 
-
         card_menu_camera = view.findViewById(R.id.card_menu_camera);
         card_menu_picture = view.findViewById(R.id.card_menu_picture);
 
@@ -40,8 +39,9 @@ public class MenuAnalyzeFragment extends Fragment {
             }
         });
 
-
         // Inflate the layout for this fragment
         return view;
     }
+
+
 }

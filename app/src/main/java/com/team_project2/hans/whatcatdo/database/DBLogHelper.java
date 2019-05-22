@@ -84,7 +84,6 @@ public class DBLogHelper extends SQLiteOpenHelper{
                                                 + " ON " + Common.TABLE_LOGS + "." + Common.LOG_TIMESTAMP + " == " + Common.TABLE_EMOTIONS + "." + Common.EMOTION_TIMESTAMP
                                                 + " ORDER BY " + Common.TABLE_LOGS + "." + Common.LOG_TIMESTAMP + " DESC;";
 
-
         Cursor cursor = db.rawQuery(SELECT_LOGS_TABLE,null);
 
         while(cursor.moveToNext()){

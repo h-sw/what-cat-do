@@ -55,5 +55,4 @@ public class LogEmotion implements Serializable {
         }
         return max.getTitle();
     }
-
 }

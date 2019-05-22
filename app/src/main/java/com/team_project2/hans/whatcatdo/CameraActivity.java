@@ -48,14 +48,20 @@ public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기�
     }
 
     void recordVideo(){
-        Toast.makeText(CameraActivity.this, "분석 시작!", Toast.LENGTH_SHORT).show();
-        cameraView.captureVideo();
-        cameraView.postDelayed(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                cameraView.stopVideo();
+                Toast.makeText(CameraActivity.this, "분석 시작!", Toast.LENGTH_SHORT).show();
+                cameraView.captureVideo();
+                cameraView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        cameraView.stopVideo();
+                    }
+                },RECORD_TIME);
             }
-        },RECORD_TIME);
+        }).run();
+
     }
 
 
@@ -90,13 +96,20 @@ public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기�
 
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
-                if(cameraKitVideo.getVideoFile().exists()){
-                    Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
-                    File file = cameraKitVideo.getVideoFile();
-                    Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
-                    intent.putExtra("videoPath",file.getAbsolutePath());
-                    startActivity(intent);
-                }
+                final CameraKitVideo video = cameraKitVideo;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(video.getVideoFile().exists()){
+                            Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
+                            File file = video.getVideoFile();
+                            Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
+                            intent.putExtra("videoPath",file.getAbsolutePath());
+                            startActivity(intent);
+                        }
+                    }
+                }).run();
+
 
             }
         });

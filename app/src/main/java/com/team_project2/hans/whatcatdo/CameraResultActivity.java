@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +19,8 @@ import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.common.Common;
 import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
+import com.team_project2.hans.whatcatdo.controller.Classify;
+import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
 
@@ -71,6 +72,7 @@ public class CameraResultActivity extends AppCompatActivity {
 
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
         sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
+        selectImage = -1;
 
         new TaskClassifier().execute();
     }
@@ -96,6 +98,9 @@ public class CameraResultActivity extends AppCompatActivity {
                 convertVideoToImage();
                 classifyResults = classifyImages(bitmapArrayList);
                 setSliderViews();
+                Classify classify = new Classify(classifyResults);
+                Emotion e = classify.getPrimaryEmotion();
+                text_result_camera.setText(e.getTitle());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -121,12 +126,12 @@ public class CameraResultActivity extends AppCompatActivity {
             mediaMetadataRetriever.setDataSource(videoFile.toString());
             mediaPlayer = MediaPlayer.create(getBaseContext(),videoFileUri);
 
-            for(int i=0;i<mediaPlayer.getDuration(); i += 500){
+            for(int i=0;i<mediaPlayer.getDuration(); i += 1000){
                 bitmap = mediaMetadataRetriever.getFrameAtTime(i*1000,MediaMetadataRetriever.OPTION_CLOSEST);
                 bitmapArrayList.add(bitmap);
             }
             mediaMetadataRetriever.release();
-            //saveFrames();
+            saveFrames();
         }
     }
 
@@ -181,7 +186,6 @@ public class CameraResultActivity extends AppCompatActivity {
     }
 
     private void setSliderViews() {
-
         for (int i = 0; i < bitmapArrayList.size(); i++) {
             sliderView = new SliderView(this);
 
@@ -189,8 +193,6 @@ public class CameraResultActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
             byte[] byteArray = stream.toByteArray();
-
-            Log.d(TAG,byteArray.toString());
 
             sliderView.setImageByte(byteArray);
 
@@ -205,7 +207,13 @@ public class CameraResultActivity extends AppCompatActivity {
                     Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI), Toast.LENGTH_SHORT).show();
                 }
             });
-            sliderLayout.addSliderView(sliderView);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    sliderLayout.addSliderView(sliderView);
+                }
+            });
+
         }
     }
 

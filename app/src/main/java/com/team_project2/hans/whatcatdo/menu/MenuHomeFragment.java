@@ -40,7 +40,6 @@ public class MenuHomeFragment extends Fragment {
 
 
     private void setSliderViews() {
-
         if(logs.isEmpty()){
             return;
         }

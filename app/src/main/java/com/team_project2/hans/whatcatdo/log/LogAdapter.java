@@ -18,6 +18,8 @@ import com.team_project2.hans.whatcatdo.database.LogEmotion;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import static com.team_project2.hans.whatcatdo.common.Common.THUMBSIZE;
+
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
     private ArrayList<LogEmotion> mDataset;
 
@@ -40,7 +42,6 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
             text_emotion = v.findViewById(R.id.text_emotion);
             img_log = v.findViewById(R.id.img_log);
             card_log = v.findViewById(R.id.card_log);
-
         }
     }
 
@@ -61,13 +62,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        //holder.textView.setText(mDataset[position]);
-
         final LogEmotion log = mDataset.get(position);
 
         //String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
@@ -82,11 +78,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         holder.text_emotion.setText(log.getPrimaryEmotion());
 
         if(!log.getPath().isEmpty()){
-            final int THUMBSIZE = 64;
-            //용량이 큰 bitmap image를 thumbnail로 변경하여 보여줌
-            //recyclerview에서 원본을 사용하면 메모리 부족 오류 발생
             Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(log.getPath()), THUMBSIZE, THUMBSIZE);
-
             holder.img_log.setImageBitmap(ThumbImage);
         }
         holder.card_log.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +95,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        if(mDataset == null){
+        if(mDataset == null)
             return 0;
-        }
         return mDataset.size();
     }
 }

@@ -23,6 +23,7 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
         getSupportActionBar().hide();
+        db = new DBLogHelper(LogActivity.this);
 
         recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -30,8 +31,6 @@ public class LogActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(LogActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        db = new DBLogHelper(LogActivity.this);
         ArrayList<LogEmotion> myDataset = db.getLogEmotion();
         mAdapter = new LogAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);

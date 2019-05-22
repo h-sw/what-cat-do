@@ -2,63 +2,89 @@ package com.team_project2.hans.whatcatdo.controller;
 
 import android.util.Log;
 import java.util.ArrayList;
+
+import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 
 import java.util.Collections;
 import java.util.List;
 
-class Classify {
-    //happy=1, angry=2, sad=3, curious=4, ignore=5, scared=6, sleepy=7, sad=8
-    ArrayList<Integer> image = new ArrayList<>();//이미지의 결과
-    ArrayList<Integer> result = new ArrayList<>();//결과 리스트
+public class Classify {
     int accuracy;//정확도
 
-    //enum을 활용해보자 상혁아!
-    enum Emotion
-    {
-        HAPPY, ANGRY, SAD, CURIOUS, IGNORE, SCARED, SLEEPY
-    }
+    static final int HAPPY    = 0;
+    static final int ANGRY    = 1;
+    static final int CURIOUS  = 2;
+    static final int EXCITED  = 3;
+    static final int IGNORE   = 4;
+    static final int SLEEPY   = 5;
+    static final int SCARED   = 6;
 
     ArrayList<List<Classifier.Recognition>> results;
+    Emotion[] result = new Emotion[7];
+
     public Classify(ArrayList<List<Classifier.Recognition>> results) {
         this.results = results;
-
-        //사진 한장의 감정들 : List<Classifier.Recognition>
-        //사진 여러장의 감정들 : List<Classifier.Recognition>가 여러개니까 저걸 ArrayList로 둘러 쌈
-
-      //  for(Classifier.Recognition result : results){
-        //    Log.d("SSS",Float.toString(result.getConfidence()));
-        //}
     }
 
-    //일단 모든 감정들을 다 불러와서 평균을 구해서 정리하자
-
-    //정리한 후에 정확도를 따지면 될 것같은데 (빈도수?는 굳이 신경 안써도 될듯?? 이건 내 생각임)
-
-    //알고리즘을 정리하자면 일단 전체 평균을 내서 배열에 저장하는 함수 하나.
-
-    //저장된 배열에서 정확도 순서로 정렬하는 알고리즘 하나
-
-    void classify(){//이 함수가 정확도 순서대로 정렬할 것 같은데 리턴값을 세개짜리 Emotion( database 패키지에 있는 java 파일 참고) 배열로 보내면 되지 않을까?
-        for(int i=0;i<18;i++){
-            result.add(image.get(i),+1);//result리스트에 값을 저장해준다
+    public Emotion getPrimaryEmotion(){
+        ArrayList<Emotion> emotions = getAllEmotions();
+        result = new Emotion[7];
+        for(Emotion e : result){
+            e = null;
         }
 
-        Collections.sort(result);//result값을 소트해준다
-
-        for(int i=0; i<8; i++){
-                    int cnt=0;
-                    if(accuracy>70){//정확도가 70이 넘어 갈때
-                        //image의 값을 출력한다
-                        //Log.d("T",Integer.toString(image[i]));
-                        cnt++;
-                    }
-                    if(cnt==3){//cnt가 3이 되면 탈출
-                        break;
+        for(Emotion e : emotions){
+            switch (e.getTitle()) {
+                case "happy":
+                    calc(e, HAPPY);
+                    break;
+                case "angry":
+                    calc(e, ANGRY);
+                    break;
+                case "curious":
+                    calc(e, CURIOUS);
+                    break;
+                case "excited":
+                    calc(e, EXCITED);
+                    break;
+                case "ignore":
+                    calc(e, IGNORE);
+                    break;
+                case "sleepy":
+                    calc(e, SLEEPY);
+                    break;
+                case "scared":
+                    calc(e, SCARED);
+                    break;
             }
         }
 
+        Emotion primary = result[0];
+        for(int i = 1; i< result.length ; i++){
+            if(primary.getPercent()<result[i].getPercent())
+                primary = result[i];
+        }
+        return primary;
+
     }
 
+    void calc(Emotion e, int n){
+        if(result[n]==null){
+            result[n] = new Emotion(e.getTitle(),e.getPercent());
+        }else{
+            result[n].setPercent(e.getPercent());
+        }
+    }
+
+    ArrayList<Emotion> getAllEmotions(){
+        ArrayList<Emotion> emotions = new ArrayList<>();
+        for(List<Classifier.Recognition> list : results){
+            for(Classifier.Recognition recognition : list){
+                emotions.add(new Emotion(recognition.getTitle(),recognition.getConfidence()));
+            }
+        }
+        return emotions;
+    }
 
 }

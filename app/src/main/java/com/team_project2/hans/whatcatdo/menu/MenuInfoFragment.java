@@ -20,4 +20,5 @@ public class MenuInfoFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_menu_info, container, false);
     }
 
+
 }
