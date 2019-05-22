@@ -99,7 +99,6 @@ public class ImageResultActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-
                 classifyImage();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -148,7 +147,6 @@ public class ImageResultActivity extends AppCompatActivity {
                 setScreen(results);
             }
         });
-
 
         log = new Log(timestamp, getIntent().getStringExtra("path"));
         emotions = new ArrayList<>();

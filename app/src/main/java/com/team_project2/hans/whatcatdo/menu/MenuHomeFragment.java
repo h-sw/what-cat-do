@@ -53,7 +53,6 @@ public class MenuHomeFragment extends Fragment {
                 public void onSliderClick(SliderView sliderView) {
 
                 }
-
             });
             sliderLayout.addSliderView(sliderView);
 

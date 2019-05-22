@@ -9,9 +9,7 @@ import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 import java.util.Collections;
 import java.util.List;
 
-public class Classify {
-    int accuracy;//정확도
-
+public class CameraResultClassify {
     static final int HAPPY    = 0;
     static final int ANGRY    = 1;
     static final int CURIOUS  = 2;
@@ -23,16 +21,13 @@ public class Classify {
     ArrayList<List<Classifier.Recognition>> results;
     Emotion[] result = new Emotion[7];
 
-    public Classify(ArrayList<List<Classifier.Recognition>> results) {
+    public CameraResultClassify(ArrayList<List<Classifier.Recognition>> results) {
         this.results = results;
     }
 
     public Emotion getPrimaryEmotion(){
         ArrayList<Emotion> emotions = getAllEmotions();
         result = new Emotion[7];
-        for(Emotion e : result){
-            e = null;
-        }
 
         for(Emotion e : emotions){
             switch (e.getTitle()) {
@@ -60,13 +55,18 @@ public class Classify {
             }
         }
 
-        Emotion primary = result[0];
-        for(int i = 1; i< result.length ; i++){
-            if(primary.getPercent()<result[i].getPercent())
-                primary = result[i];
+        int primary = -1;
+        for(int i = 0; i< result.length ; i++){
+            if(result[i]!=null){
+                if(primary == -1){
+                    primary = i;
+                }else{
+                    if(result[primary].getPercent()<result[i].getPercent())
+                        primary = i;
+                }
+            }
         }
-        return primary;
-
+        return result[primary];
     }
 
     void calc(Emotion e, int n){
@@ -87,4 +87,13 @@ public class Classify {
         return emotions;
     }
 
+    public ArrayList<Emotion> getCertifiedEmotions(){
+        ArrayList<Emotion> arrayList = new ArrayList<>();
+        for(Emotion e : result){
+            if(e!=null){
+                arrayList.add(e);
+            }
+        }
+        return arrayList;
+    }
 }

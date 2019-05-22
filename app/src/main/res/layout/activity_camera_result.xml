@@ -6,19 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".CameraResultActivity"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.smarteist.autoimageslider.SliderLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentTop="true"
+                android:id="@+id/imageSlider"/>
+            <TextView
+                android:id="@+id/text_camera_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:text="Angry!"
+                android:gravity="center" />
 
-    <com.smarteist.autoimageslider.SliderLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:id="@+id/imageSlider"/>
-    <TextView
-        android:id="@+id/text_result_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="10sp"
-        android:gravity="center" />
+            <EditText
+                android:id="@+id/edit_camera_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="코멘트를 입력해주세요!"
+                android:inputType="textImeMultiLine"/>
+
+            <Button
+                android:id="@+id/btn_camera_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="18dp"
+                android:text="기록 저장하기"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/Pink"
+                android:textColor="#fff"
+                android:gravity="center"/>
+            <Button
+                android:id="@+id/btn_camera_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="12dp"
+                android:text="홈화면으로 가기"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/Menu4"
+                android:textColor="#fff"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 
 </LinearLayout>
