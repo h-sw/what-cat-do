@@ -25,8 +25,7 @@
 
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:text="분석 결과"
-                />
+                android:text="분석 결과" />
             <ImageView
                 android:id="@+id/img_result"
 

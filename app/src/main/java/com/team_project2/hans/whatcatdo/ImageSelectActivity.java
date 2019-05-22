@@ -57,8 +57,11 @@ public class ImageSelectActivity extends AppCompatActivity {
         btn_analyze_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isSelect)
+                if(isSelect){
                     startActivity(IntentBitmap(img_select));
+                    finish();
+                }
+
             }
         });
     }

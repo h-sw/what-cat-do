@@ -36,4 +36,7 @@ public class Emotion implements Serializable {
         return timestamp;
     }
 
+    public void setTimeStamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

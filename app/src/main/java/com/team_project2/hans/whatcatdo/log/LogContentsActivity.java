@@ -54,7 +54,7 @@ public class LogContentsActivity extends AppCompatActivity {
 
         int i = 0;
         for(Emotion e : logEmotion.getEmotions()){
-            text_cont_emotion[i++].setText(e.getTitle() +" -  "+e.getPercent());
+            text_cont_emotion[i++].setText(e.getTitle() +" -  "+ e.getPercent()*100.0f + "%");
         }
 
     }

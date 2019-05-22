@@ -80,23 +80,27 @@ public class CameraResultActivity extends AppCompatActivity {
         sliderLayout = findViewById(R.id.imageSlider);
 
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
-        sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
-
+        sliderLayout.setScrollTimeInSec(10); //set scroll delay in seconds
 
         btn_camera_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(selectImage==null){
+                    Toast.makeText(CameraResultActivity.this, "저장할 대표 이미지를 지정 해 주세요!", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 comment = edit_camera_comment.getText().toString();
                 saveOnDB();
+                Toast.makeText(CameraResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         btn_camera_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CameraResultActivity.this,MainActivity.class));
+                finish();
             }
         });
-
         new TaskClassifier().execute();
     }
 
@@ -150,7 +154,7 @@ public class CameraResultActivity extends AppCompatActivity {
             mediaMetadataRetriever.setDataSource(videoFile.toString());
             mediaPlayer = MediaPlayer.create(getBaseContext(),videoFileUri);
 
-            for(int i=0;i<mediaPlayer.getDuration(); i += 1000){
+            for(int i=0;i<mediaPlayer.getDuration(); i += 500){
                 bitmap = mediaMetadataRetriever.getFrameAtTime(i*1000,MediaMetadataRetriever.OPTION_CLOSEST);
                 bitmapArrayList.add(bitmap);
             }
@@ -228,15 +232,14 @@ public class CameraResultActivity extends AppCompatActivity {
     }
 
     private void saveOnDB(){
-        if(selectImage==null){
-            Toast.makeText(this, "저장할 대표 이미지를 지정 해 주세요!", Toast.LENGTH_SHORT).show();
-            return ;
-        }
         DBLogHelper db = new DBLogHelper(this);
-
         Log log = new Log(timestamp,selectImage);
         log.setComment(comment);
+        ArrayList<Emotion> emotions = classify.getCertifiedEmotions();
+        for(Emotion e : emotions){
+            e.setTimeStamp(timestamp);
+        }
+
         db.addLog(log,classify.getCertifiedEmotions());
     }
-
 }

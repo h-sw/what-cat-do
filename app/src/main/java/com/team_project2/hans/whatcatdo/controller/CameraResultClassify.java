@@ -28,6 +28,9 @@ public class CameraResultClassify {
     public Emotion getPrimaryEmotion(){
         ArrayList<Emotion> emotions = getAllEmotions();
         result = new Emotion[7];
+        for(Emotion e : result){
+            e = null;
+        }
 
         for(Emotion e : emotions){
             switch (e.getTitle()) {
@@ -82,6 +85,7 @@ public class CameraResultClassify {
         for(List<Classifier.Recognition> list : results){
             for(Classifier.Recognition recognition : list){
                 emotions.add(new Emotion(recognition.getTitle(),recognition.getConfidence()));
+                Log.d("SS",recognition.toString());
             }
         }
         return emotions;
@@ -94,6 +98,7 @@ public class CameraResultClassify {
                 arrayList.add(e);
             }
         }
+
         return arrayList;
     }
 }

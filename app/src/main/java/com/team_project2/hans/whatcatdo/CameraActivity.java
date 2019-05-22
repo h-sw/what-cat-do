@@ -16,10 +16,10 @@ import com.wonderkiln.camerakit.CameraView;
 
 import java.io.File;
 
+import static com.team_project2.hans.whatcatdo.common.Common.RECORD_TIME;
+
 public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기본 제공 클래스
     private static final String TAG         = "CAMERA ACTIVITY";//보기 편리하게 태그
-
-    private static final int    RECORD_TIME = 3000;
 
     /*layout Component*/
     private CameraView cameraView;
@@ -106,6 +106,7 @@ public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기�
                             Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
                             intent.putExtra("videoPath",file.getAbsolutePath());
                             startActivity(intent);
+                            finish();
                         }
                     }
                 }).run();
