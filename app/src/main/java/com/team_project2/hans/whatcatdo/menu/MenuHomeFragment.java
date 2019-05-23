@@ -32,7 +32,7 @@ public class MenuHomeFragment extends Fragment {
 
         sliderLayout = view.findViewById(R.id.slider_main);
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SLIDE);
-        sliderLayout.setScrollTimeInSec(2); //set scroll delay in seconds
+        sliderLayout.setScrollTimeInSec(7); //set scroll delay in seconds
 
         setSliderViews();
         return view;
