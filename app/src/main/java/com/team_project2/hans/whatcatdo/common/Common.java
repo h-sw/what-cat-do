@@ -7,13 +7,15 @@ package com.team_project2.hans.whatcatdo.common;
 public class Common {
     /*tensorflow*/
     public static final String  MODEL_PATH        = "cat.tflite";
-    public static final String  LABEL_PATH        = "labels.txt";
+    public static final String  LABEL_PATH        = "cats_labels.txt";
     public static final int     INPUT_SIZE        = 299;
     public static final String  IMAGE_PATH        = "/whatcatdo/";
     public static final int     IMAGE_QUALITY     = 100;
 
+    public static final int     RECORD_TIME       = 3500;
 
-
+    //bitmap
+    public static final int     THUMBSIZE         = 64;
 
     /*database*/
     public static final int     DATABASE_VERSION  = 1;

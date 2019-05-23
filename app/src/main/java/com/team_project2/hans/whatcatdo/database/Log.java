@@ -11,7 +11,6 @@ public class Log {
         this.comment = null;
     }
 
-
     public String getPath() {
         return path;
     }
@@ -27,7 +26,6 @@ public class Log {
     public long getTimestamp() {
         return timestamp;
     }
-
 
     public String getComment() {
         return comment;

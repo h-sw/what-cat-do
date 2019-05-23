@@ -10,7 +10,9 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,10 @@ import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.common.Common;
 import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
+import com.team_project2.hans.whatcatdo.controller.CameraResultClassify;
+import com.team_project2.hans.whatcatdo.database.LogDBManager;
+import com.team_project2.hans.whatcatdo.database.Emotion;
+import com.team_project2.hans.whatcatdo.database.Log;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
 
@@ -36,11 +42,11 @@ public class CameraResultActivity extends AppCompatActivity {
 
     /*layout component*/
     private SliderLayout sliderLayout;
-    private TextView text_result_camera;
+    private TextView text_camera_result;
+    private EditText edit_camera_comment;
+    private Button btn_camera_save;
+    private Button btn_camera_main;
     private SliderView sliderView;
-
-    /*&#xd150;&#xc11c;&#xd50c;&#xb85c;&#xc6b0; &#xad00;&#xb828;*/
-    private TensorFlowImageClassifier classifier;
 
     /*동영상 프레임 단위로 자르기*/
     private File videoFile;
@@ -53,12 +59,13 @@ public class CameraResultActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Thread thread;
 
-    private int selectImage;
-
+    /*database*/
+    private String selectImage;
     private Long timestamp;
+    private String comment;
 
-
-
+    /*tensorflow classifier after work*/
+    private CameraResultClassify classify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,26 +73,45 @@ public class CameraResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera_result);
         getSupportActionBar().hide();
 
-        text_result_camera = findViewById(R.id.text_result_camera);
+        text_camera_result = findViewById(R.id.text_camera_result);
+        edit_camera_comment = findViewById(R.id.edit_camera_comment);
+        btn_camera_save = findViewById(R.id.btn_camera_save);
+        btn_camera_main = findViewById(R.id.btn_camera_main);
         sliderLayout = findViewById(R.id.imageSlider);
 
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.FILL);
-        sliderLayout.setScrollTimeInSec(1); //set scroll delay in seconds
+        sliderLayout.setScrollTimeInSec(10); //set scroll delay in seconds
 
+        btn_camera_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectImage==null){
+                    Toast.makeText(CameraResultActivity.this, "저장할 대표 이미지를 지정 해 주세요!", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+                comment = edit_camera_comment.getText().toString();
+                saveOnDB();
+                Toast.makeText(CameraResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+        btn_camera_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         new TaskClassifier().execute();
     }
 
     private class TaskClassifier extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog asyncDialog = new ProgressDialog(
-                CameraResultActivity.this);
+        ProgressDialog asyncDialog = new ProgressDialog(CameraResultActivity.this);
 
         @Override
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("감정분석 중이에요~");
-
-            // show dialog
             asyncDialog.show();
             super.onPreExecute();
         }
@@ -95,8 +121,15 @@ public class CameraResultActivity extends AppCompatActivity {
             try {
                 convertVideoToImage();
                 classifyResults = classifyImages(bitmapArrayList);
-                setSliderViews();
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setSliderViews();
+                        classify = new CameraResultClassify(classifyResults);
+                        Emotion e = classify.getPrimaryEmotion();
+                        text_camera_result.setText(e.getTitle());
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -126,7 +159,7 @@ public class CameraResultActivity extends AppCompatActivity {
                 bitmapArrayList.add(bitmap);
             }
             mediaMetadataRetriever.release();
-            //saveFrames();
+            saveFrames();
         }
     }
 
@@ -156,7 +189,7 @@ public class CameraResultActivity extends AppCompatActivity {
         for (Bitmap b : saveBitmap){
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             b.compress(Bitmap.CompressFormat.JPEG, Common.IMAGE_QUALITY, bytes);
-            File file = new File(saveFolder,("wcd_image_"+ timestamp +"_"+i+".jpg"));
+            File file = new File(saveFolder,("image_"+ timestamp +"_"+i+".jpg"));
             bitmapPath.add(file.getAbsolutePath());
             file.createNewFile();
             FileOutputStream fo = new FileOutputStream(file);
@@ -171,50 +204,41 @@ public class CameraResultActivity extends AppCompatActivity {
 
     public ArrayList<List<Classifier.Recognition>> classifyImages(ArrayList<Bitmap> bitmaps){
         ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
-        TensorFlowImageClassifier tensorFlowImageClassifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+        TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
         for(Bitmap bitmap : bitmaps){
             bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
-            List<Classifier.Recognition> results = tensorFlowImageClassifier.recognizeImage(bitmap);
+            List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
             recognitions.add(results);
         }
         return recognitions;
     }
 
     private void setSliderViews() {
-
-        for (int i = 0; i < bitmapArrayList.size(); i++) {
+        for(String s : bitmapPath){
             sliderView = new SliderView(this);
-
-            Bitmap bitmap = bitmapArrayList.get(i);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-            byte[] byteArray = stream.toByteArray();
-
-            Log.d(TAG,byteArray.toString());
-
-            sliderView.setImageByte(byteArray);
-
+            sliderView.setImageUrl(s);
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-            sliderView.setDescription("setDescription " + i);
-            final int finalI = i;
+            sliderView.setDescription(s);
+            final String select = s;
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(SliderView sliderView) {
-                    selectImage = finalI;
-
-                    Toast.makeText(CameraResultActivity.this, "This is slider " + (finalI), Toast.LENGTH_SHORT).show();
+                    selectImage = select;
+                    Toast.makeText(CameraResultActivity.this, "이 이미지가 선택되었습니다!.", Toast.LENGTH_SHORT).show();
                 }
             });
             sliderLayout.addSliderView(sliderView);
         }
     }
 
-    public void evaluateClassifiedResult(ArrayList<List<Classifier.Recognition>> classifyResults){
-        //ArrayList<>
-
-
+    private void saveOnDB(){
+        LogDBManager db = new LogDBManager(this);
+        Log log = new Log(timestamp,selectImage);
+        log.setComment(comment);
+        ArrayList<Emotion> emotions = classify.getArrayEmotions();
+        for(Emotion e : emotions){
+            e.setTimeStamp(timestamp);
+        }
+        db.addLog(log,classify.getArrayEmotions());
     }
-
-
-
 }

@@ -57,8 +57,11 @@ public class ImageSelectActivity extends AppCompatActivity {
         btn_analyze_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isSelect)
+                if(isSelect){
                     startActivity(IntentBitmap(img_select));
+                    finish();
+                }
+
             }
         });
     }
@@ -93,11 +96,8 @@ public class ImageSelectActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 try{
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                    Uri uri = data.getData();
 
-
-                    path = RealPathManager.getRealPathFromURI_API19(this,uri);
-                    //path = data.getData().getPath();
+                    path = RealPathManager.getRealPathFromURI_API19(this,data.getData());
                     img = BitmapFactory.decodeStream(inputStream);
 
                     inputStream.close();

@@ -10,12 +10,12 @@
     >
 
     <TextView
-        android:background="@color/Menu1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
         android:text="뭐하냥?"
         android:textSize="32dp"
-        android:textColor="#fff"
+        android:textColor="@color/Menu1"
         android:fontFamily="@font/misaeng"
         android:textStyle="bold"/>
 

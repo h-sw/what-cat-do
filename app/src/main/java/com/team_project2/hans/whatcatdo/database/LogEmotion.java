@@ -1,10 +1,9 @@
 package com.team_project2.hans.whatcatdo.database;
 
-import com.team_project2.hans.whatcatdo.database.Emotion;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LogEmotion {
+public class LogEmotion implements Serializable {
 
     public ArrayList<Emotion> getEmotions() {
         return emotions;
@@ -54,5 +53,4 @@ public class LogEmotion {
         }
         return max.getTitle();
     }
-
 }
