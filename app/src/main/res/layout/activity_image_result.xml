@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ImageResultActivity"
-    android:background="@color/Menu1"
+    android:background="@color/PrimaryLight"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -62,7 +62,7 @@
                 android:text="기록 저장하기"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="@color/Pink"
+                android:background="@color/Primary"
                 android:textColor="#fff"
                 android:gravity="center"/>
             <Button
@@ -74,7 +74,7 @@
                 android:text="홈화면으로 가기"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="@color/Menu4"
+                android:background="@color/PrimaryDark"
                 android:textColor="#fff"
                 android:gravity="center"/>
 
