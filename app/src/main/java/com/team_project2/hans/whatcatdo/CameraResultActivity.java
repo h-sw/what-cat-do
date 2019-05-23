@@ -143,6 +143,16 @@ public class CameraResultActivity extends AppCompatActivity {
         }
     }
 
+    boolean isCat(List<Classifier.Recognition> list){
+        for(Classifier.Recognition r : list){
+            String s = r.getTitle();
+            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")){
+                return true;
+            }
+        }
+        return false;
+    }
+
     void convertVideoToImage(){
         if(!getIntent().getStringExtra("videoPath").isEmpty()){
             String path = getIntent().getStringExtra("videoPath");

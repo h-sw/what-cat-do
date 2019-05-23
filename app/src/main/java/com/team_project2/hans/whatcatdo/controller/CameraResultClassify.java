@@ -24,7 +24,6 @@ public class CameraResultClassify {
         init();
     }
 
-
     /**
      * 모든 사진들의 북석 결과를 Emotion Class로 생성한 뒤,
      * 하나의 ArrayList로 저장합니다.

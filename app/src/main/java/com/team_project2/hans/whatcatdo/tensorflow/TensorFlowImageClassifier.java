@@ -40,6 +40,7 @@ public class TensorFlowImageClassifier implements Classifier {
     private List<String> labelList;
 
     private static TensorFlowImageClassifier tensorFlowImageClassifier = null;
+    private static TensorFlowImageClassifier tensorFlowCatFinder = null;
 
     private TensorFlowImageClassifier(AssetManager assetManager,
                                      String modelPath,
@@ -50,17 +51,35 @@ public class TensorFlowImageClassifier implements Classifier {
         this.inputSize = inputSize;
     }
 
+    public static void createCatFinder(AssetManager assetManager,
+                                String modelPath,
+                                String labelPath,
+                                int inputSize)throws IOException{
+
+        tensorFlowCatFinder = create(assetManager,modelPath,labelPath,inputSize);
+    }
+
+    public static void createEmotionClassifier(AssetManager assetManager,
+                                                              String modelPath,
+                                                              String labelPath,
+                                                              int inputSize)throws IOException{
+        tensorFlowImageClassifier = create(assetManager,modelPath,labelPath,inputSize);
+    }
+
+
     public static TensorFlowImageClassifier create(AssetManager assetManager,
                              String modelPath,
                              String labelPath,
                              int inputSize) throws IOException {
-        tensorFlowImageClassifier = new TensorFlowImageClassifier(assetManager,modelPath,labelPath,inputSize);
-
-        return tensorFlowImageClassifier;
+        return new TensorFlowImageClassifier(assetManager,modelPath,labelPath,inputSize);
     }
 
     public static TensorFlowImageClassifier getTensorFlowClassifier(){
         return tensorFlowImageClassifier;
+    }
+
+    public static TensorFlowImageClassifier getCatFinder(){
+        return tensorFlowCatFinder;
     }
 
     @Override
