@@ -47,7 +47,7 @@
             android:text="갤러리에서 가져오기"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:background="@color/Menu4"
+            android:background="@color/Pink"
             android:textColor="#fff"/>
         <Button
             android:id="@+id/btn_analyze_picture"
@@ -58,7 +58,7 @@
             android:text="사진 분석"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:background="@color/Menu3"
+            android:background="@color/Menu4"
             android:textColor="#fff"/>
         <TextView
             android:id="@+id/text_score"

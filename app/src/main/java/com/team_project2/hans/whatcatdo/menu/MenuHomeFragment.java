@@ -31,8 +31,8 @@ public class MenuHomeFragment extends Fragment {
         logs = db.getLogEmotion();
 
         sliderLayout = view.findViewById(R.id.slider_main);
-        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SLIDE);
-        sliderLayout.setScrollTimeInSec(7); //set scroll delay in seconds
+        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.WORM);
+        sliderLayout.setScrollTimeInSec(7);
 
         setSliderViews();
         return view;

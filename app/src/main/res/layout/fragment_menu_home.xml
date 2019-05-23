@@ -8,24 +8,28 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="12dp"
-                android:text="인공지능 고양이 감정 분석기"
+                android:layout_gravity="left"
+                android:text="HOME"
+                android:textColor="@color/PrimaryDark"
+                android:textSize="24sp"
                 android:layout_marginBottom="10dp"/>
 
             <com.smarteist.autoimageslider.SliderLayout
                 android:id="@+id/slider_main"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:background="#FFF"
+                android:elevation="20dp"/>
             <TextView
                 android:layout_marginTop="50dp"
                 android:textAlignment="center"
@@ -40,7 +44,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFF"
+                android:backgroundTint="@color/PrimaryLight"
                 android:layout_marginBottom="20dp"
                 card_view:cardElevation="6dp">
                 <LinearLayout
@@ -69,7 +73,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFF"
+                android:backgroundTint="@color/PrimaryLight"
                 android:layout_marginBottom="20dp"
                 card_view:cardElevation="6dp">
                 <LinearLayout
@@ -94,7 +98,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFF"
+                android:backgroundTint="@color/PrimaryLight"
                 android:layout_marginBottom="20dp"
                 card_view:cardElevation="6dp">
                 <LinearLayout
