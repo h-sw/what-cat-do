@@ -19,5 +19,8 @@
     <color name="DeepBrown">#785E3E</color>
     <color name="DarkBlue">#447294</color>
     <color name="Puple1">#3146DE</color>
+    <color name="Primary">#ef9a9a</color>
+    <color name="PrimaryDark">#ba6b6c</color>
+    <color name="PrimaryLight">#ffcccb</color>
 
 </resources>
