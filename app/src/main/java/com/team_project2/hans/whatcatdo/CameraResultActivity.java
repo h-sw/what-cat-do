@@ -2,7 +2,6 @@ package com.team_project2.hans.whatcatdo;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -24,7 +23,7 @@ import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.common.Common;
 import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
 import com.team_project2.hans.whatcatdo.controller.CameraResultClassify;
-import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.database.Log;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
@@ -60,11 +59,12 @@ public class CameraResultActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Thread thread;
 
+    /*database*/
     private String selectImage;
-
     private Long timestamp;
     private String comment;
 
+    /*tensorflow classifier after work*/
     private CameraResultClassify classify;
 
     @Override
@@ -204,10 +204,10 @@ public class CameraResultActivity extends AppCompatActivity {
 
     public ArrayList<List<Classifier.Recognition>> classifyImages(ArrayList<Bitmap> bitmaps){
         ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
-        TensorFlowImageClassifier tensorFlowImageClassifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+        TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
         for(Bitmap bitmap : bitmaps){
             bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
-            List<Classifier.Recognition> results = tensorFlowImageClassifier.recognizeImage(bitmap);
+            List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
             recognitions.add(results);
         }
         return recognitions;
@@ -232,14 +232,13 @@ public class CameraResultActivity extends AppCompatActivity {
     }
 
     private void saveOnDB(){
-        DBLogHelper db = new DBLogHelper(this);
+        LogDBManager db = new LogDBManager(this);
         Log log = new Log(timestamp,selectImage);
         log.setComment(comment);
-        ArrayList<Emotion> emotions = classify.getCertifiedEmotions();
+        ArrayList<Emotion> emotions = classify.getArrayEmotions();
         for(Emotion e : emotions){
             e.setTimeStamp(timestamp);
         }
-
-        db.addLog(log,classify.getCertifiedEmotions());
+        db.addLog(log,classify.getArrayEmotions());
     }
 }

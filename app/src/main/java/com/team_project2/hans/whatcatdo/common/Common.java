@@ -12,7 +12,7 @@ public class Common {
     public static final String  IMAGE_PATH        = "/whatcatdo/";
     public static final int     IMAGE_QUALITY     = 100;
 
-    public static final int    RECORD_TIME       = 3500;
+    public static final int     RECORD_TIME       = 3500;
 
     //bitmap
     public static final int     THUMBSIZE         = 64;

@@ -1,7 +1,5 @@
 package com.team_project2.hans.whatcatdo.database;
 
-import com.team_project2.hans.whatcatdo.database.Emotion;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

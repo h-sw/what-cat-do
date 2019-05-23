@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.database.Log;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
@@ -35,7 +35,7 @@ public class ImageResultActivity extends AppCompatActivity {
     private EditText edit_comment;
     private Button btn_save;
 
-    private DBLogHelper db;
+    private LogDBManager db;
 
     private Log log;
     private ArrayList<Emotion> emotions;
@@ -45,7 +45,7 @@ public class ImageResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_result);
-        db = new DBLogHelper(this);
+        db = new LogDBManager(this);
         getSupportActionBar().hide();
 
         img_result = findViewById(R.id.img_result);

@@ -18,8 +18,8 @@ import java.io.File;
 
 import static com.team_project2.hans.whatcatdo.common.Common.RECORD_TIME;
 
-public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기본 제공 클래스
-    private static final String TAG         = "CAMERA ACTIVITY";//보기 편리하게 태그
+public class CameraActivity extends AppCompatActivity {
+    private static final String TAG         = "CAMERA ACTIVITY"; //보기 편리하게 태그
 
     /*layout Component*/
     private CameraView cameraView;
@@ -110,8 +110,6 @@ public class CameraActivity extends AppCompatActivity {//Appcompatactivity 기�
                         }
                     }
                 }).run();
-
-
             }
         });
     }

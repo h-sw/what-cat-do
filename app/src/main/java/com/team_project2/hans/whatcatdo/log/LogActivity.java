@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.team_project2.hans.whatcatdo.R;
-import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ public class LogActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private DBLogHelper db;
+    private LogDBManager db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
         getSupportActionBar().hide();
-        db = new DBLogHelper(LogActivity.this);
+        db = new LogDBManager(LogActivity.this);
 
         recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);

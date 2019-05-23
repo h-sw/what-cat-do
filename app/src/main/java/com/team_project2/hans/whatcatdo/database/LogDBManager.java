@@ -11,10 +11,10 @@ import com.team_project2.hans.whatcatdo.common.Common;
 
 import java.util.ArrayList;
 
-public class DBLogHelper extends SQLiteOpenHelper{
+public class LogDBManager extends SQLiteOpenHelper{
     private final static String TAG = "DB LOG HELPER";
 
-    public DBLogHelper(Context context){
+    public LogDBManager(Context context){
         super(context, Common.DATABASE_NAME, null, Common.DATABASE_VERSION);
     }
 

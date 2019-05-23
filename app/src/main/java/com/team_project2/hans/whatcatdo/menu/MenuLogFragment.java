@@ -17,7 +17,7 @@ import com.team_project2.hans.whatcatdo.CameraActivity;
 import com.team_project2.hans.whatcatdo.ImageSelectActivity;
 import com.team_project2.hans.whatcatdo.log.LogAdapter;
 import com.team_project2.hans.whatcatdo.R;
-import com.team_project2.hans.whatcatdo.database.DBLogHelper;
+import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 
 import java.util.ArrayList;
@@ -26,9 +26,10 @@ import java.util.ArrayList;
 public class MenuLogFragment extends Fragment{
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    DBLogHelper db;
+    LogDBManager db;
     LogAdapter mAdapter;
     LinearLayout emptyView;
+
     TextView text_empty_gallary;
     TextView text_empty_camera;
     ArrayList<LogEmotion> myDataset;
@@ -63,14 +64,12 @@ public class MenuLogFragment extends Fragment{
     }
 
     private class LogManager extends AsyncTask<Void, Void, Void> {
-
         ProgressDialog asyncDialog = new ProgressDialog(view.getContext());
 
         @Override
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("로딩중이에요~");
-            // show dialog
             asyncDialog.show();
             super.onPreExecute();
         }
@@ -78,7 +77,7 @@ public class MenuLogFragment extends Fragment{
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                db = new DBLogHelper(getContext());
+                db = new LogDBManager(getContext());
                 myDataset = db.getLogEmotion();
 
             } catch (Exception e) {

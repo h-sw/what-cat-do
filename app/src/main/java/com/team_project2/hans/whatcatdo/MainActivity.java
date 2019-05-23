@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void Loading() {
         startActivity(new Intent(this, LoadingActivity.class));
     }

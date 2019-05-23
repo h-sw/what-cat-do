@@ -67,13 +67,12 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.MyViewHolder> {
         final LogEmotion log = mDataset.get(position);
 
         //String time = new SimpleDateFormat("HH:mm:SS").format(log.getTimestamp());
-        String date =  new SimpleDateFormat("yyyy.MM.dd").format(log.getTimestamp());
+        String date =  new SimpleDateFormat("MM월 dd일 HH시 mm분").format(log.getTimestamp());
 
         holder.text_date.setText(date);
         holder.text_comment.setText(log.getComment());
-        if(log.getComment().isEmpty()){
+        if(log.getComment().isEmpty())
             holder.text_comment.setText("코멘트가 없습니다");
-        }
 
         holder.text_emotion.setText(log.getPrimaryEmotion());
 
