@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -215,11 +216,35 @@ public class CameraResultActivity extends AppCompatActivity {
     public ArrayList<List<Classifier.Recognition>> classifyImages(ArrayList<Bitmap> bitmaps){
         ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
         TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
+        TensorFlowImageClassifier catFinder = TensorFlowImageClassifier.getCatFinder();
+        boolean isCat = false;
         for(Bitmap bitmap : bitmaps){
             bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
             List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
+            List<Classifier.Recognition> cats = catFinder.recognizeImage(bitmap);
+            if(isCat(cats)) {
+                isCat = true;
+            }
             recognitions.add(results);
         }
+
+        if(!isCat){
+            Snackbar.make(findViewById(R.id.foo),"고양이가 맞나요?",Snackbar.LENGTH_INDEFINITE)
+                    .setAction("yes", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    })
+                    .setAction("no", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    })
+                    .show();
+        }
+
         return recognitions;
     }
 
