@@ -1,8 +1,10 @@
 package com.team_project2.hans.whatcatdo.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,9 @@ import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
+import com.team_project2.hans.whatcatdo.info.InfoActivity;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -27,7 +32,7 @@ public class MenuHomeFragment extends Fragment {
     SliderLayout sliderLayout;
     ArrayList<LogEmotion> logs;
     View view;
-
+    CardView go_Info;
     TextView text_img_count;
     TextView text_storage_size;
     TextView text_remain_storage;
@@ -37,11 +42,17 @@ public class MenuHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu_home, container, false);
 
-
+        go_Info = view.findViewById(R.id.cv_goInfo);
         text_img_count = view.findViewById(R.id.text_img_count);
         text_storage_size = view.findViewById(R.id.text_storage_size);
         text_remain_storage = view.findViewById(R.id.text_remain_storage);
 
+        go_Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), InfoActivity.class));
+            }
+        });
         setInfomation();
 
 

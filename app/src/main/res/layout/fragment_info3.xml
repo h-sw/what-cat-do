@@ -4,19 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/Menu3">
     <TextView
-        android:text="기록확인"
+        android:text="분석기록"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="#FFF"
+        android:textColor="@color/PrimaryDark"
         android:textSize="30dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_gravity="center"
-        android:text="저장된 기록 확인하기 Tap!!"
-        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

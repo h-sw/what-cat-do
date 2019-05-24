@@ -8,14 +8,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="#FFF"
+        android:textColor="@color/PrimaryDark"
         android:textSize="30dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_gravity="center"
-        android:text="고양이 촬영으로 알아보기 Tap!!"
+        android:text="실시간 분석 Tap!!"
         />
     <TextView
         android:layout_width="wrap_content"
