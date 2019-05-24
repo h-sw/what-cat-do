@@ -29,7 +29,8 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    TensorFlowImageClassifier.create(getAssets(), Common.MODEL_PATH,Common.LABEL_PATH,Common.INPUT_SIZE);
+                    TensorFlowImageClassifier.createCatFinder(getAssets(),Common.INCEPTION_MODEL_PATH,Common.INCEPTION_LABEL_PATH,Common.INPUT_SIZE);
+                    TensorFlowImageClassifier.createEmotionClassifier(getAssets(), Common.EMOTION_MODEL_PATH,Common.EMOTION_LABEL_PATH,Common.INPUT_SIZE);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -63,6 +63,13 @@ public class MenuLogFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mAdapter!=null)
+            setUserVisibleHint(true);
+    }
+
     private class LogManager extends AsyncTask<Void, Void, Void> {
         ProgressDialog asyncDialog = new ProgressDialog(view.getContext());
 

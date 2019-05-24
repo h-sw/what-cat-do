@@ -6,15 +6,21 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.team_project2.hans.whatcatdo.common.Common;
+import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
 import com.team_project2.hans.whatcatdo.controller.RealPathManager;
+import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
+import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
 
 import java.io.InputStream;
+import java.util.List;
 
 import static com.team_project2.hans.whatcatdo.controller.BitmapConverter.ImageViewToBitmap;
 
@@ -58,12 +64,30 @@ public class ImageSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isSelect){
-                    startActivity(IntentBitmap(img_select));
-                    finish();
+                    TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getCatFinder();
+                    Bitmap bitmap = BitmapConverter.ImageViewToBitmap(img_select,Common.INPUT_SIZE);
+                    List<Classifier.Recognition> result = classifier.recognizeImage(bitmap);
+                    Log.d(TAG,result.toString());
+                    if(isCat(result)){
+                        startActivity(IntentBitmap(img_select));
+                        finish();
+                    }else{
+                        Toast.makeText(ImageSelectActivity.this, "고양이가 맞는지 확인해주세요!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
             }
         });
+    }
+
+
+    boolean isCat(List<Classifier.Recognition> list){
+        for(Classifier.Recognition r : list){
+            String s = r.getTitle();
+            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
