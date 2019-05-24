@@ -1,6 +1,8 @@
 package com.team_project2.hans.whatcatdo.common;
 
 
+import android.os.Environment;
+
 /**
  * 프로젝트에서 계속 사용되는 상수값을 저장해 두는 파일입니다.
 * */
@@ -11,7 +13,7 @@ public class Common {
     public static final String  INCEPTION_MODEL_PATH = "inceptionv3_slim_2016.tflite";
     public static final String  INCEPTION_LABEL_PATH = "inception_labels.txt";
     public static final int     INPUT_SIZE           = 299;
-    public static final String  IMAGE_PATH           = "/whatcatdo/";
+    public static final String  IMAGE_PATH           = Environment.getExternalStorageDirectory().toString()+"/whatcatdo/";
     public static final int     IMAGE_QUALITY        = 100;
 
     public static final int     RECORD_TIME          = 3500;

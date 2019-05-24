@@ -189,10 +189,9 @@ public class CameraResultActivity extends AppCompatActivity {
     }
 
     public void saveFrames(ArrayList<Bitmap> saveBitmap) throws IOException{
-        String folder = Environment.getExternalStorageDirectory().toString();
         bitmapPath = new ArrayList<>();
         timestamp = System.currentTimeMillis();
-        File saveFolder = new File(folder + Common.IMAGE_PATH);
+        File saveFolder = new File(Common.IMAGE_PATH);
         if(!saveFolder.exists()){
             saveFolder.mkdirs();
         }
