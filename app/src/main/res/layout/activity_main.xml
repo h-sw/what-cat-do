@@ -12,11 +12,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="6dp"
         android:layout_marginLeft="6dp"
         android:text="뭐하냥?"
-        android:textSize="32dp"
-        android:textColor="@color/Menu1"
-        android:fontFamily="@font/misaeng"
+        android:textSize="28dp"
+        android:textColor="@color/Primary"
+        android:fontFamily="@font/godic"
         android:textStyle="bold"/>
 
     <LinearLayout
@@ -36,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#808080"/>
+                android:background="@color/Primary"/>
             <TextView
                 android:id="@+id/menu2"
                 android:layout_width="match_parent"

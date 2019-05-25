@@ -45,6 +45,16 @@ public class LogDBManager extends SQLiteOpenHelper{
     }
     //comment  추가
 
+    public void delete(Long timestamp){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String key = Long.toString(timestamp);
+
+        db.delete(Common.TABLE_EMOTIONS,Common.EMOTION_TIMESTAMP + "=" + key, null);
+        db.delete(Common.TABLE_LOGS, Common.LOG_TIMESTAMP + "=" + key,null);
+
+
+    }
+
     public void addLog(Log log, ArrayList<Emotion> emotions){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -113,5 +123,7 @@ public class LogDBManager extends SQLiteOpenHelper{
         }
         return logs;
     }
+
+
 
 }

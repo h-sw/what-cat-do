@@ -13,17 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true" />
-
-    <ImageView
-        android:layout_gravity="bottom|center"
-        android:id="@+id/btn_record"
+    
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:background="@null"
-        android:tint="@color/Menu3"
-        android:src="@drawable/ic_circle_shape_outline" />
+        android:layout_gravity="center|bottom"
+        android:background="#20000000"
+        android:elevation="10dp">
+
+        <ImageView
+            android:layout_gravity="bottom|center"
+            android:id="@+id/btn_record"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:background="@null"
+            android:tint="@color/PrimaryDark"
+            android:src="@drawable/ic_circle_shape_outline" />
+    </FrameLayout>
 
 
 </FrameLayout>

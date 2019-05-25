@@ -24,7 +24,7 @@ public class LogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log);
         getSupportActionBar().hide();
         db = new LogDBManager(LogActivity.this);
-
+        // 왜 this가 아니라 LogActivity.this를 해야하는지 이해가 안돼용
         recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
 

@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/Menu4"
+    android:backgroundTint="#fff"
     tools:context="com.team_project2.hans.whatcatdo.info.InfoActivity">
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/HotPink">
+        android:background="#fff">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_margin="6dp"
             android:text="뭐하냥? - 고양이의 감정을 알아보자"
-            android:textColor="#FFF"
+            android:textColor="@color/Primary"
             android:textStyle="bold"
             android:textSize="18sp" />
     </FrameLayout>
@@ -32,29 +32,29 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/Menu1"
-            android:textColor="#FFF"
+            android:backgroundTint="#fff"
+            android:textColor="@color/PrimaryDark"
             android:text="사진분석"
             android:id="@+id/bt1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/Menu2"
-            android:textColor="#FFF"
+            android:backgroundTint="#fff"
+            android:textColor="@color/PrimaryDark"
             android:text="촬영분석"
             android:id="@+id/bt2"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/Menu3"
-            android:textColor="#FFF"
+            android:backgroundTint="#fff"
+            android:textColor="@color/PrimaryDark"
             android:text="기록확인"
             android:id="@+id/bt3"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/MainBack"
-            android:textColor="#FFF"
+            android:backgroundTint="#fff"
+            android:textColor="@color/PrimaryDark"
             android:text="닫기"
             android:id="@+id/bt4"/>
     </LinearLayout>

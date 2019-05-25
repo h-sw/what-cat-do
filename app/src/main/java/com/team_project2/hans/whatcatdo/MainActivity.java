@@ -3,6 +3,7 @@ package com.team_project2.hans.whatcatdo;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 for (TextView m : menu) {
                     m.setBackgroundColor(Color.WHITE);
                 }
-                menu[position].setBackgroundColor(getResources().getColor(R.color.Brown));
+                menu[position].setBackgroundColor(getResources().getColor(R.color.Primary));
             }
 
             @Override
