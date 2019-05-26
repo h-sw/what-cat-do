@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +103,17 @@ public class MenuHomeFragment extends Fragment {
         setSliderViews();
         return view;
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setInfomation();
+            }
+        });
+
+    }
 
     private void deleteCache() {
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/whatcatdo");
@@ -111,6 +123,8 @@ public class MenuHomeFragment extends Fragment {
         for(File file : list){
             boolean isLog = false;
             for(LogEmotion emotion : logs){
+                Log.d("sss1", file.getAbsolutePath());
+                Log.d("sss2", emotion.getPath());
                 if(file.getAbsolutePath().equals(emotion.getPath()))
                     isLog = true;
             }
