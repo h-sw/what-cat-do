@@ -139,15 +139,17 @@ public class MenuHomeFragment extends Fragment {
         long size = 0;
 
         File[] list = dir.listFiles();
-        int count = 0;
-        for(File file : list){
-          if(file.isFile()){
-                count++;
-                size += file.length();
-          }
-       }
-        text_storage_size.setText(getFileSize(size));
-        text_img_count.setText(count+"장");
+        if(list!=null){
+            int count = 0;
+            for(File file : list){
+                if(file.isFile()){
+                    count++;
+                    size += file.length();
+                }
+            }
+            text_storage_size.setText(getFileSize(size));
+            text_img_count.setText(count+"장");
+        }
 
         File file = new File(Environment.getDataDirectory().getAbsolutePath());
         String s = getFileSize(file.getFreeSpace());

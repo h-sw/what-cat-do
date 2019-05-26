@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
         viewPager.setCurrentItem(0);
-
-
     }
 
     private class pagerAdapter extends FragmentStatePagerAdapter {
