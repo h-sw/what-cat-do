@@ -8,11 +8,9 @@
     android:backgroundTint="#fff"
     tools:context="com.team_project2.hans.whatcatdo.info.InfoActivity">
 
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff">
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@null"
-        android:layout_margin="16dp">
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="24dp">
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
