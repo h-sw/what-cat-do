@@ -17,10 +17,16 @@
             android:layout_gravity="left"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="3dp"
             android:text="HOME"
             android:textColor="@color/PrimaryDark"
             android:textSize="24sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="10sp"
+            android:text="뭐하냥은 인공지능을 통한 고양이 감정 분석 어플리케이션입니다."/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -142,6 +148,36 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="도움말"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_goInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="6dp"
+                    card_view:cardElevation="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp"
+                        android:text="뭐하냥의 이용법이 궁금해요!"
+                        android:textColor="@color/PrimaryDark"
+                        android:textSize="16sp" />
+                </android.support.v7.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:gravity="center"
                     android:text="이전 기록"
@@ -155,10 +191,11 @@
                     android:background="#FFF"
                     android:elevation="-10dp" />
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="6dp"
                     android:text="빠른 이동"
                     android:textAlignment="center"
@@ -226,33 +263,44 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="관리"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cv_goInfo"
+                    android:id="@+id/card_delete_cache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginBottom="20dp"
                     card_view:cardElevation="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="뭐하냥의 이용법이 궁금하다면?"
+                            android:text="저장공간이 부족해요!"
                             android:textColor="@color/Primary"
                             android:textSize="12sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="도움말 바로가기"
+                            android:text="데이터 정리"
                             android:textColor="@color/PrimaryDark"
                             android:textSize="24sp" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
-
 
             </LinearLayout>
         </ScrollView>
