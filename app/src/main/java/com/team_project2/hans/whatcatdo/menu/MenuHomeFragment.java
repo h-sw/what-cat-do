@@ -120,15 +120,13 @@ public class MenuHomeFragment extends Fragment {
 
         File[] list = dir.listFiles();
 
-        for(File file : list){
+        for(File file : list) {
             boolean isLog = false;
-            for(LogEmotion emotion : logs){
-                Log.d("sss1", file.getAbsolutePath());
-                Log.d("sss2", emotion.getPath());
-                if(file.getAbsolutePath().equals(emotion.getPath()))
+            for (LogEmotion emotion : logs) {
+                if (file.getAbsolutePath().equals(emotion.getPath()))
                     isLog = true;
             }
-            if(!isLog)
+            if (!isLog)
                 file.delete();
         }
         Toast.makeText(getContext(), "파일 정리에 성공하였습니다!", Toast.LENGTH_SHORT).show();
@@ -149,6 +147,9 @@ public class MenuHomeFragment extends Fragment {
             }
             text_storage_size.setText(getFileSize(size));
             text_img_count.setText(count+"장");
+        }else{
+            text_storage_size.setText("알수없음");
+            text_img_count.setText("알수없음");
         }
 
         File file = new File(Environment.getDataDirectory().getAbsolutePath());
