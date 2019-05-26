@@ -22,7 +22,7 @@
             android:layout_marginBottom="6dp"
             android:text="먼저 고양이의 감정을 분석해주세요!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="6dp"
             android:text="분석을 완료하시면 위 사진처럼 기록들이 나열됩니다!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>

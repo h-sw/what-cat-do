@@ -31,7 +31,7 @@
             android:layout_marginBottom="6dp"
             android:text="내 눈앞에 고양이가 있어요! click!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
@@ -45,7 +45,7 @@
             android:layout_marginBottom="6dp"
             android:text="촬영 버튼을 클릭한 후 3초간 고양이를 찍어주세요!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
 
 
         <ImageView
@@ -59,9 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="6dp"
-            android:text="대표 이미지로 저장할 사진을 골라주세요!"
+            android:text="좌우로 움직여 대표 이미지로 저장할 사진을 골라주세요!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,6 +70,6 @@
             android:layout_marginBottom="6dp"
             android:text="원하는 코멘트를 적고 기록 저장하기 click!"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>
