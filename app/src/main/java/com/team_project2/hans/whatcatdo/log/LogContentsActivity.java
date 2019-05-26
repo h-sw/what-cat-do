@@ -88,7 +88,7 @@ public class LogContentsActivity extends AppCompatActivity {
     void setEmotionText(){
         String str = "";
         for(Emotion e : logEmotion.getEmotions()){
-            str += e.getTitle() +" -  "+ e.getPercent()*100.0f + "%\n";
+            str += e.getTitle() +" -  "+ e.getPercent()*100.2f + "%\n";//정확도 출력할때 소숫점 2번째 자리까지만 출력.
         }
         text_cont_emotion.setText(str);
     }
