@@ -8,18 +8,20 @@ public class Emotion implements Serializable {
     private float percent;
     private int count;
 
+    //timestamp가 있는 Emotion 객체 생성
     public Emotion(long timestamp, String title, float percent){
         this.timestamp = timestamp;
         this.title = title;
         this.percent = percent;
     }
-
+    //timestamp가 없는 Emotion 객체 생성
     public Emotion(String title, float percent){
         this.title = title;
         this.percent = percent;
         this.count = 1;
     }
 
+    //각 변수들의 set,get함수
     public void setPercent(float percent) {
         this.percent = (this.percent*(this.count) + percent) / (++count);
     }
@@ -30,6 +32,10 @@ public class Emotion implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+    //요기도 set함수 만들었는데?!!?!
+    public void setTimestamp(String title){
+        this.title=title;
     }
 
     public long getTimestamp() {
