@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="12dp">
     <TextView
         android:text="촬영분석"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/PrimaryDark"
-        android:textSize="30dp"/>
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="30sp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_gravity="center"
-        android:text="실시간 분석 Tap!!"
+        android:text="실시간 분석 Tap"
+        android:layout_marginBottom="3dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_gravity="center"
-        android:text="카메라 촬영 버튼을 누른 후 3초동안 고양이를 찍어주세요 !!"
+        android:layout_marginBottom="6dp"
+        android:text="화면 하단에 촬영 버튼을 클릭하면 3초정도 자동으로 고양이 촬영이 진행됩니다."
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:layout_gravity="left"
-        android:text="\n- 3초 동안 촬영 된 고양이의 속마음을 알려드릴게요 !!"
+        android:layout_marginBottom="3dp"
+        android:text="잠시만 기다리시면 고양이가 어떤 감정을 느끼고 있는지 결과화면이 보여집니다."
         />
 
 </LinearLayout>
