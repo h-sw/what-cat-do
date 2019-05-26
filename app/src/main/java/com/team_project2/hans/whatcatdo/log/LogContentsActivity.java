@@ -64,7 +64,8 @@ public class LogContentsActivity extends AppCompatActivity {
     }
 
     void initData(){
-        text_cont_comment.setText(logEmotion.getComment());
+        if(logEmotion.getComment()!=null)
+            text_cont_comment.setText(logEmotion.getComment());
         setTimeText();
         setBitmapImage();
         setEmotionText();
