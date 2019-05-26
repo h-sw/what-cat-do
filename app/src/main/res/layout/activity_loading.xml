@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".LoadingActivity"
     android:orientation="vertical"
+    android:layout_gravity="center_vertical"
     android:background="#FFF">
-    <TextView
+    <LinearLayout
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:text="뭐하냥?"
-        android:textColor="@color/Primary"
-        android:textStyle="bold"
-        android:textSize="28sp"/>
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_main_launcher"
+            android:layout_gravity="center_vertical|center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="뭐하냥?"
+            android:textColor="@color/Primary"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

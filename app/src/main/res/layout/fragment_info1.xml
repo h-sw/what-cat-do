@@ -40,8 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        android:layout_gravity="left"   `
+        android:layout_gravity="left"
         android:layout_marginBottom="6dp"
-        android:text="- 사진 분석을 누른 후 고양이를 촬영해 주시면 저희가 고양이의 속마음을 알려드릴게요 !!"
-        />
+        android:text="- 사진 분석을 누른 후 고양이를 촬영해 주시면 저희가 고양이의 속마음을 알려드릴게요 !!" />
 </LinearLayout>

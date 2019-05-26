@@ -70,7 +70,6 @@ public class LogContentsActivity extends AppCompatActivity {
         setEmotionText();
     }
 
-
     void setTimeText(){
         String date =  new SimpleDateFormat("yyyy년 MM월 dd일").format(logEmotion.getTimestamp());
         text_cont_date.setText(date);
@@ -88,7 +87,7 @@ public class LogContentsActivity extends AppCompatActivity {
     void setEmotionText(){
         String str = "";
         for(Emotion e : logEmotion.getEmotions()){
-            str += e.getTitle() +" -  "+ e.getPercent()*100.0f + "%\n";
+            str += e.getTitle() +" -  "+ e.getPercent()*100.3f + "%\n";
         }
         text_cont_emotion.setText(str);
     }

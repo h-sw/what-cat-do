@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +21,6 @@ import com.team_project2.hans.whatcatdo.R;
 import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 import com.team_project2.hans.whatcatdo.info.InfoActivity;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -44,6 +42,8 @@ public class MenuHomeFragment extends Fragment {
     CardView card_fast_image;
     CardView card_delete_cache;
 
+    LinearLayout no_log;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MenuHomeFragment extends Fragment {
         card_fast_camera = view.findViewById(R.id.card_fast_camera);
         card_fast_image = view.findViewById(R.id.card_fast_image);
         card_delete_cache = view.findViewById(R.id.card_delete_cache);
+        no_log = view.findViewById(R.id.no_log);
 
 
         go_Info.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +151,11 @@ public class MenuHomeFragment extends Fragment {
 
 
     private void setSliderViews() {
-        if(logs.isEmpty()) return;
+        if(logs.isEmpty()){
+            no_log.setVisibility(view.VISIBLE);
+            sliderLayout.setVisibility(view.GONE);
+            return;
+        }
 
         int count = 0;
         for(LogEmotion log : logs){

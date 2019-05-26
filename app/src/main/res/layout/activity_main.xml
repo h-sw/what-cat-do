@@ -9,16 +9,28 @@
     android:id="@+id/main"
     >
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="6dp"
-        android:layout_marginLeft="6dp"
-        android:text="뭐하냥?"
-        android:textSize="24sp"
-        android:textColor="@color/Primary"
-        android:fontFamily="@font/godic"
-        android:textStyle="bold"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_main_launcher"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="6dp"
+            android:layout_marginLeft="6dp"
+            android:text="뭐하냥?"
+            android:textSize="24sp"
+            android:textColor="@color/Primary"
+            android:fontFamily="@font/godic"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/bottom_navigator"
