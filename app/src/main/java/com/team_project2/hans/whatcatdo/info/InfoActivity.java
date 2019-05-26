@@ -17,6 +17,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
     Fragment frag1;
     Fragment frag2;
     Fragment frag3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

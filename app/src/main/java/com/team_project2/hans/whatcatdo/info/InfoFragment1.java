@@ -18,4 +18,5 @@ public class InfoFragment1 extends Fragment {
 
         return view;
     }
+
 }
