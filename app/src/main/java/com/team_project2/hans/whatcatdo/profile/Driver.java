@@ -18,6 +18,5 @@ public class Driver {
          profile.setAge(sc.nextInt());//입력받은 값을 seAge함수에 넣어준다
 
          System.out.println(profile.toString());//
-
     }
 }

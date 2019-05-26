@@ -40,7 +40,9 @@ public class ImageSelectActivity extends AppCompatActivity {
     /*image buffer*/
     private boolean isSelect = false;
     private Bitmap img;
-    private String path;
+    private String path="";
+
+    private String kind;
 
 
     @Override
@@ -83,7 +85,8 @@ public class ImageSelectActivity extends AppCompatActivity {
     boolean isCat(List<Classifier.Recognition> list){
         for(Classifier.Recognition r : list){
             String s = r.getTitle();
-            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")){
+            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")||s.contains("angora")){
+                kind = s;
                 return true;
             }
         }
@@ -98,6 +101,7 @@ public class ImageSelectActivity extends AppCompatActivity {
         Bitmap bitmap = ImageViewToBitmap(imageView, Common.INPUT_SIZE);
         intent.putExtra("bitmap",bitmap);
         intent.putExtra("path",path);
+        intent.putExtra("kind",kind);
         return intent;
     }
 

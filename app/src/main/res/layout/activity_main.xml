@@ -15,7 +15,7 @@
         android:paddingVertical="6dp"
         android:layout_marginLeft="6dp"
         android:text="뭐하냥?"
-        android:textSize="28dp"
+        android:textSize="24sp"
         android:textColor="@color/Primary"
         android:fontFamily="@font/godic"
         android:textStyle="bold"/>

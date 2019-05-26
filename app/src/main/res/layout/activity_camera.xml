@@ -12,7 +12,18 @@
         android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true" >
+
+        <TextView
+            android:id="@+id/text_camera_how"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="60dp"
+            android:textSize="16sp"
+            android:textColor="@color/Primary"
+            android:text="고양이의 전체 모습이 보이게 해주세요!" />
+    </com.wonderkiln.camerakit.CameraView>
     
     <FrameLayout
         android:layout_width="match_parent"
@@ -30,7 +41,7 @@
             android:clickable="true"
             android:background="@null"
             android:tint="@color/PrimaryDark"
-            android:src="@drawable/ic_circle_shape_outline" />
+            android:src="@drawable/ic_record" />
     </FrameLayout>
 
 

@@ -19,6 +19,8 @@ import com.team_project2.hans.whatcatdo.database.Log;
 import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 import com.team_project2.hans.whatcatdo.tensorflow.TensorFlowImageClassifier;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class ImageResultActivity extends AppCompatActivity {
     private Button btn_main;
     private EditText edit_comment;
     private Button btn_save;
+    private TextView text_image_kind;
 
     private LogDBManager db;
 
@@ -54,7 +57,10 @@ public class ImageResultActivity extends AppCompatActivity {
         edit_comment = findViewById(R.id.edit_comment);
         btn_save = findViewById(R.id.btn_save);
 
+        text_image_kind = findViewById(R.id.text_image_kind);
+
         bitmap = getIntent().getParcelableExtra("bitmap");
+        text_image_kind.setText(getIntent().getStringExtra("kind"));
         img_result.setImageBitmap(bitmap);
 
 

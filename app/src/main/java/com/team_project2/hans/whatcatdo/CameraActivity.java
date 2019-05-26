@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wonderkiln.camerakit.CameraKitError;
@@ -24,6 +27,7 @@ public class CameraActivity extends AppCompatActivity {
     /*layout Component*/
     private CameraView cameraView;
     private ImageView btn_record;
+    private TextView text_camera_how;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class CameraActivity extends AppCompatActivity {
 
         cameraView = findViewById(R.id.camera);
         btn_record = findViewById(R.id.btn_record);
+        text_camera_how = findViewById(R.id.text_camera_how);
 
         setCamera();
 
@@ -41,8 +46,19 @@ public class CameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 recordVideo();
                 btn_record.setClickable(false);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        text_camera_how.setText("촬영중 입니다. 잠시만 기다리세요.");
+                    }
+                });
             }
         });
+
+
+        Animation animation = AnimationUtils.loadAnimation(CameraActivity.this,R.anim.blink_animation);
+        text_camera_how.startAnimation(animation);
+
 
         Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
     }

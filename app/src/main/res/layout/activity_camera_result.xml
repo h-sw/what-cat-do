@@ -21,10 +21,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <com.smarteist.autoimageslider.SliderLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_marginTop="12dp"
                     android:layout_alignParentTop="true"
                     android:id="@+id/imageSlider"/>
 
@@ -36,6 +36,14 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:text="분석 결과" />
+
+                <TextView
+                    android:id="@+id/text_camera_kind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text=""
+                    android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/text_camera_result"

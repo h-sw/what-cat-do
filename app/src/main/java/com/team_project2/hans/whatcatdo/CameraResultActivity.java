@@ -147,7 +147,7 @@ public class CameraResultActivity extends AppCompatActivity {
     boolean isCat(List<Classifier.Recognition> list){
         for(Classifier.Recognition r : list){
             String s = r.getTitle();
-            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")){
+            if(s.contains("cat")||s.contains("tabby")||s.contains("kitten")||s.contains("angora")){
                 return true;
             }
         }

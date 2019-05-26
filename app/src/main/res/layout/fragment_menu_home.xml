@@ -123,7 +123,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="저장된 이미지 수" />
+                                android:text="저장된 이미지" />
 
                             <TextView
                                 android:id="@+id/text_img_count"
