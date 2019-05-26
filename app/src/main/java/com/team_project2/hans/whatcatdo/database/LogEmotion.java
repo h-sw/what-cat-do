@@ -9,7 +9,7 @@ public class LogEmotion implements Serializable {
         return emotions;
     }
 
-    private ArrayList<Emotion> emotions;
+    private ArrayList<Emotion> emotions;//감정들을 담은 list
     private long timestamp;
     private String path;
     private String comment;
@@ -18,6 +18,7 @@ public class LogEmotion implements Serializable {
         return comment;
     }
 
+    //logEmotion 생성자
     public LogEmotion(long timestamp, String path, String comment){
         this.emotions = new ArrayList<>();
         this.timestamp =  timestamp;

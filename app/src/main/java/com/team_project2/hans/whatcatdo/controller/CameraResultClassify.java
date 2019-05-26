@@ -7,7 +7,7 @@ import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 
 import java.util.List;
 
-public class CameraResultClassify {
+public class CameraResultClassify {//감정들을 int형태로 변환
     static final int HAPPY    = 0;
     static final int ANGRY    = 1;
     static final int CURIOUS  = 2;
