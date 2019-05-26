@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="12dp">
+    android:layout_marginLeft="12dp"
+    android:orientation="vertical">
+
     <TextView
-        android:text="촬영분석"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/PrimaryDark"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:textSize="30sp"/>
+        android:text="촬영분석"
+        android:textColor="@color/PrimaryDark"
+        android:textSize="30sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,32 +47,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="내 눈앞에 고양이가 있어요! click!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="촬영 버튼을 클릭한 후 3초간 고양이를 찍어주세요!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="대표 이미지로 저장할 사진을 골라주세요!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="원하는 코멘트를 적고 기록 저장하기 click!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
 </LinearLayout>

@@ -41,6 +41,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/selecting_complete" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -53,25 +54,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="미리 찍어둔 사진이 있어요! click!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="사진을 선택하고 사진분석 click!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="10sp"
         android:layout_marginBottom="6dp"
         android:text="원하는 코멘트를 적고 기록 저장하기 click!"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="10sp" />
 
 </LinearLayout>
