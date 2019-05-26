@@ -23,7 +23,7 @@ public class LogContentsActivity extends AppCompatActivity {
     TextView text_cont_date;
     TextView text_cont_time;
     TextView text_cont_comment;
-    TextView text_cont_emotion[];
+    TextView text_cont_emotion;
     Button btn_delete;
 
     ImageView img_cont;
@@ -35,33 +35,17 @@ public class LogContentsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         logEmotion = (LogEmotion)getIntent().getSerializableExtra("logEmotion");
-        text_cont_emotion = new TextView[3];
 
         text_cont_comment = findViewById(R.id.text_cont_comment);
         text_cont_date = findViewById(R.id.text_cont_date);
         text_cont_time = findViewById(R.id.text_cont_time);
-        text_cont_emotion[0] = findViewById(R.id.text_cont_emotion1);
-        text_cont_emotion[1] = findViewById(R.id.text_cont_emotion2);
-        text_cont_emotion[2] = findViewById(R.id.text_cont_emotion3);
+
+        text_cont_emotion = findViewById(R.id.text_cont_emotion);
+
         img_cont = findViewById(R.id.img_cont);
         btn_delete = findViewById(R.id.btn_delete);
 
-
-        String date =  new SimpleDateFormat("yyyy년 MM월 dd일").format(logEmotion.getTimestamp());
-        text_cont_date.setText(date);
-
-        String time =  new SimpleDateFormat("HH시 mm분 SS초").format(logEmotion.getTimestamp());
-        text_cont_time.setText(time);
-
-        text_cont_comment.setText(logEmotion.getComment());
-
-        Bitmap bitmap = BitmapFactory.decodeFile(logEmotion.getPath());
-        img_cont.setImageBitmap(bitmap);
-
-        int i = 0;
-        for(Emotion e : logEmotion.getEmotions()){
-            text_cont_emotion[i++].setText(e.getTitle() +" -  "+ e.getPercent()*100.0f + "%");
-        }
+        initData();
 
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +61,35 @@ public class LogContentsActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    void initData(){
+        text_cont_comment.setText(logEmotion.getComment());
+        setTimeText();
+        setBitmapImage();
+        setEmotionText();
+    }
+
+
+    void setTimeText(){
+        String date =  new SimpleDateFormat("yyyy년 MM월 dd일").format(logEmotion.getTimestamp());
+        text_cont_date.setText(date);
+
+        String time =  new SimpleDateFormat("HH시 mm분 SS초").format(logEmotion.getTimestamp());
+        text_cont_time.setText(time);
+    }
+
+    void setBitmapImage(){
+        Bitmap bitmap = BitmapFactory.decodeFile(logEmotion.getPath());
+        img_cont.setImageBitmap(bitmap);
+
+    }
+
+    void setEmotionText(){
+        String str = "";
+        for(Emotion e : logEmotion.getEmotions()){
+            str += e.getTitle() +" -  "+ e.getPercent()*100.0f + "%\n";
+        }
+        text_cont_emotion.setText(str);
     }
 }

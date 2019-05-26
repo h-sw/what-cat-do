@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
@@ -41,6 +42,7 @@ public class MenuHomeFragment extends Fragment {
 
     CardView card_fast_camera;
     CardView card_fast_image;
+    CardView card_delete_cache;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +57,7 @@ public class MenuHomeFragment extends Fragment {
 
         card_fast_camera = view.findViewById(R.id.card_fast_camera);
         card_fast_image = view.findViewById(R.id.card_fast_image);
+        card_delete_cache = view.findViewById(R.id.card_delete_cache);
 
 
         go_Info.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,14 @@ public class MenuHomeFragment extends Fragment {
             }
         });
 
+        card_delete_cache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCache();
+                onResume();
+            }
+        });
+
 
         db = new LogDBManager(view.getContext());
         logs = db.getLogEmotion();
@@ -91,13 +102,25 @@ public class MenuHomeFragment extends Fragment {
         return view;
     }
 
-    void setInfomation(){
+    private void deleteCache() {
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/whatcatdo");
 
-        //String storage_size = getFileSize(dir.length());
+        File[] list = dir.listFiles();
 
+        for(File file : list){
+            boolean isLog = false;
+            for(LogEmotion emotion : logs){
+                if(file.getAbsolutePath().equals(emotion.getPath()))
+                    isLog = true;
+            }
+            if(!isLog)
+                file.delete();
+        }
+        Toast.makeText(getContext(), "파일 정리에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+    }
 
-
+    void setInfomation(){
+        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/whatcatdo");
         long size = 0;
 
         File[] list = dir.listFiles();
@@ -108,9 +131,7 @@ public class MenuHomeFragment extends Fragment {
                 size += file.length();
           }
        }
-
         text_storage_size.setText(getFileSize(size));
-
         text_img_count.setText(count+"장");
 
         File file = new File(Environment.getDataDirectory().getAbsolutePath());

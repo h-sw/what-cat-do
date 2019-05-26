@@ -71,26 +71,10 @@
                 android:textSize="20sp"
                 android:textColor="#80000000"/>
             <TextView
-                android:id="@+id/text_cont_emotion1"
+                android:id="@+id/text_cont_emotion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="happy - 98.0323%"
-                android:layout_marginHorizontal="24dp"
-                android:textColor="#000"
-                android:textSize="20sp"/>
-            <TextView
-                android:id="@+id/text_cont_emotion2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Scared- 0.733%"
-                android:layout_marginHorizontal="24dp"
-                android:textColor="#000"
-                android:textSize="20sp"/>
-            <TextView
-                android:id="@+id/text_cont_emotion3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sad - 0.013%"
+                android:text=""
                 android:layout_marginHorizontal="24dp"
                 android:textColor="#000"
                 android:textSize="20sp"/>
