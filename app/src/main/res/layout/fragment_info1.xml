@@ -1,46 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="12dp">
+    android:layout_marginLeft="12dp"
+    android:orientation="vertical">
+
     <TextView
-        android:text="사진분석"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/PrimaryDark"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:textSize="30sp"/>
+        android:text="사진분석"
+        android:textColor="@color/PrimaryDark"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/page_2" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/select_picture" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/selecting_complete" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/analyze_finish" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
         android:layout_gravity="center"
-        android:layout_marginBottom="3dp"
-        android:text="사진분석 Tap"
-        />
+        android:textSize="10sp"
+        android:layout_marginBottom="6dp"
+        android:text="미리 찍어둔 사진이 있어요! click!"
+        android:textColor="#000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
+        android:textSize="10sp"
         android:layout_marginBottom="6dp"
-        android:text="- 갤러리에서 가져오기 혹은 사진 분석을 눌러주세요 !!"
-        />
+        android:text="사진을 선택하고 사진분석 click!"
+        android:textColor="#000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
+        android:textSize="10sp"
         android:layout_marginBottom="6dp"
-        android:text="- 갤러리에서 가져올 사진을 선택하면 저희가 고양이의 속마음을 알려드릴게요 !!"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_gravity="left"
-        android:layout_marginBottom="6dp"
-        android:text="- 사진 분석을 누른 후 고양이를 촬영해 주시면 저희가 고양이의 속마음을 알려드릴게요 !!" />
+        android:text="원하는 코멘트를 적고 기록 저장하기 click!"
+        android:textColor="#000" />
+
 </LinearLayout>

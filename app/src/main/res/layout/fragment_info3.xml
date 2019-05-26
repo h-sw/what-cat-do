@@ -3,28 +3,37 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="12dp">
-    <TextView
-        android:text="분석기록"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/PrimaryDark"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="12dp"
-        android:textSize="30sp"/>
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/analyze_log" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
         android:layout_gravity="center"
-        android:text="먼저 사진분석 혹은 영상분석을 실행해주세요 !!"
-        />
+        android:textSize="10sp"
+        android:layout_marginBottom="6dp"
+        android:text="먼저 고양이의 감정을 분석해주세요!"
+        android:textColor="#000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_gravity="left"
-        android:text="\n- 지금까지 분석한 고양이들의 속마음을 확인하실 수 있습니다 !!"
-        />
+        android:layout_gravity="center"
+        android:textSize="10sp"
+        android:layout_marginBottom="6dp"
+        android:text="분석을 완료하시면 위 사진처럼 기록들이 나열됩니다!"
+        android:textColor="#000" />
+
+
 </LinearLayout>
