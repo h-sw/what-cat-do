@@ -2,10 +2,8 @@ package com.team_project2.hans.whatcatdo.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +17,22 @@ import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.CameraActivity;
 import com.team_project2.hans.whatcatdo.ImageSelectActivity;
 import com.team_project2.hans.whatcatdo.R;
+import com.team_project2.hans.whatcatdo.common.Common;
+import com.team_project2.hans.whatcatdo.controller.DataManager;
 import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.LogEmotion;
 import com.team_project2.hans.whatcatdo.info.InfoActivity;
 
-import java.io.File;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MenuHomeFragment extends Fragment {
+    ArrayList<LogEmotion> logs;
 
     LogDBManager db;
+    DataManager dataManager;
 
     SliderLayout sliderLayout;
-    ArrayList<LogEmotion> logs;
+
     View view;
     CardView go_Info;
     TextView text_img_count;
@@ -59,8 +59,10 @@ public class MenuHomeFragment extends Fragment {
         card_fast_camera = view.findViewById(R.id.card_fast_camera);
         card_fast_image = view.findViewById(R.id.card_fast_image);
         card_delete_cache = view.findViewById(R.id.card_delete_cache);
+
         no_log = view.findViewById(R.id.no_log);
 
+        dataManager = new DataManager(Common.IMAGE_PATH);
 
         go_Info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +70,7 @@ public class MenuHomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), InfoActivity.class));
             }
         });
-        setInfomation();
+        setInformation();
 
         card_fast_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,63 +111,26 @@ public class MenuHomeFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                setInfomation();
+                setInformation();
             }
         });
-
     }
 
     private void deleteCache() {
-        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/whatcatdo");
-
-        File[] list = dir.listFiles();
-
-        for(File file : list) {
-            boolean isLog = false;
-            for (LogEmotion emotion : logs) {
-                if (file.getAbsolutePath().equals(emotion.getPath()))
-                    isLog = true;
-            }
-            if (!isLog)
-                file.delete();
-        }
-        Toast.makeText(getContext(), "파일 정리에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+        if(dataManager.deleteCache(logs))
+            Toast.makeText(getContext(), "파일 정리에 성공하였습니다!", Toast.LENGTH_SHORT).show();
     }
 
-    void setInfomation(){
-        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/whatcatdo");
-        long size = 0;
-
-        File[] list = dir.listFiles();
-        if(list!=null){
-            int count = 0;
-            for(File file : list){
-                if(file.isFile()){
-                    count++;
-                    size += file.length();
-                }
-            }
-            text_storage_size.setText(getFileSize(size));
-            text_img_count.setText(count+"장");
-        }else{
+    void setInformation(){
+        text_remain_storage.setText(dataManager.getFreeSpace());
+        if(dataManager.isNull()){
             text_storage_size.setText("알수없음");
             text_img_count.setText("알수없음");
+        }else{
+            text_storage_size.setText(dataManager.getDirSize());
+            text_img_count.setText(dataManager.getFileCount());
         }
-
-        File file = new File(Environment.getDataDirectory().getAbsolutePath());
-        String s = getFileSize(file.getFreeSpace());
-
-        text_remain_storage.setText(s);
     }
-
-    public String getFileSize(long size) {
-        if (size <= 0)
-            return "0";
-        final String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
-        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
-        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
-    }
-
 
     private void setSliderViews() {
         if(logs.isEmpty()){
@@ -180,17 +145,10 @@ public class MenuHomeFragment extends Fragment {
             sliderView.setImageUrl(log.getPath());
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
             sliderView.setDescription(log.getComment());
-            sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(SliderView sliderView) {
-
-                }
-            });
             sliderLayout.addSliderView(sliderView);
             count++;
-            if(count == 5){
+            if(count == 5)
                 break;
-            }
         }
     }
 

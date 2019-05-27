@@ -7,7 +7,7 @@ import com.team_project2.hans.whatcatdo.tensorflow.Classifier;
 
 import java.util.List;
 
-public class CameraResultClassify {//감정들을 int형태로 변환
+public class ResultManager {//감정들을 int형태로 변환
     static final int HAPPY    = 0;
     static final int ANGRY    = 1;
     static final int CURIOUS  = 2;
@@ -19,7 +19,7 @@ public class CameraResultClassify {//감정들을 int형태로 변환
     ArrayList<List<Classifier.Recognition>> src;
     Emotion[] result;
 
-    public CameraResultClassify(ArrayList<List<Classifier.Recognition>> results) {
+    public ResultManager(ArrayList<List<Classifier.Recognition>> results) {
         this.src = results;
         init();
     }
@@ -61,7 +61,7 @@ public class CameraResultClassify {//감정들을 int형태로 변환
 
 
     /**
-     * 최고의 정학도를 가진 감정을 반환합니다.
+     * 최고의 정확도를 가진 감정을 반환합니다.
      * */
     public Emotion getPrimaryEmotion(){
         int primary = -1;

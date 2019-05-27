@@ -11,63 +11,57 @@ import android.widget.Button;
 import com.team_project2.hans.whatcatdo.R;
 
 public class InfoActivity extends AppCompatActivity implements View.OnClickListener{
-    Button bt1,bt2,bt3,bt4;
-    FragmentManager fm;
-    FragmentTransaction tran;
-    Fragment frag1;
-    Fragment frag2;
-    Fragment frag3;
+    private Button[] button;
+    private Fragment[] fragment;
 
+    /*Fragment management*/
+    private FragmentManager fm;
+    private FragmentTransaction tran;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         getSupportActionBar().hide();
-        bt1 = findViewById(R.id.bt1);
-        bt2 = findViewById(R.id.bt2);
-        bt3 = findViewById(R.id.bt3);
-        bt4 = findViewById(R.id.bt4);
-        bt1.setOnClickListener(this);
-        bt2.setOnClickListener(this);
-        bt3.setOnClickListener(this);
-        bt4.setOnClickListener(this);
-        frag1 = new InfoFragment1(); //프래그먼트 객채셍성
-        frag2 = new InfoFragment2(); //프래그먼트 객채셍성
-        frag3 = new InfoFragment3(); //프래그먼트 객채셍성
-        setFrag(0); //프래그먼트 교체
+
+        button = new Button[4];
+        fragment = new Fragment[3];
+
+        for(int i = 0;i<button.length ; i++){
+            int id = getResources().getIdentifier("bt"+(i+1),"id",getPackageName());
+            button[i] = findViewById(id);
+            button[i].setOnClickListener(this);
+        }
+
+        fragment[0] = new InfoImageFragment(); //프래그먼트 객채셍성
+        fragment[1] = new InfoCameraFragment(); //프래그먼트 객채셍성
+        fragment[2] = new InfoLogFragment(); //프래그먼트 객채셍성
+
+        setFragment(fragment[0].getId()); //프래그먼트 교체
     }
 
     @Override
     public void onClick(View v){
-        switch (v.getId()){
-            case R.id.bt1:
-                setFrag(0);
-                break;
-            case R.id.bt2:
-                setFrag(1);
-                break;
-            case R.id.bt3:
-                setFrag(2);
-                break;
-            case R.id.bt4:
-                setFrag(3);
-        }
+        setFragment(v.getId());
     }
-    public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
+
+    public void setFragment(int id){ //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
         fm = getSupportFragmentManager();
         tran = fm.beginTransaction();
-        switch (n){
-            case 0:
-                tran.replace(R.id.main_frame, frag1);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
+
+        switch (id){ //replace 의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
+            case R.id.bt1:
+                tran.replace(R.id.main_frame, fragment[0]);
                 break;
-            case 1:
-                tran.replace(R.id.main_frame, frag2);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
+            case R.id.bt2:
+                tran.replace(R.id.main_frame, fragment[1]);
                 break;
-            case 2:
-                tran.replace(R.id.main_frame, frag3);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
+            case R.id.bt3:
+                tran.replace(R.id.main_frame, fragment[2]);
                 break;
-            case 3:
+            case R.id.bt4:
                 finish();
+                break;
+            default :
                 break;
         }
         tran.commit();

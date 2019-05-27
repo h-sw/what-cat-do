@@ -123,7 +123,4 @@ public class LogDBManager extends SQLiteOpenHelper{
         }
         return logs;
     }
-
-
-
 }

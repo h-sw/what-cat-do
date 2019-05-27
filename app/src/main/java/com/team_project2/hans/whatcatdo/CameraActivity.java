@@ -55,10 +55,8 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-
         Animation animation = AnimationUtils.loadAnimation(CameraActivity.this,R.anim.blink_animation);
         text_camera_how.startAnimation(animation);
-
 
         Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
     }
@@ -79,7 +77,6 @@ public class CameraActivity extends AppCompatActivity {
         }).run();
 
     }
-
 
     @Override
     protected void onResume() {
@@ -109,7 +106,6 @@ public class CameraActivity extends AppCompatActivity {
             public void onImage(CameraKitImage cameraKitImage) {
 
             }
-
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
                 final CameraKitVideo video = cameraKitVideo;

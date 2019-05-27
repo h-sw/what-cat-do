@@ -30,7 +30,7 @@ public class MenuLogFragment extends Fragment{
     LogAdapter mAdapter;
     LinearLayout emptyView;
 
-    TextView text_empty_gallary;
+    TextView text_empty_gallery;
     TextView text_empty_camera;
     ArrayList<LogEmotion> myDataset;
     View view;
@@ -38,15 +38,15 @@ public class MenuLogFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_menu_log, container, false);
+
         recyclerView = view.findViewById(R.id.my_recycler_view);
         emptyView = view.findViewById(R.id.empty_view);
         text_empty_camera = view.findViewById(R.id.text_empty_camera);
-        text_empty_gallary = view.findViewById(R.id.text_empty_gallary);
+        text_empty_gallery = view.findViewById(R.id.text_empty_gallary);
 
 
-        text_empty_gallary.setOnClickListener(new View.OnClickListener() {
+        text_empty_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ImageSelectActivity.class));
@@ -86,7 +86,6 @@ public class MenuLogFragment extends Fragment{
             try {
                 db = new LogDBManager(getContext());
                 myDataset = db.getLogEmotion();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -105,7 +104,6 @@ public class MenuLogFragment extends Fragment{
                     }
                 }
             });
-
             return null;
         }
 
@@ -122,15 +120,12 @@ public class MenuLogFragment extends Fragment{
         if (isVisibleToUser) {
             new LogManager().execute();
             recyclerView.setHasFixedSize(true);
-
             mAdapter = new LogAdapter(null);
 
-            // use a linear layout manager
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
 
             recyclerView.setAdapter(mAdapter);
-
         }
     }
 }

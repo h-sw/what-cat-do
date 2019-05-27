@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 for (TextView m : menu) {
                     m.setBackgroundColor(Color.WHITE);
                 }
-                menu[position].setBackgroundColor(getResources().getColor(R.color.Primary));
+                menu[position].setBackgroundColor(
+                        ContextCompat.getColor(MainActivity.this,R.color.Primary));
             }
 
             @Override

@@ -9,13 +9,10 @@ import android.view.ViewGroup;
 
 import com.team_project2.hans.whatcatdo.R;
 
-public class InfoFragment3 extends Fragment {
-    View view;
+public class InfoCameraFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_info3, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_info2, container, false);
     }
 }

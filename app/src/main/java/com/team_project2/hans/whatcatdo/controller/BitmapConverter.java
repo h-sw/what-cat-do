@@ -14,6 +14,7 @@ public class BitmapConverter {
         Bitmap bitmap = bitmapDrawable.getBitmap();
         return Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
     }
+
     /**
      * 비트맵을 Inception V3에서 사용하는
      * 299 * 299 크기의 비트맵으로 변환하여 반환합니다.

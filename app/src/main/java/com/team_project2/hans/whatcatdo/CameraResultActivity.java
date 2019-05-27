@@ -7,7 +7,6 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 import com.team_project2.hans.whatcatdo.common.Common;
 import com.team_project2.hans.whatcatdo.controller.BitmapConverter;
-import com.team_project2.hans.whatcatdo.controller.CameraResultClassify;
+import com.team_project2.hans.whatcatdo.controller.ResultManager;
 import com.team_project2.hans.whatcatdo.database.LogDBManager;
 import com.team_project2.hans.whatcatdo.database.Emotion;
 import com.team_project2.hans.whatcatdo.database.Log;
@@ -66,7 +65,7 @@ public class CameraResultActivity extends AppCompatActivity {
     private String comment;
 
     /*tensorflow classifier after work*/
-    private CameraResultClassify classify;
+    private ResultManager classify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +125,7 @@ public class CameraResultActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         setSliderViews();
-                        classify = new CameraResultClassify(classifyResults);
+                        classify = new ResultManager(classifyResults);
                         Emotion e = classify.getPrimaryEmotion();
                         text_camera_result.setText(e.getTitle());
                     }

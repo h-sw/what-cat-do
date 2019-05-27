@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageResultActivity extends AppCompatActivity {
-
+    private static final String TAG = "IMAGE RESULT ACTIVITY";
 
     private Classifier classifier;
 
@@ -39,7 +39,6 @@ public class ImageResultActivity extends AppCompatActivity {
     private TextView text_image_kind;
 
     private LogDBManager db;
-
     private Log log;
     private ArrayList<Emotion> emotions;
 
@@ -63,7 +62,6 @@ public class ImageResultActivity extends AppCompatActivity {
         text_image_kind.setText(getIntent().getStringExtra("kind"));
         img_result.setImageBitmap(bitmap);
 
-
         CheckTypesTask task = new CheckTypesTask();
         task.execute();
 
@@ -83,7 +81,6 @@ public class ImageResultActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         db.getLogEmotion();
     }
 

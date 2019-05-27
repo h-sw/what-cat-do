@@ -66,11 +66,9 @@ public class ImageSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isSelect){
-                    TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getCatFinder();
-                    Bitmap bitmap = BitmapConverter.ImageViewToBitmap(img_select,Common.INPUT_SIZE);
-                    List<Classifier.Recognition> result = classifier.recognizeImage(bitmap);
-                    Log.d(TAG,result.toString());
-                    if(isCat(result)){
+
+
+                    if(isCat()){
                         startActivity(IntentBitmap(img_select));
                         finish();
                     }else{
@@ -81,6 +79,19 @@ public class ImageSelectActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 고양이 인지 아닌지 판별하는 메소드 입니다.
+     * 우선 Tensorflow로 CatFinder 모델을 로딩해 분석을 진행하고
+     * 결과값으로 isCat(result)을 리턴합니다.
+     * */
+    boolean isCat(){
+        TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getCatFinder();
+        Bitmap bitmap = BitmapConverter.ImageViewToBitmap(img_select,Common.INPUT_SIZE);
+        List<Classifier.Recognition> result = classifier.recognizeImage(bitmap);
+        Log.d(TAG,result.toString());
+
+        return isCat(result);
+    }
 
     boolean isCat(List<Classifier.Recognition> list){
         for(Classifier.Recognition r : list){
