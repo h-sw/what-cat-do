@@ -148,7 +148,6 @@ public class TensorFlowImageClassifier implements Classifier {
                         });
         for (int i = 0; i < labelList.size(); ++i) {
             float confidence = labelProbArray[0][i];
-
             if (confidence > THRESHOLD) {
                 pq.add(new Recognition("" + i, labelList.size() > i ? labelList.get(i) : "unknown", confidence));
             }
@@ -159,7 +158,6 @@ public class TensorFlowImageClassifier implements Classifier {
         for (int i = 0; i < recognitionsSize; ++i) {
             recognitions.add(pq.poll());
         }
-
         return recognitions;
     }
 }

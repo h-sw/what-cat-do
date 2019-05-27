@@ -66,8 +66,6 @@ public class ImageSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isSelect){
-
-
                     if(isCat()){
                         startActivity(IntentBitmap(img_select));
                         finish();

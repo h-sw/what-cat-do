@@ -33,22 +33,22 @@ public class ImageResultActivity extends AppCompatActivity {
 
     private ImageView img_result;
     private TextView text_result;
-    private Button btn_main;
-    private EditText edit_comment;
-    private Button btn_save;
     private TextView text_image_kind;
+    private EditText edit_comment;
+    private Button btn_main;
+    private Button btn_save;
 
     private LogDBManager db;
     private Log log;
     private ArrayList<Emotion> emotions;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_result);
-        db = new LogDBManager(this);
         getSupportActionBar().hide();
+
+        db = new LogDBManager(this);
 
         img_result = findViewById(R.id.img_result);
         text_result = findViewById(R.id.text_result);
@@ -62,8 +62,7 @@ public class ImageResultActivity extends AppCompatActivity {
         text_image_kind.setText(getIntent().getStringExtra("kind"));
         img_result.setImageBitmap(bitmap);
 
-        CheckTypesTask task = new CheckTypesTask();
-        task.execute();
+        new CheckTypesTask().execute();
 
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,17 +74,19 @@ public class ImageResultActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                log.setComment(edit_comment.getText().toString());
-                db.addLog(log,emotions);
-                Toast.makeText(ImageResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
+                saveDB();
                 finish();
             }
         });
-        db.getLogEmotion();
+    }
+
+    private void saveDB(){
+        log.setComment(edit_comment.getText().toString());
+        db.addLog(log,emotions);
+        Toast.makeText(ImageResultActivity.this, "저장에 성공하였습니다!", Toast.LENGTH_SHORT).show();
     }
 
     private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
-
         ProgressDialog asyncDialog = new ProgressDialog(
                 ImageResultActivity.this);
 
@@ -133,11 +134,9 @@ public class ImageResultActivity extends AppCompatActivity {
 
     }
 
-
     /**
      * bitmap이미지를 인자로 받아 결과를 추론하는 클래스 입니다.
      * 이 메소드는 추론된 결과를 반환하지 않고 바로 screen에 값을 수정하도록 합니다.
-     *
      * */
     public void classifyImage(Bitmap bitmap){
         classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
@@ -158,15 +157,6 @@ public class ImageResultActivity extends AppCompatActivity {
             Emotion emotion = new Emotion(timestamp, r.getTitle(), r.getConfidence());
             emotions.add(emotion);
         }
-    }
-
-    /**
-     * 이 메소드는 bitmap이미지를 인자로 받아 추론결과를 List형태로 반환합니다.
-     * */
-    public List<Classifier.Recognition> getClassifiedResult(Bitmap bitmap){
-        classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
-
-        return classifier.recognizeImage(bitmap);
     }
 
     /**

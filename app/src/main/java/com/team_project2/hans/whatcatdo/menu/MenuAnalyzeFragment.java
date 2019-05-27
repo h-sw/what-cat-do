@@ -38,7 +38,6 @@ public class MenuAnalyzeFragment extends Fragment {
                 startActivity(new Intent(getContext(), ImageSelectActivity.class));
             }
         });
-
         return view;
     }
 }

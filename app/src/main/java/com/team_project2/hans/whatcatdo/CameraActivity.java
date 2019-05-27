@@ -58,14 +58,14 @@ public class CameraActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(CameraActivity.this,R.anim.blink_animation);
         text_camera_how.startAnimation(animation);
 
-        Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하고 있으세요!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "가운데 버튼을 눌러 고양이를 촬영하세요", Toast.LENGTH_SHORT).show();
     }
 
     void recordVideo(){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CameraActivity.this, "분석 시작!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CameraActivity.this, "분석 시작", Toast.LENGTH_SHORT).show();
                 cameraView.captureVideo();
                 cameraView.postDelayed(new Runnable() {
                     @Override
@@ -93,19 +93,12 @@ public class CameraActivity extends AppCompatActivity {
     void setCamera(){
         cameraView.addCameraKitListener(new CameraKitEventListener() {
             @Override
-            public void onEvent(CameraKitEvent cameraKitEvent) {
-
-            }
-
+            public void onEvent(CameraKitEvent cameraKitEvent) { }
             @Override
-            public void onError(CameraKitError cameraKitError) {
-
-            }
-
+            public void onError(CameraKitError cameraKitError) { }
             @Override
-            public void onImage(CameraKitImage cameraKitImage) {
+            public void onImage(CameraKitImage cameraKitImage) { }
 
-            }
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
                 final CameraKitVideo video = cameraKitVideo;
@@ -113,7 +106,7 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(video.getVideoFile().exists()){
-                            Toast.makeText(CameraActivity.this, "분석 종료!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CameraActivity.this, "촬영 종료", Toast.LENGTH_SHORT).show();
                             File file = video.getVideoFile();
                             Intent intent = new Intent(CameraActivity.this, CameraResultActivity.class);
                             intent.putExtra("videoPath",file.getAbsolutePath());

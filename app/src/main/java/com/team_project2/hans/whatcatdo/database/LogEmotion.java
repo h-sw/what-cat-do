@@ -44,7 +44,7 @@ public class LogEmotion implements Serializable {
 
     public String getPrimaryEmotion(){
         if(emotions.isEmpty()){
-            return "no ";
+            return "no data";
         }
         Emotion max = emotions.get(0);
         for(Emotion e : emotions){

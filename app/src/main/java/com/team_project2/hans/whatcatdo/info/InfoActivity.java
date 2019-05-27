@@ -36,7 +36,7 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         fragment[1] = new InfoCameraFragment(); //프래그먼트 객채셍성
         fragment[2] = new InfoLogFragment(); //프래그먼트 객채셍성
 
-        setFragment(fragment[0].getId()); //프래그먼트 교체
+        setFragment(button[0].getId()); //프래그먼트 교체
     }
 
     @Override
@@ -60,8 +60,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt4:
                 finish();
-                break;
-            default :
                 break;
         }
         tran.commit();
