@@ -8,10 +8,10 @@ import android.os.Environment;
 * */
 public class Common {
     /*tensorflow*/
-    public static final String  EMOTION_MODEL_PATH   = "cat.tflite";
-    public static final String  EMOTION_LABEL_PATH   = "cats_labels.txt";
-    public static final String  INCEPTION_MODEL_PATH = "inceptionv3_slim_2016.tflite";
-    public static final String  INCEPTION_LABEL_PATH = "inception_labels.txt";
+    public static final String  EMOTION_MODEL_PATH   = "emotion_finder.tflite";
+    public static final String  EMOTION_LABEL_PATH   = "emotion_labels.txt";
+    public static final String  INCEPTION_MODEL_PATH = "cat_finder.tflite";
+    public static final String  INCEPTION_LABEL_PATH = "cat_labels.txt";
     public static final int     INPUT_SIZE           = 299;
     public static final String  IMAGE_PATH           = Environment.getExternalStorageDirectory().toString()+"/whatcatdo/";
     public static final int     IMAGE_QUALITY        = 100;
