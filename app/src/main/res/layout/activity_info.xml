@@ -34,13 +34,14 @@
             android:textColor="@color/PrimaryDark"
             android:text="사진분석"
             android:id="@+id/bt1"/>
+
         <Button
+            android:id="@+id/bt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#fff"
-            android:textColor="@color/PrimaryDark"
-            android:text="촬영분석"
-            android:id="@+id/bt2"/>
+            android:text="실시간분석"
+            android:textColor="@color/PrimaryDark" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

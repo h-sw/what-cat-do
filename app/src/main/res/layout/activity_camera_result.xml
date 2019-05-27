@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".CameraResultActivity"
     android:background="@color/PrimaryLight"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:id="@+id/foo"
     android:orientation="vertical">
     <ScrollView

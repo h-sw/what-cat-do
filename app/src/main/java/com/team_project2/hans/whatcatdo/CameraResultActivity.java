@@ -111,7 +111,7 @@ public class CameraResultActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            asyncDialog.setMessage("감정분석 중이에요~");
+            asyncDialog.setMessage("감정분석 중이에요~\n30초 정도 소요됩니다.");
             asyncDialog.show();
             super.onPreExecute();
         }
@@ -213,28 +213,28 @@ public class CameraResultActivity extends AppCompatActivity {
 
     public ArrayList<List<Classifier.Recognition>> classifyImages(ArrayList<Bitmap> bitmaps){
         ArrayList<List<Classifier.Recognition>> recognitions = new ArrayList<>();
+
         TensorFlowImageClassifier classifier = TensorFlowImageClassifier.getTensorFlowClassifier();
         TensorFlowImageClassifier catFinder = TensorFlowImageClassifier.getCatFinder();
+
+        List<Classifier.Recognition> results;
+        List<Classifier.Recognition> cats = null;
         boolean isCat = false;
+
         for(Bitmap bitmap : bitmaps){
             bitmap = BitmapConverter.ConvertBitmap(bitmap, Common.INPUT_SIZE);
-            List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-            List<Classifier.Recognition> cats = catFinder.recognizeImage(bitmap);
+            results = classifier.recognizeImage(bitmap);
+            cats = catFinder.recognizeImage(bitmap);
             if(isCat(cats)) {
                 isCat = true;
             }
+
             recognitions.add(results);
         }
 
         if(!isCat){
-            Snackbar.make(findViewById(R.id.foo),"고양이가 맞나요?",Snackbar.LENGTH_INDEFINITE)
-                    .setAction("yes", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    })
-                    .setAction("no", new View.OnClickListener() {
+            Snackbar.make(findViewById(R.id.foo),"고양이가 아닙니다.",Snackbar.LENGTH_INDEFINITE)
+                    .setAction("YES", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             finish();

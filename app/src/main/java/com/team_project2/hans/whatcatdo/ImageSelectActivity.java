@@ -72,6 +72,8 @@ public class ImageSelectActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(ImageSelectActivity.this, "고양이가 맞는지 확인해주세요!", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(ImageSelectActivity.this, "사진을 선택 해 주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
