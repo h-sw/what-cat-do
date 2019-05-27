@@ -33,10 +33,6 @@ public class Emotion implements Serializable {
     public String getTitle() {
         return title;
     }
-    //요기도 set함수 만들었는데?!!?!
-    public void setTimestamp(String title){
-        this.title=title;
-    }
 
     public long getTimestamp() {
         return timestamp;
